@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Zero — The Team That Takes Agents Back to Zero</title>
+  <meta name="description" content="Agent Zero는 자율 에이전트의 추론·협업·안전을 제로에서부터 다시 연구하는 리서치 팀입니다." />
+  <meta property="og:title" content="Agent Zero — AI Agent Research Team" />
+  <meta property="og:description" content="자율 에이전트의 추론·협업·안전을 제로에서부터 다시 연구하는 리서치 팀" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ag3nt-z3r0.github.io/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23f2f2f2' stroke-width='2.5'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="frame" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav" aria-label="주요 메뉴">
+    <a class="nav__link" href="#preview">ABOUT</a>
+    <a class="nav__link" href="#research">RESEARCH</a>
+    <div class="nav__center">
+      <a class="nav__wordmark" href="#top" aria-label="Agent Zero 홈">
+        <span class="nav__wordmark-line">AGENT</span>
+        <span class="nav__wordmark-line">ZERO</span>
+      </a>
+      <span class="nav__social">
+        <a href="https://github.com/Ag3nt-Z3r0" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        </a>
+      </span>
+    </div>
+    <a class="nav__link" href="#team">TEAM</a>
+    <a class="nav__link nav__link--cta" href="#join">JOIN <span aria-hidden="true">→</span></a>
+    <button class="nav__burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#preview">ABOUT</a>
+    <a href="#research">RESEARCH</a>
+    <a href="#team">TEAM</a>
+    <a href="#join">JOIN →</a>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <div class="hero__art" aria-hidden="true">
+        <img src="images/hero.jpg" alt="" loading="eager" />
+      </div>
+      <div class="hero__content">
+        <p class="hero__eyebrow reveal">OPEN RESEARCH&nbsp;&nbsp;•&nbsp;&nbsp;SEOUL, KR</p>
+        <h1 class="hero__title">
+          <span class="reveal d1">THE TEAM THAT</span>
+          <span class="reveal d2">TAKES AGENTS</span>
+          <span class="reveal d3">BACK TO ZERO</span>
+        </h1>
+        <p class="hero__sub reveal d4">자율 에이전트의 추론·협업·안전을<br />제로(0)에서부터 다시 연구하는 리서치 팀</p>
+        <a class="btn btn--light reveal d5" href="#research"><span class="btn__icon" aria-hidden="true">◎</span> 연구 영역 보기</a>
+      </div>
+    </header>
+
+    <!-- ============ PREVIEW (terminal in art frame) ============ -->
+    <section class="preview" id="preview">
+      <div class="preview__frame">
+        <div class="preview__art" aria-hidden="true"><img src="images/preview-bg.jpg" alt="" loading="lazy" /></div>
+        <div class="terminal" aria-label="에이전트 실행 데모">
+          <div class="terminal__bar">
+            <span class="terminal__dot"></span><span class="terminal__dot"></span><span class="terminal__dot"></span>
+            <span class="terminal__title">agent-zero — research log</span>
+          </div>
+          <pre class="terminal__body" id="terminalBody" aria-hidden="true"></pre>
+          <div class="terminal__status">
+            <span>◈ swarm ready</span>
+            <span>312 evals · 0 regressions</span>
+          </div>
+        </div>
+        <p class="preview__caption">AGENT ZERO — RESEARCH TERMINAL&nbsp;&nbsp;[LIVE]</p>
+      </div>
+    </section>
+
+    <!-- ============ AUDIENCE (3 cards) ============ -->
+    <section class="audience" id="audience">
+      <article class="card reveal">
+        <div class="card__art" aria-hidden="true"><img src="images/aud-dev.jpg" alt="" loading="lazy" /></div>
+        <div class="card__body">
+          <p class="card__eyebrow">FOR BUILDERS</p>
+          <h3 class="card__title">Developers</h3>
+          <p class="card__text">검증된 오케스트레이션 패턴과<br />오픈소스 도구를 제공합니다</p>
+          <a class="btn btn--ghost" href="#join">⌘ 함께 만들기</a>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card__art" aria-hidden="true"><img src="images/aud-ent.jpg" alt="" loading="lazy" /></div>
+        <div class="card__body">
+          <p class="card__eyebrow">FOR ORGANIZATIONS</p>
+          <h3 class="card__title">Enterprises</h3>
+          <p class="card__text">에이전트 도입의 실효성을<br />PoC와 데이터로 검증합니다</p>
+          <a class="btn btn--ghost" href="#join">◳ 협업 제안하기</a>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card__art" aria-hidden="true"><img src="images/aud-aca.jpg" alt="" loading="lazy" /></div>
+        <div class="card__body">
+          <p class="card__eyebrow">FOR RESEARCHERS</p>
+          <h3 class="card__title">Academia</h3>
+          <p class="card__text">공동 연구와 공개 벤치마크로<br />공통 기반을 넓힙니다</p>
+          <a class="btn btn--ghost" href="#join">✳ 공동 연구하기</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ WHITE PANEL : RESEARCH + TEAM ============ -->
+    <section class="panel" id="research">
+      <div class="panel__chips" aria-hidden="true"><span>Research</span><span>Team</span></div>
+
+      <div class="features">
+        <article class="feature reveal">
+          <p class="feature__eyebrow">#1 ORCHESTRATE</p>
+          <h2 class="feature__title">Agent<br />Orchestration</h2>
+          <div class="feature__art" aria-hidden="true"><img class="parallax" src="images/r1.jpg" alt="" loading="lazy" /></div>
+          <p class="feature__text">여러 에이전트가 역할을 나누고 결과를 검증하는 협업 구조를 설계합니다. 파이프라인·토너먼트·심판 패널 — 패턴별 비용-성능 곡선을 정량화합니다.</p>
+        </article>
+
+        <article class="feature reveal">
+          <p class="feature__eyebrow">#2 REASON</p>
+          <h2 class="feature__title">Reasoning<br />&amp; Tool Use</h2>
+          <div class="feature__art" aria-hidden="true"><img class="parallax" src="images/r2.jpg" alt="" loading="lazy" /></div>
+          <p class="feature__text">도구·API·코드 실행 환경을 다루며 장기 계획을 수행하는 능력을 연구합니다. 컨텍스트 관리, 자기 수정, 실패 복구 전략이 핵심 주제입니다.</p>
+        </article>
+
+        <article class="feature reveal">
+          <p class="feature__eyebrow">#3 MEASURE</p>
+          <h2 class="feature__title">Evaluation<br />&amp; Benchmarks</h2>
+          <div class="feature__art" aria-hidden="true"><img class="parallax" src="images/r3.jpg" alt="" loading="lazy" /></div>
+          <p class="feature__text">"에이전트가 잘한다"를 어떻게 측정할 것인가. 실제 업무에 가까운 시나리오 벤치마크를 설계하고 LLM-judge의 신뢰도를 검증합니다.</p>
+        </article>
+
+        <article class="feature reveal">
+          <p class="feature__eyebrow">#4 ALIGN</p>
+          <h2 class="feature__title">Safety<br />&amp; Alignment</h2>
+          <div class="feature__art" aria-hidden="true"><img class="parallax" src="images/r4.jpg" alt="" loading="lazy" /></div>
+          <p class="feature__text">자율 에이전트의 권한 경계, 감사 가능성, 레드티밍을 연구합니다. 능력이 커질수록 통제 수단도 함께 성장해야 합니다.</p>
+        </article>
+
+        <article class="feature reveal">
+          <p class="feature__eyebrow">#5 INTERACT</p>
+          <h2 class="feature__title">Human–Agent<br />Interaction</h2>
+          <div class="feature__art" aria-hidden="true"><img class="parallax" src="images/r5.jpg" alt="" loading="lazy" /></div>
+          <p class="feature__text">사람이 에이전트를 신뢰하고 위임하게 되는 조건을 관찰합니다. 개입 시점, 승인 설계, 설명 가능성을 실험으로 다룹니다.</p>
+        </article>
+
+        <article class="feature reveal">
+          <p class="feature__eyebrow">#6 REPRODUCE</p>
+          <h2 class="feature__title">Open<br />Infrastructure</h2>
+          <div class="feature__art" aria-hidden="true"><img class="parallax" src="images/r6.jpg" alt="" loading="lazy" /></div>
+          <p class="feature__text">모든 실험은 재현 가능한 코드와 공개 벤치마크로 이어집니다. 데모가 아닌 증거를 만드는 것이 우리의 결과물입니다.</p>
+        </article>
+      </div>
+
+      <!-- TEAM -->
+      <div class="team" id="team">
+        <div class="team__head">
+          <p class="team__eyebrow">THE RESEARCHERS</p>
+          <h2 class="team__title">Six Minds, One Question</h2>
+          <p class="team__sub">여섯 명의 연구자가 각자의 영역에서 같은 질문을 파고듭니다 — "에이전트는 어디까지 스스로 할 수 있는가?"</p>
+        </div>
+        <div class="members">
+          <article class="member reveal">
+            <div class="member__art" aria-hidden="true"><img src="images/m1.jpg" alt="" loading="lazy" /></div>
+            <p class="member__id">AZ-001 — LEAD</p>
+            <h3 class="member__name">김지원 <em>Jiwon Kim</em></h3>
+            <p class="member__role">Founder · Lead Researcher</p>
+            <p class="member__bio">멀티 에이전트 오케스트레이션 전공. 에이전트 협업의 비용-성능 곡선을 그리는 일에 집착한다.</p>
+          </article>
+          <article class="member reveal">
+            <div class="member__art" aria-hidden="true"><img src="images/m2.jpg" alt="" loading="lazy" /></div>
+            <p class="member__id">AZ-002 — SYSTEMS</p>
+            <h3 class="member__name">박서연 <em>Seoyeon Park</em></h3>
+            <p class="member__role">Agent Systems Engineer</p>
+            <p class="member__bio">도구 사용과 계획 수립 파이프라인을 설계한다. 실패하는 에이전트를 고치는 것이 취미이자 직업.</p>
+          </article>
+          <article class="member reveal">
+            <div class="member__art" aria-hidden="true"><img src="images/m3.jpg" alt="" loading="lazy" /></div>
+            <p class="member__id">AZ-003 — EVAL</p>
+            <h3 class="member__name">이도현 <em>Dohyun Lee</em></h3>
+            <p class="member__role">Research Scientist</p>
+            <p class="member__bio">평가와 벤치마크 담당. "측정되지 않으면 개선되지 않는다"를 입에 달고 산다.</p>
+          </article>
+          <article class="member reveal">
+            <div class="member__art" aria-hidden="true"><img src="images/m4.jpg" alt="" loading="lazy" /></div>
+            <p class="member__id">AZ-004 — SAFETY</p>
+            <h3 class="member__name">최하늘 <em>Haneul Choi</em></h3>
+            <p class="member__role">Safety Researcher</p>
+            <p class="member__bio">에이전트 레드티밍과 정렬 연구. 에이전트가 하지 말아야 할 일의 목록을 만든다.</p>
+          </article>
+          <article class="member reveal">
+            <div class="member__art" aria-hidden="true"><img src="images/m5.jpg" alt="" loading="lazy" /></div>
+            <p class="member__id">AZ-005 — INFRA</p>
+            <h3 class="member__name">정민재 <em>Minjae Jung</em></h3>
+            <p class="member__role">ML Engineer</p>
+            <p class="member__bio">실험 인프라와 에이전트 런타임을 책임진다. 재현 가능한 실험 환경이 그의 작품.</p>
+          </article>
+          <article class="member reveal">
+            <div class="member__art" aria-hidden="true"><img src="images/m6.jpg" alt="" loading="lazy" /></div>
+            <p class="member__id">AZ-006 — HCI</p>
+            <h3 class="member__name">한유진 <em>Yujin Han</em></h3>
+            <p class="member__role">HCI Researcher</p>
+            <p class="member__bio">인간-에이전트 인터랙션 연구. 사람이 에이전트를 신뢰하게 되는 순간을 관찰한다.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="panel__wordmark" aria-hidden="true">Agent Zero</div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer" id="join">
+      <div class="footer__cta">
+        <p class="footer__eyebrow">COLLABORATE&nbsp;&nbsp;•&nbsp;&nbsp;JOIN&nbsp;&nbsp;•&nbsp;&nbsp;PARTNER</p>
+        <h2 class="footer__title">Open Invitation</h2>
+        <p class="footer__text">공동 연구, 협업 제안, 합류 문의 — 무엇이든 환영합니다.<br />에이전트의 다음 단계를 함께 만들 사람을 찾습니다.</p>
+        <a class="btn btn--light" href="mailto:hello@agentzero.team">hello@agentzero.team&nbsp;&nbsp;↗</a>
+      </div>
+
+      <div class="footer__ghost" aria-hidden="true">
+        <span>Agent</span>
+        <span>Zero</span>
+      </div>
+      <img class="footer__figure" src="images/footer-figure.jpg" alt="" loading="lazy" aria-hidden="true" />
+
+      <div class="footer__meta footer__meta--left">
+        <p>AGENT ZERO — RESEARCH COLLECTIVE</p>
+        <p>EST. 2026 · FROM ZERO, AGENTS EMERGE</p>
+      </div>
+      <div class="footer__meta footer__meta--right">
+        <p>SEOUL, KR — <span id="footClock">--:--:--</span> KST</p>
+        <p>ART: GUSTAVE DORÉ (PUBLIC DOMAIN)</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
