@@ -9,12 +9,43 @@
   <meta property="og:description" content="네 명의 연구자, 하나의 질문 — 궤도 위의 팀" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ag3nt-z3r0.github.io/team.html" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0B'/%3E%3Cg fill='%23EAEAE4'%3E%3Ccircle cx='25' cy='16' r='1.3'/%3E%3Ccircle cx='23.8' cy='20.5' r='1.3'/%3E%3Ccircle cx='20.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='16' cy='25' r='1.3'/%3E%3Ccircle cx='11.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='8.2' cy='20.5' r='1.3'/%3E%3Ccircle cx='7' cy='16' r='1.3'/%3E%3Ccircle cx='8.2' cy='11.5' r='1.3'/%3E%3Ccircle cx='11.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='16' cy='7' r='1.3'/%3E%3Ccircle cx='20.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='23.8' cy='11.5' r='1.3'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.6' fill='%23FF4D00'/%3E%3C/svg%3E" />
+  <meta property="og:image" content="https://ag3nt-z3r0.github.io/images/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Agent Zero — Zero-Day Research Team" />
+  <meta property="og:site_name" content="Agent Zero" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://ag3nt-z3r0.github.io/images/og-cover.png" />
+  <link rel="icon" type="image/png" href="images/az-favicon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62.5..125,100..900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- neon accents — scoped to the team page -->
+  <style>
+    /* hero title word "one" */
+    .page-hero__title em {
+      color: #00e5ff;
+      text-shadow: 0 0 18px rgba(0, 229, 255, 0.6), 0 0 42px rgba(0, 229, 255, 0.28);
+    }
+    /* orbit chips: neon frame + emphasized role title */
+    .orbit__chip {
+      border-color: rgba(0, 229, 255, 0.45);
+      box-shadow: 0 0 0 7px var(--bg), 0 18px 40px rgba(0, 0, 0, 0.55),
+                  0 0 16px rgba(0, 229, 255, 0.28), inset 0 0 12px rgba(0, 229, 255, 0.06);
+    }
+    .orbit__chip b {
+      font-weight: 600;
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      color: #00e5ff;
+      text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+    }
+    /* romanized reading a touch brighter to sit under the neon title */
+    .orbit__chip i { color: rgba(0, 229, 255, 0.7); }
+  </style>
 </head>
 <body>
 
@@ -32,14 +63,7 @@
 
     <header class="nav" id="top">
       <a class="nav__brand" href="index.html" aria-label="Agent Zero 홈">
-        <svg class="nav__glyph" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
-          <g fill="currentColor">
-            <circle cx="25" cy="16" r="1.4"/><circle cx="23.8" cy="20.5" r="1.4"/><circle cx="20.5" cy="23.8" r="1.4"/>
-            <circle cx="16" cy="25" r="1.4"/><circle cx="11.5" cy="23.8" r="1.4"/><circle cx="8.2" cy="20.5" r="1.4"/>
-            <circle cx="7" cy="16" r="1.4"/><circle cx="8.2" cy="11.5" r="1.4"/><circle cx="11.5" cy="8.2" r="1.4"/>
-            <circle cx="16" cy="7" r="1.4"/><circle cx="20.5" cy="8.2" r="1.4"/><circle cx="23.8" cy="11.5" r="1.4"/>
-          </g>
-        </svg>
+        <img class="nav__glyph" src="images/az-logo.png" alt="" aria-hidden="true" width="47" height="26" />
         <span class="nav__wordmark">AGENT ZERO</span>
         <span class="nav__ver">/00</span>
       </a>
@@ -82,29 +106,39 @@
         <p class="page-hero__sub reveal d3">네 명의 연구자가 각자의 영역에서 같은 질문을 파고듭니다 —<br />"에이전트는 어디까지 스스로 할 수 있는가?"</p>
 
         <div class="orbit reveal d4" aria-hidden="true">
-          <svg class="orbit__field" viewBox="0 0 800 800" aria-hidden="true" focusable="false">
-            <g fill="none" stroke="#EAEAE4">
-              <circle cx="400" cy="400" r="120" stroke-opacity=".3"/>
-              <circle class="orbit__spin" cx="400" cy="400" r="210" stroke-opacity=".3" stroke-dasharray="2 9"/>
-              <circle cx="400" cy="400" r="300" stroke-opacity=".15"/>
-              <circle cx="400" cy="400" r="380" stroke-opacity=".09"/>
-              <circle cx="400" cy="400" r="300" stroke-opacity=".85" stroke-width="2.5" stroke-dasharray="150 1735" transform="rotate(-64 400 400)"/>
-              <circle cx="400" cy="400" r="210" stroke-opacity=".7" stroke-width="2" stroke-dasharray="80 1240" transform="rotate(122 400 400)"/>
-              <path d="M117 117 L683 683 M683 117 L117 683" stroke-opacity=".1"/>
-              <path d="M20 400 H780" stroke-opacity=".07"/>
+          <svg class="orbit__field" viewBox="0 0 800 800" aria-hidden="true" focusable="false" style="filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.7)) drop-shadow(0 0 14px rgba(0, 229, 255, 0.4));">
+            <!-- base rings — brighter cyan -->
+            <g fill="none" stroke="#00E5FF">
+              <circle cx="400" cy="400" r="120" stroke-opacity=".55"/>
+              <circle class="orbit__spin" cx="400" cy="400" r="210" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="2 9"/>
+              <circle cx="400" cy="400" r="300" stroke-opacity=".32"/>
+              <circle cx="400" cy="400" r="380" stroke-opacity=".2"/>
+              <path d="M117 117 L683 683 M683 117 L117 683" stroke-opacity=".18"/>
+              <path d="M20 400 H780" stroke-opacity=".12"/>
             </g>
-            <g fill="#EAEAE4">
-              <circle cx="593" cy="170" r="3.5"/><circle cx="603" cy="454" r="3.5"/>
-              <circle cx="110" cy="322" r="3.5"/><circle cx="322" cy="690" r="3.5"/>
+            <!-- bright sweeping arcs — cyan + magenta duotone -->
+            <circle cx="400" cy="400" r="300" fill="none" stroke="#00E5FF" stroke-opacity="1" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="150 1735" transform="rotate(-64 400 400)" style="filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.95));"/>
+            <circle cx="400" cy="400" r="210" fill="none" stroke="#FF2D95" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-dasharray="80 1240" transform="rotate(122 400 400)" style="filter: drop-shadow(0 0 8px rgba(255, 45, 149, 0.95));"/>
+            <circle cx="400" cy="400" r="380" fill="none" stroke="#B16BFF" stroke-opacity=".9" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="60 2328" transform="rotate(28 400 400)" style="filter: drop-shadow(0 0 7px rgba(177, 107, 255, 0.9));"/>
+            <!-- researcher nodes — glowing cyan with wide halos -->
+            <g fill="#00E5FF" style="filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.95));">
+              <circle cx="593" cy="170" r="4.5"/><circle cx="603" cy="454" r="4.5"/>
+              <circle cx="110" cy="322" r="4.5"/><circle cx="322" cy="690" r="4.5"/>
             </g>
-            <g fill="none" stroke="#EAEAE4" stroke-opacity=".35">
-              <circle cx="593" cy="170" r="9"/><circle cx="603" cy="454" r="9"/>
-              <circle cx="110" cy="322" r="9"/><circle cx="322" cy="690" r="9"/>
+            <g fill="none" stroke="#00E5FF" stroke-opacity=".7">
+              <circle cx="593" cy="170" r="10"/><circle cx="603" cy="454" r="10"/>
+              <circle cx="110" cy="322" r="10"/><circle cx="322" cy="690" r="10"/>
             </g>
-            <circle class="orbit__pulse" cx="400" cy="400" r="14" fill="none" stroke="#EAEAE4"/>
-            <circle cx="400" cy="400" r="5" fill="#EAEAE4"/>
-            <circle cx="400" cy="400" r="14" fill="none" stroke="#EAEAE4" stroke-opacity=".5"/>
-            <circle cx="400" cy="400" r="24" fill="none" stroke="#EAEAE4" stroke-opacity=".25" stroke-dasharray="1 5"/>
+            <g fill="none" stroke="#00E5FF" stroke-opacity=".28" stroke-dasharray="1 5">
+              <circle cx="593" cy="170" r="17"/><circle cx="603" cy="454" r="17"/>
+              <circle cx="110" cy="322" r="17"/><circle cx="322" cy="690" r="17"/>
+            </g>
+            <!-- magenta core with heavy bloom -->
+            <circle class="orbit__pulse" cx="400" cy="400" r="16" fill="none" stroke="#FF2D95" stroke-width="1.5"/>
+            <circle cx="400" cy="400" r="30" fill="rgba(255,45,149,0.12)"/>
+            <circle cx="400" cy="400" r="6.5" fill="#FF2D95" style="filter: drop-shadow(0 0 10px rgba(255, 45, 149, 1)) drop-shadow(0 0 20px rgba(255, 45, 149, 0.7));"/>
+            <circle cx="400" cy="400" r="16" fill="none" stroke="#FF2D95" stroke-opacity=".6"/>
+            <circle cx="400" cy="400" r="26" fill="none" stroke="#00E5FF" stroke-opacity=".4" stroke-dasharray="1 5"/>
           </svg>
           <span class="orbit__chip" style="--x:74.1%; --y:21.2%">
             <b>AZ-001 — LEAD</b>류석준 <i>Seokjun Ryu</i>
@@ -116,7 +150,7 @@
             <b>AZ-003 — EVAL</b>곽동윤 <i>Dongyun Kwak</i>
           </span>
           <span class="orbit__chip" style="--x:40.2%; --y:86.2%">
-            <b>AZ-004 — SAFETY</b>정태영 <i>Taeyoung Jung</i>
+            <b>AZ-004 — SAFETY</b>정태영 <i>Taeyoung Jeong</i>
           </span>
           <span class="orbit__corelabel">Q.00 — "어디까지 스스로?"</span>
         </div>
@@ -154,25 +188,11 @@
           <article class="roster__row reveal" role="listitem">
             <span class="roster__thumb roster__thumb--photo" aria-hidden="true"><img src="images/taeyoung.png" alt="" loading="lazy" /></span>
             <span class="roster__id">AZ-004<br /><b>SAFETY</b></span>
-            <h3 class="roster__name">정태영 <i>Taeyoung Jung</i></h3>
+            <h3 class="roster__name">정태영 <i>Taeyoung Jeong</i></h3>
             <p class="roster__bio">에이전트 안전성과 실제 영향도를 함께 보며 방어 가능한 결론을 만든다.</p>
             <span class="roster__status">DISCLOSURE<br /><b>MEMBER</b></span>
           </article>
         </div>
-      </section>
-
-      <!-- ============ 02 · OPEN SEAT ============ -->
-      <section class="sect" id="open-seat">
-        <div class="sect__head reveal">
-          <h2 class="sect__kicker"><span class="sect__index">[ 02 ]</span> OPEN SEAT</h2>
-        </div>
-
-        <a class="seat reveal" href="mailto:hello@agentzero.team">
-          <p class="seat__id">AZ-005 — <b>UNASSIGNED</b></p>
-          <h3 class="seat__title">다섯 번째 자리는 비어 있습니다</h3>
-          <p class="seat__text">에이전트의 다음 단계를 함께 검증할 연구자를 찾습니다.<br />관심 영역과 함께 짧게 소개해 주세요.</p>
-          <span class="seat__cta">hello@agentzero.team&nbsp;&nbsp;↗</span>
-        </a>
       </section>
 
       <div class="band" aria-hidden="true"></div>

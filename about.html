@@ -9,7 +9,14 @@
   <meta property="og:description" content="연구 독트린, 공개 파이프라인, 협업 대상" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ag3nt-z3r0.github.io/about.html" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0B'/%3E%3Cg fill='%23EAEAE4'%3E%3Ccircle cx='25' cy='16' r='1.3'/%3E%3Ccircle cx='23.8' cy='20.5' r='1.3'/%3E%3Ccircle cx='20.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='16' cy='25' r='1.3'/%3E%3Ccircle cx='11.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='8.2' cy='20.5' r='1.3'/%3E%3Ccircle cx='7' cy='16' r='1.3'/%3E%3Ccircle cx='8.2' cy='11.5' r='1.3'/%3E%3Ccircle cx='11.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='16' cy='7' r='1.3'/%3E%3Ccircle cx='20.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='23.8' cy='11.5' r='1.3'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.6' fill='%23FF4D00'/%3E%3C/svg%3E" />
+  <meta property="og:image" content="https://ag3nt-z3r0.github.io/images/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Agent Zero — Zero-Day Research Team" />
+  <meta property="og:site_name" content="Agent Zero" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://ag3nt-z3r0.github.io/images/og-cover.png" />
+  <link rel="icon" type="image/png" href="images/az-favicon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,14 +39,7 @@
 
     <header class="nav" id="top">
       <a class="nav__brand" href="index.html" aria-label="Agent Zero 홈">
-        <svg class="nav__glyph" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
-          <g fill="currentColor">
-            <circle cx="25" cy="16" r="1.4"/><circle cx="23.8" cy="20.5" r="1.4"/><circle cx="20.5" cy="23.8" r="1.4"/>
-            <circle cx="16" cy="25" r="1.4"/><circle cx="11.5" cy="23.8" r="1.4"/><circle cx="8.2" cy="20.5" r="1.4"/>
-            <circle cx="7" cy="16" r="1.4"/><circle cx="8.2" cy="11.5" r="1.4"/><circle cx="11.5" cy="8.2" r="1.4"/>
-            <circle cx="16" cy="7" r="1.4"/><circle cx="20.5" cy="8.2" r="1.4"/><circle cx="23.8" cy="11.5" r="1.4"/>
-          </g>
-        </svg>
+        <img class="nav__glyph" src="images/az-logo.png" alt="" aria-hidden="true" width="47" height="26" />
         <span class="nav__wordmark">AGENT ZERO</span>
         <span class="nav__ver">/00</span>
       </a>
@@ -72,8 +72,9 @@
 
     <main>
 
-      <!-- ============ PAGE HERO + SPEC SHEET ============ -->
-      <section class="page-hero">
+      <!-- ============ PAGE HERO + ASC WATERMARK ============ -->
+      <section class="page-hero page-hero--about">
+        <span class="hero-seal" aria-hidden="true"></span>
         <div class="page-hero__main">
           <p class="page-hero__kicker reveal">ABOUT — RESEARCH DOCTRINE</p>
           <h1 class="page-hero__title">
@@ -83,16 +84,6 @@
           <p class="page-hero__sub reveal d3">에이전트의 추론·도구 사용·권한 경계를 가정 없이 다시 검증합니다.<br />감이 아니라 재현 가능한 로그가 결론을 만듭니다.</p>
         </div>
 
-        <aside class="spec reveal d3" aria-label="팀 개요">
-          <p class="spec__head">SPEC / AZ-00</p>
-          <dl class="spec__list">
-            <div class="spec__row"><dt>EST.</dt><dd>2026</dd></div>
-            <div class="spec__row"><dt>BASE</dt><dd>SEOUL, KR</dd></div>
-            <div class="spec__row"><dt>FOCUS</dt><dd>AGENT SECURITY</dd></div>
-            <div class="spec__row"><dt>METHOD</dt><dd>COORDINATED DISCLOSURE</dd></div>
-            <div class="spec__row"><dt>OUTPUT</dt><dd>LEDGER · EVALS · TOOLS</dd></div>
-          </dl>
-        </aside>
       </section>
 
       <!-- ============ 01 · EVIDENCE ============ -->

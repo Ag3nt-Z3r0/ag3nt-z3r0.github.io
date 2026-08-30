@@ -9,12 +9,70 @@
   <meta property="og:description" content="에이전트 보안 취약점 공개 ledger와 조정 공개 원칙" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ag3nt-z3r0.github.io/disclosure.html" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0B'/%3E%3Cg fill='%23EAEAE4'%3E%3Ccircle cx='25' cy='16' r='1.3'/%3E%3Ccircle cx='23.8' cy='20.5' r='1.3'/%3E%3Ccircle cx='20.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='16' cy='25' r='1.3'/%3E%3Ccircle cx='11.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='8.2' cy='20.5' r='1.3'/%3E%3Ccircle cx='7' cy='16' r='1.3'/%3E%3Ccircle cx='8.2' cy='11.5' r='1.3'/%3E%3Ccircle cx='11.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='16' cy='7' r='1.3'/%3E%3Ccircle cx='20.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='23.8' cy='11.5' r='1.3'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.6' fill='%23FF4D00'/%3E%3C/svg%3E" />
+  <meta property="og:image" content="https://ag3nt-z3r0.github.io/images/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Agent Zero — Zero-Day Research Team" />
+  <meta property="og:site_name" content="Agent Zero" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://ag3nt-z3r0.github.io/images/og-cover.png" />
+  <link rel="icon" type="image/png" href="images/az-favicon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62.5..125,100..900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- ledger: color-coded severity (keep square markers) + white CVE — scoped to disclosure -->
+  <style>
+    /* keep the existing square markers; color them by level (marker uses currentColor) */
+    .sev--crit { color: #ff4d4d; }
+    .sev--high { color: #ff6d8a; }
+    .sev--med  { color: #ffc061; }
+    .sev--low  { color: #4ff7cf; }
+    .sev--unknown, .sev--floor { color: var(--fg-faint); }
+
+    /* CVE column — white */
+    .ledger .cvecell {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.03em;
+      color: #ffffff;
+    }
+    .ledger .cvecell--none {
+      color: var(--fg-faint); letter-spacing: 0.1em;
+    }
+
+    /* interactive neon hero — cursor parallax + glow */
+    #crtScope { transition: transform 0.18s ease-out, filter 0.3s; will-change: transform, filter; }
+
+    /* ledger search box */
+    .ledgersearch {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 16px; margin-bottom: 14px;
+      border: 1px solid var(--line-strong);
+      background: var(--bg-raise);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .ledgersearch:focus-within {
+      border-color: rgba(0, 229, 255, 0.6);
+      box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.3), 0 0 18px rgba(0, 229, 255, 0.15);
+    }
+    .ledgersearch__icon { flex: 0 0 auto; color: var(--fg-faint); transition: color 0.3s; }
+    .ledgersearch:focus-within .ledgersearch__icon { color: #00e5ff; }
+    .ledgersearch__input {
+      flex: 1 1 auto; min-width: 0;
+      background: transparent; border: 0; outline: none;
+      color: var(--fg);
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    }
+    .ledgersearch__input::placeholder { color: var(--fg-faint); letter-spacing: 0.14em; }
+    .ledgersearch__input::-webkit-search-cancel-button { -webkit-appearance: none; }
+    .ledgersearch__hint {
+      flex: 0 0 auto;
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.16em;
+      color: #00e5ff; text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+    }
+    .ledger tr.is-search-hidden { display: none; }
+  </style>
 </head>
 <body>
 
@@ -32,14 +90,7 @@
 
     <header class="nav" id="top">
       <a class="nav__brand" href="index.html" aria-label="Agent Zero 홈">
-        <svg class="nav__glyph" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
-          <g fill="currentColor">
-            <circle cx="25" cy="16" r="1.4"/><circle cx="23.8" cy="20.5" r="1.4"/><circle cx="20.5" cy="23.8" r="1.4"/>
-            <circle cx="16" cy="25" r="1.4"/><circle cx="11.5" cy="23.8" r="1.4"/><circle cx="8.2" cy="20.5" r="1.4"/>
-            <circle cx="7" cy="16" r="1.4"/><circle cx="8.2" cy="11.5" r="1.4"/><circle cx="11.5" cy="8.2" r="1.4"/>
-            <circle cx="16" cy="7" r="1.4"/><circle cx="20.5" cy="8.2" r="1.4"/><circle cx="23.8" cy="11.5" r="1.4"/>
-          </g>
-        </svg>
+        <img class="nav__glyph" src="images/az-logo.png" alt="" aria-hidden="true" width="47" height="26" />
         <span class="nav__wordmark">AGENT ZERO</span>
         <span class="nav__ver">/00</span>
       </a>
@@ -90,11 +141,11 @@
         </div>
 
         <div class="crt__stage reveal">
-          <svg class="crt__circles" viewBox="0 0 1040 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-            <rect x="430" y="70" width="140" height="260" fill="#EAEAE4" opacity=".035"/>
-            <rect x="356" y="90" width="60" height="220" fill="#EAEAE4" opacity=".02"/>
-            <rect x="600" y="100" width="44" height="200" fill="#EAEAE4" opacity=".02"/>
-            <g fill="none" stroke="#EAEAE4">
+          <svg id="crtScope" class="crt__circles" viewBox="0 0 1040 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.45));">
+            <rect x="430" y="70" width="140" height="260" fill="#00E5FF" opacity=".05"/>
+            <rect x="356" y="90" width="60" height="220" fill="#00E5FF" opacity=".03"/>
+            <rect x="600" y="100" width="44" height="200" fill="#00E5FF" opacity=".03"/>
+            <g fill="none" stroke="#00E5FF">
               <circle cx="190" cy="200" r="150" stroke-opacity=".22"/>
               <circle cx="345" cy="200" r="150" stroke-opacity=".4"/>
               <circle cx="500" cy="200" r="150" stroke-opacity=".6"/>
@@ -103,17 +154,32 @@
               <circle cx="500" cy="200" r="75" stroke-opacity=".5"/>
               <circle cx="578" cy="200" r="75" stroke-opacity=".25"/>
               <path d="M40 200 H1000" stroke-opacity=".22"/>
-              <path d="M500 176 V224 M476 200 H524" stroke-opacity=".7"/>
             </g>
-            <g fill="#EAEAE4">
+            <g fill="#00E5FF">
               <circle cx="190" cy="200" r="1.4" opacity=".7"/>
               <circle cx="345" cy="200" r="1.4" opacity=".8"/>
               <circle cx="655" cy="200" r="1.4" opacity=".8"/>
               <circle cx="810" cy="200" r="1.4" opacity=".7"/>
-              <circle cx="500" cy="200" r="2.2"/>
-              <circle cx="500" cy="200" r="7" opacity=".16"/>
             </g>
-            <g fill="none" stroke="#EAEAE4" stroke-width="1.5" stroke-opacity=".8">
+            <!-- targeting reticle — tracks the cursor, auto-acquires targets when idle -->
+            <g id="crtReticle" transform="translate(500 200)" style="transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);">
+              <circle r="7" fill="none" stroke="#FF2D95" stroke-width="2" opacity="0">
+                <animate attributeName="r" values="7;120" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.5;0" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <g stroke="#FF2D95" fill="none" style="filter: drop-shadow(0 0 6px rgba(255, 45, 149, 0.9));">
+                <circle r="22" stroke-width="1.6" stroke-opacity=".8"/>
+                <circle r="34" stroke-width="1" stroke-opacity=".28" stroke-dasharray="2 6">
+                  <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="14s" repeatCount="indefinite"/>
+                </circle>
+                <path d="M0 -36 V-12 M0 12 V36 M-36 0 H-12 M12 0 H36" stroke-width="1.6"/>
+                <path d="M-31 -21 V-31 H-21 M21 -31 H31 V-21 M31 21 V31 H21 M-21 31 H-31 V21" stroke-width="1.4" stroke-opacity=".85"/>
+              </g>
+              <circle r="2.4" fill="#FF2D95" style="filter: drop-shadow(0 0 5px rgba(255, 45, 149, 1));">
+                <animate attributeName="r" values="2.4;3.4;2.4" dur="2.2s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+            <g fill="none" stroke="#00E5FF" stroke-width="1.5" stroke-opacity=".8">
               <path d="M78 60 H48 V340 H78"/>
               <path d="M962 60 H992 V340 H962"/>
             </g>
@@ -138,7 +204,7 @@
 
         <div class="ledger__intro reveal">
           <h2 class="sect__title">ALL CASES</h2>
-          <p class="sect__sub"><a class="inline-link" href="agents.html">CrayFisher와 DeepSealer</a>가 찾아낸 뒤 Agent Zero가 GitHub Security Advisory(GHSA)로 조정 공개 중인 취약점입니다. 조정 공개 전에는 재현 payload, 민감한 경로, 비공개 타깃 세부 사항을 포함하지 않습니다.</p>
+          <p class="sect__sub"><a class="inline-link" href="agents.html">CrayFisher와 DeepSealer</a>가 찾아낸 뒤 Agent Zero가 GitHub Security Advisory(GHSA)로 조정 공개 중인 취약점입니다.<br />조정 공개 전에는 재현 payload, 민감한 경로, 비공개 타깃 세부 사항을 포함하지 않습니다.</p>
         </div>
 
         <!-- gauge + counters -->
@@ -190,6 +256,15 @@
           </div>
         </div>
 
+        <!-- search -->
+        <div class="ledgersearch reveal">
+          <svg class="ledgersearch__icon" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="7" cy="7" r="5"/><path d="M11 11 L14.5 14.5" stroke-linecap="round"/>
+          </svg>
+          <input id="ledgerSearch" class="ledgersearch__input" type="search" placeholder="SEARCH" aria-label="케이스 검색" autocomplete="off" spellcheck="false" />
+          <span class="ledgersearch__hint" id="searchHint" aria-hidden="true"></span>
+        </div>
+
         <!-- filters -->
         <div class="filters reveal" role="group" aria-label="상태 필터">
           <span class="filters__label">FILTER</span>
@@ -209,17 +284,17 @@
                 <th scope="col">Target</th>
                 <th scope="col">Class</th>
                 <th scope="col">Severity</th>
-                <th scope="col">Status</th>
+                <th scope="col">CVE</th>
                 <th scope="col">Summary</th>
               </tr>
             </thead>
             <tbody>
               <tr data-status="published" data-cve="y">
-                <td data-label="ID"><a class="ghsa" href="https://github.com/qbee-io/qbee-agent/security/advisories/GHSA-xhv5-8fpq-g7hf" target="_blank" rel="noopener noreferrer">GHSA-xhv5-8fpq-g7hf</a><br /><span class="ghsa__cve">CVE-2026-62336</span></td>
+                <td data-label="ID"><a class="ghsa" href="https://github.com/qbee-io/qbee-agent/security/advisories/GHSA-xhv5-8fpq-g7hf" target="_blank" rel="noopener noreferrer">GHSA-xhv5-8fpq-g7hf</a></td>
                 <td data-label="Target">qbee / qbee-agent</td>
                 <td data-label="Class">Privilege Escalation</td>
                 <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="CVE"><span class="cvecell">CVE-2026-62336</span></td>
                 <td data-label="Summary">Symlink following in a privileged file helper allows local privilege escalation and arbitrary file tampering to root.</td>
               </tr>
               <tr data-status="published" data-cve="n">
@@ -227,23 +302,23 @@
                 <td data-label="Target">n8n</td>
                 <td data-label="Class">Privilege Escalation</td>
                 <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="CVE"><span class="cvecell cvecell--none">GHSA only</span></td>
                 <td data-label="Summary">Enterprise SSO instance-role provisioning lets an attacker controlling the IdP role claim escalate to full instance owner.</td>
               </tr>
               <tr data-status="published" data-cve="y">
-                <td data-label="ID"><a class="ghsa" href="https://github.com/coturn/coturn/security/advisories/GHSA-69wx-x7x6-pjj8" target="_blank" rel="noopener noreferrer">GHSA-69wx-x7x6-pjj8</a><br /><span class="ghsa__cve">CVE-2026-65981</span></td>
+                <td data-label="ID"><a class="ghsa" href="https://github.com/coturn/coturn/security/advisories/GHSA-69wx-x7x6-pjj8" target="_blank" rel="noopener noreferrer">GHSA-69wx-x7x6-pjj8</a></td>
                 <td data-label="Target">coturn</td>
                 <td data-label="Class">Auth Bypass</td>
                 <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="CVE"><span class="cvecell">CVE-2026-65981</span></td>
                 <td data-label="Summary">With --mobility enabled, a session-resume authorization flaw lets an authenticated attacker hijack another user's active TURN allocation.</td>
               </tr>
               <tr data-status="published" data-cve="y">
-                <td data-label="ID"><a class="ghsa" href="https://github.com/coturn/coturn/security/advisories/GHSA-4g7c-p5wg-j4hp" target="_blank" rel="noopener noreferrer">GHSA-4g7c-p5wg-j4hp</a><br /><span class="ghsa__cve">CVE-2026-68553</span></td>
+                <td data-label="ID"><a class="ghsa" href="https://github.com/coturn/coturn/security/advisories/GHSA-4g7c-p5wg-j4hp" target="_blank" rel="noopener noreferrer">GHSA-4g7c-p5wg-j4hp</a></td>
                 <td data-label="Target">coturn</td>
                 <td data-label="Class">Format String</td>
                 <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="CVE"><span class="cvecell">CVE-2026-68553</span></td>
                 <td data-label="Summary">An authenticated TURN user can inject format specifiers via STUN USERNAME/REALM, causing crashes or memory disclosure.</td>
               </tr>
               <tr data-status="published" data-cve="n">
@@ -251,7 +326,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Privilege Escalation</td>
                 <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="CVE"><span class="cvecell cvecell--none">GHSA only</span></td>
                 <td data-label="Summary">Isolated cron jobs could regain access to exec tools that had been denied, exceeding intended authorization.</td>
               </tr>
               <tr data-status="published" data-cve="n">
@@ -259,23 +334,23 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Auth Bypass</td>
                 <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="CVE"><span class="cvecell cvecell--none">GHSA only</span></td>
                 <td data-label="Summary">MS Teams message actions could skip requester authorization, letting a lower-trust caller act without required checks.</td>
               </tr>
               <tr data-status="published" data-cve="y">
-                <td data-label="ID"><a class="ghsa" href="https://github.com/qbee-io/transport/security/advisories/GHSA-f9m7-vc86-p6jj" target="_blank" rel="noopener noreferrer">GHSA-f9m7-vc86-p6jj</a><br /><span class="ghsa__cve">CVE-2026-55828</span></td>
+                <td data-label="ID"><a class="ghsa" href="https://github.com/qbee-io/transport/security/advisories/GHSA-f9m7-vc86-p6jj" target="_blank" rel="noopener noreferrer">GHSA-f9m7-vc86-p6jj</a></td>
                 <td data-label="Target">qbee / transport</td>
                 <td data-label="Class">Path Traversal</td>
                 <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
-                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="CVE"><span class="cvecell">CVE-2026-55828</span></td>
                 <td data-label="Summary">Symlink-chain path traversal in tar extraction lets a crafted archive write a file one level above the target directory.</td>
               </tr>
               <tr data-status="published" data-cve="y">
-                <td data-label="ID"><a class="ghsa" href="https://github.com/traefik/traefik/security/advisories/GHSA-62fc-8686-hfmq" target="_blank" rel="noopener noreferrer">GHSA-62fc-8686-hfmq</a><br /><span class="ghsa__cve">CVE-2026-71325</span></td>
+                <td data-label="ID"><a class="ghsa" href="https://github.com/traefik/traefik/security/advisories/GHSA-62fc-8686-hfmq" target="_blank" rel="noopener noreferrer">GHSA-62fc-8686-hfmq</a></td>
                 <td data-label="Target">Traefik</td>
                 <td data-label="Class">Auth Bypass</td>
                 <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
-                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="CVE"><span class="cvecell">CVE-2026-71325</span></td>
                 <td data-label="Summary">With allowCrossNamespace=false, Traefik fails to block cross-namespace TraefikService backendRefs, letting tenants bypass isolation.</td>
               </tr>
               <tr data-status="published" data-cve="n">
@@ -283,7 +358,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Denial of Service</td>
                 <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
-                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="CVE"><span class="cvecell cvecell--none">GHSA only</span></td>
                 <td data-label="Summary">Remote media URLs can slow-read exhaust tool workers, consuming gateway resources and reducing availability.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -291,7 +366,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Command Execution</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A command bypass in the Google Meet node enables arbitrary command execution on paired nodes.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -299,7 +374,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Command Execution</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A non-owner can install arbitrary Codex plugins and trigger host MCP process execution.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -307,7 +382,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Command Execution</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A non-owner chat ACP control can enable approve-all permissions and drive host command execution.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -315,7 +390,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Auth Bypass</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Missing owner/admin gate on codex bind lets non-owner senders create full-access native Codex host turns.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -323,7 +398,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Auth Bypass</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">An authorization bypass in iMessage message-action group management allows unauthorized group management.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -331,7 +406,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Sandbox Escape</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A browser sandbox bypass lets a target node evade host control.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -339,7 +414,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Privilege Escalation</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A browser proxy node invoke path permits a scope downgrade that weakens permission enforcement.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -347,7 +422,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Allowlist Bypass</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A Windows PowerShell allowlist rewrite can run a workspace shadow executable instead of the allowlisted path.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -355,7 +430,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -363,7 +438,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -371,7 +446,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -379,7 +454,7 @@
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -387,7 +462,7 @@
                 <td data-label="Target">Flowise</td>
                 <td data-label="Class">Sandbox Escape</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">An allowed google-auth-library dependency enables host command execution, escaping the Flowise NodeVM sandbox.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -395,7 +470,7 @@
                 <td data-label="Target">Flowise</td>
                 <td data-label="Class">Improper Access Control</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Missing ownership and permission checks on workspace sharing let a low-privileged user use another workspace's credentials.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -403,7 +478,7 @@
                 <td data-label="Target">Flowise</td>
                 <td data-label="Class">Improper Authorization</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Expired enterprise workspace invites may be revived via the forgot/reset password and first-login flow.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -411,7 +486,7 @@
                 <td data-label="Target">Flowise</td>
                 <td data-label="Class">Improper Privilege Mgmt</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Insufficient session expiration combined with improper privilege management and improper authorization.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -419,7 +494,7 @@
                 <td data-label="Target">Flowise</td>
                 <td data-label="Class">Stored XSS</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Stored cross-site scripting from improper neutralization of script-related HTML tags.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -427,7 +502,7 @@
                 <td data-label="Target">Flowise</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -435,7 +510,7 @@
                 <td data-label="Target">NATS Server</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -443,7 +518,7 @@
                 <td data-label="Target">NATS Server</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -451,7 +526,7 @@
                 <td data-label="Target">NATS Server</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -459,7 +534,7 @@
                 <td data-label="Target">NATS Server</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -467,7 +542,7 @@
                 <td data-label="Target">NATS Server</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -475,7 +550,7 @@
                 <td data-label="Target">NATS Server</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -483,7 +558,7 @@
                 <td data-label="Target">NATS Server</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -491,7 +566,7 @@
                 <td data-label="Target">qbee / qbee-agent</td>
                 <td data-label="Class">Zip Slip</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A Docker Compose build-context archive can write files outside the intended context directory (Zip Slip).</td>
               </tr>
               <tr data-status="draft" data-cve="n">
@@ -499,23 +574,23 @@
                 <td data-label="Target">qbee / qbee-agent</td>
                 <td data-label="Class">Privilege Escalation</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A predictable installer working directory allows local package substitution that runs as root.</td>
               </tr>
               <tr data-status="draft" data-cve="y">
-                <td data-label="ID">GHSA-vg53-****-****<br /><span class="ghsa__cve">CVE-2026-14368</span></td>
+                <td data-label="ID">GHSA-vg53-****-****</td>
                 <td data-label="Target">Zephyr RTOS</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; CVE assigned</span></td>
+                <td data-label="CVE"><span class="cvecell">CVE-2026-14368</span></td>
                 <td data-label="Summary">Advisory under embargo; tracked as CVE-2026-14368, public details pending.</td>
               </tr>
               <tr data-status="draft" data-cve="y">
-                <td data-label="ID">GHSA-4q9g-****-****<br /><span class="ghsa__cve">CVE-2026-18746</span></td>
+                <td data-label="ID">GHSA-4q9g-****-****</td>
                 <td data-label="Target">Zephyr RTOS</td>
                 <td data-label="Class">&mdash;</td>
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; CVE assigned</span></td>
+                <td data-label="CVE"><span class="cvecell">CVE-2026-18746</span></td>
                 <td data-label="Summary">Advisory under embargo; tracked as CVE-2026-18746, public details pending.</td>
               </tr>
             </tbody>
@@ -584,5 +659,52 @@
   </div>
 
   <script src="js/main.js"></script>
+  <script>
+    /* interactive neon hero: targeting reticle tracks cursor + auto-acquires targets when idle */
+    (function () {
+      var crt = document.querySelector('.crt');
+      var svg = document.getElementById('crtScope');
+      var reticle = document.getElementById('crtReticle');
+      if (!crt || !svg) return;
+      var base = 'drop-shadow(0 0 5px rgba(0, 229, 255, 0.45))';
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        try { svg.pauseAnimations && svg.pauseAnimations(); } catch (e) {}
+        return;
+      }
+
+      var targets = [[190, 200], [345, 200], [500, 200], [655, 200], [810, 200]];
+      function move(x, y) { if (reticle) reticle.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ')'); }
+
+      var autoTimer = null, ai = 2;
+      function tick() { ai = (ai + 1) % targets.length; move(targets[ai][0], targets[ai][1]); }
+      function startAuto() { if (autoTimer || !reticle) return; move(targets[ai][0], targets[ai][1]); autoTimer = setInterval(tick, 1800); }
+      function stopAuto() { clearInterval(autoTimer); autoTimer = null; }
+
+      var idle;
+      crt.addEventListener('pointermove', function (e) {
+        // reticle follows the cursor (mapped into viewBox coords)
+        if (reticle && svg.getScreenCTM) {
+          var m = svg.getScreenCTM();
+          if (m) {
+            var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+            var loc = pt.matrixTransform(m.inverse());
+            move(Math.max(60, Math.min(980, loc.x)), Math.max(72, Math.min(330, loc.y)));
+            stopAuto(); clearTimeout(idle); idle = setTimeout(startAuto, 2200);
+          }
+        }
+        // subtle whole-field parallax + glow
+        var r = crt.getBoundingClientRect();
+        var nx = (e.clientX - r.left) / r.width - 0.5;
+        var ny = (e.clientY - r.top) / r.height - 0.5;
+        svg.style.transform = 'translate(' + (nx * 12).toFixed(1) + 'px, ' + (ny * 8).toFixed(1) + 'px)';
+        svg.style.filter = 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.78))';
+      });
+      crt.addEventListener('pointerleave', function () {
+        svg.style.transform = ''; svg.style.filter = base;
+        clearTimeout(idle); startAuto();
+      });
+      startAuto();
+    })();
+  </script>
 </body>
 </html>
