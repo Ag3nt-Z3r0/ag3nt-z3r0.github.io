@@ -9,87 +9,194 @@
   <meta property="og:description" content="에이전트 보안 취약점 공개 ledger와 조정 공개 원칙" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ag3nt-z3r0.github.io/disclosure.html" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23f2f2f2' stroke-width='2.5'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0B'/%3E%3Cg fill='%23EAEAE4'%3E%3Ccircle cx='25' cy='16' r='1.3'/%3E%3Ccircle cx='23.8' cy='20.5' r='1.3'/%3E%3Ccircle cx='20.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='16' cy='25' r='1.3'/%3E%3Ccircle cx='11.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='8.2' cy='20.5' r='1.3'/%3E%3Ccircle cx='7' cy='16' r='1.3'/%3E%3Ccircle cx='8.2' cy='11.5' r='1.3'/%3E%3Ccircle cx='11.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='16' cy='7' r='1.3'/%3E%3Ccircle cx='20.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='23.8' cy='11.5' r='1.3'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.6' fill='%23FF4D00'/%3E%3C/svg%3E" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62.5..125,100..900&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <div class="frame" aria-hidden="true"></div>
+  <div class="hud" aria-hidden="true">
+    <span class="hud__corner hud__corner--tl"></span>
+    <span class="hud__corner hud__corner--tr"></span>
+    <span class="hud__corner hud__corner--bl"></span>
+    <span class="hud__corner hud__corner--br"></span>
+    <span class="hud__tag hud__tag--bl">AZ/OBS — 37.56°N 126.97°E</span>
+    <span class="hud__tag hud__tag--br" id="cursorPos">X:0000 · Y:0000</span>
+  </div>
   <div class="grain" aria-hidden="true"></div>
 
-  <nav class="nav" aria-label="주요 메뉴">
-    <a class="nav__link" href="index.html#preview">ABOUT</a>
-    <a class="nav__link" href="disclosure.html" aria-current="page">DISCLOSURE</a>
-    <div class="nav__center">
-      <a class="nav__wordmark" href="index.html#top" aria-label="Agent Zero 홈">
-        <span class="nav__wordmark-line">AGENT</span>
-        <span class="nav__wordmark-line">ZERO</span>
+  <div class="shell">
+
+    <header class="nav" id="top">
+      <a class="nav__brand" href="index.html" aria-label="Agent Zero 홈">
+        <svg class="nav__glyph" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
+          <g fill="currentColor">
+            <circle cx="25" cy="16" r="1.4"/><circle cx="23.8" cy="20.5" r="1.4"/><circle cx="20.5" cy="23.8" r="1.4"/>
+            <circle cx="16" cy="25" r="1.4"/><circle cx="11.5" cy="23.8" r="1.4"/><circle cx="8.2" cy="20.5" r="1.4"/>
+            <circle cx="7" cy="16" r="1.4"/><circle cx="8.2" cy="11.5" r="1.4"/><circle cx="11.5" cy="8.2" r="1.4"/>
+            <circle cx="16" cy="7" r="1.4"/><circle cx="20.5" cy="8.2" r="1.4"/><circle cx="23.8" cy="11.5" r="1.4"/>
+          </g>
+        </svg>
+        <span class="nav__wordmark">AGENT ZERO</span>
+        <span class="nav__ver">/00</span>
       </a>
-      <span class="nav__social">
-        <a href="https://github.com/Ag3nt-Z3r0" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+
+      <nav class="nav__links" aria-label="주요 메뉴">
+        <a class="nav__link" href="index.html#about">ABOUT</a>
+        <a class="nav__link" href="disclosure.html" aria-current="page">DISCLOSURE</a>
+        <a class="nav__link" href="index.html#team">TEAM</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a class="nav__icon" href="https://github.com/Ag3nt-Z3r0" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
         </a>
-      </span>
-    </div>
-    <a class="nav__link" href="index.html#team">TEAM</a>
-    <a class="nav__link nav__link--cta" href="index.html#join">JOIN <span aria-hidden="true">→</span></a>
-    <button class="nav__burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
-  </nav>
-
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="index.html#preview">ABOUT</a>
-    <a href="disclosure.html">DISCLOSURE</a>
-    <a href="index.html#team">TEAM</a>
-    <a href="index.html#join">JOIN →</a>
-  </div>
-
-  <main id="top">
-    <header class="page-hero">
-      <div class="page-hero__art" aria-hidden="true"><img src="images/r4.jpg" alt="" loading="eager" /></div>
-      <div class="page-hero__content">
-        <p class="page-hero__eyebrow reveal">COORDINATED AGENT SECURITY LEDGER</p>
-        <h1 class="page-hero__title">
-          <span class="reveal d1">Disclosure</span>
-          <span class="reveal d2">Ledger</span>
-        </h1>
-        <p class="page-hero__sub reveal d3">에이전트 보안 이슈를 공개 단계, 영향도, 검증 상태별로 정리합니다. 공개 전 민감 정보는 의도적으로 생략합니다.</p>
+        <a class="btn btn--light btn--nav" href="index.html#join">JOIN <span aria-hidden="true">→</span></a>
+        <button class="nav__burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
       </div>
     </header>
 
-    <section class="panel panel--page" id="ledger">
-      <div class="panel__chips" aria-hidden="true"><span>Ledger</span><span>Discipline</span></div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="index.html#about"><i>01</i> ABOUT</a>
+      <a href="disclosure.html"><i>02</i> DISCLOSURE</a>
+      <a href="index.html#team"><i>03</i> TEAM</a>
+      <a href="index.html#join"><i>04</i> JOIN →</a>
+    </div>
 
-      <div class="disclosure">
-        <div class="disclosure__head reveal">
-          <p class="disclosure__eyebrow">FULL DISCLOSURE TABLE</p>
-          <h2 class="disclosure__title">All Cases</h2>
-          <p class="disclosure__sub">CrayFisher와 Agent Zero가 추적한 공개 가능 수준의 취약점 요약입니다. 조정 공개 전에는 재현 payload, 민감한 경로, 비공개 타깃 세부 사항을 포함하지 않습니다.</p>
+    <div class="band" aria-hidden="true"></div>
+
+    <main>
+
+      <!-- ============ CRT HERO ============ -->
+      <section class="crt">
+        <div class="crt__scan" aria-hidden="true"></div>
+
+        <div class="crt__hud" aria-hidden="true">
+          <div class="crt__hud-block">
+            <p class="crt__big">T:<span id="uptime">00:00:00</span></p>
+            <p>AZ-LEDGER</p>
+            <p>FAC-08 · PUBLIC VIEW</p>
+          </div>
+          <div class="crt__hud-block crt__hud-block--right">
+            <p>INTERNAL_SYSTEM</p>
+            <p>SYS.LEDGER&nbsp;&nbsp;&nbsp;LIVE</p>
+            <p><span data-utc>--------- --:-- UTC</span></p>
+          </div>
         </div>
 
-        <div class="disclosure__stats" aria-label="취약점 공개 현황">
-          <article class="disclosure__stat reveal">
-            <span class="disclosure__stat-value">24</span>
-            <span class="disclosure__stat-label">Tracked cases</span>
-          </article>
-          <article class="disclosure__stat reveal">
-            <span class="disclosure__stat-value">2</span>
-            <span class="disclosure__stat-label">High CVE drafts</span>
-          </article>
-          <article class="disclosure__stat reveal">
-            <span class="disclosure__stat-value">21</span>
-            <span class="disclosure__stat-label">Draft reports</span>
-          </article>
-          <article class="disclosure__stat reveal">
-            <span class="disclosure__stat-value">1</span>
-            <span class="disclosure__stat-label">Internal hardening note</span>
-          </article>
+        <div class="crt__stage reveal">
+          <svg class="crt__circles" viewBox="0 0 1040 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+            <rect x="430" y="70" width="140" height="260" fill="#EAEAE4" opacity=".035"/>
+            <rect x="356" y="90" width="60" height="220" fill="#EAEAE4" opacity=".02"/>
+            <rect x="600" y="100" width="44" height="200" fill="#EAEAE4" opacity=".02"/>
+            <g fill="none" stroke="#EAEAE4">
+              <circle cx="190" cy="200" r="150" stroke-opacity=".22"/>
+              <circle cx="345" cy="200" r="150" stroke-opacity=".4"/>
+              <circle cx="500" cy="200" r="150" stroke-opacity=".6"/>
+              <circle cx="655" cy="200" r="150" stroke-opacity=".4"/>
+              <circle cx="810" cy="200" r="150" stroke-opacity=".22"/>
+              <circle cx="500" cy="200" r="75" stroke-opacity=".5"/>
+              <circle cx="578" cy="200" r="75" stroke-opacity=".25"/>
+              <path d="M40 200 H1000" stroke-opacity=".22"/>
+              <path d="M500 176 V224 M476 200 H524" stroke-opacity=".7"/>
+            </g>
+            <g fill="#EAEAE4">
+              <circle cx="190" cy="200" r="1.4" opacity=".7"/>
+              <circle cx="345" cy="200" r="1.4" opacity=".8"/>
+              <circle cx="655" cy="200" r="1.4" opacity=".8"/>
+              <circle cx="810" cy="200" r="1.4" opacity=".7"/>
+              <circle cx="500" cy="200" r="2.2"/>
+              <circle cx="500" cy="200" r="7" opacity=".16"/>
+            </g>
+            <g fill="none" stroke="#EAEAE4" stroke-width="1.5" stroke-opacity=".8">
+              <path d="M78 60 H48 V340 H78"/>
+              <path d="M962 60 H992 V340 H962"/>
+            </g>
+          </svg>
         </div>
 
-        <div class="disclosure__table-wrap reveal">
-          <table class="disclosure__table">
+        <div class="crt__intro">
+          <h1 class="crt__title">
+            <span class="reveal d1">DISCLOSURE <em>ledger</em></span>
+          </h1>
+          <p class="crt__sub reveal d2">에이전트 보안 이슈를 공개 단계, 영향도, 검증 상태별로 정리합니다.<br />공개 전 민감 정보는 의도적으로 생략합니다.</p>
+          <p class="crt__down reveal d3" aria-hidden="true">↓ SCROLL FOR CASES</p>
+        </div>
+      </section>
+
+      <!-- ============ 01 · FULL TABLE ============ -->
+      <section class="sect" id="cases">
+        <div class="sect__head reveal">
+          <p class="sect__kicker"><span class="sect__index">[ 01 ]</span> FULL CASE TABLE</p>
+          <p class="sect__stamp">LAST SYNC <span data-utc>--------- --:-- UTC</span></p>
+        </div>
+
+        <div class="ledger__intro reveal">
+          <h2 class="sect__title">ALL <em>cases</em></h2>
+          <p class="sect__sub">CrayFisher와 Agent Zero가 추적한 공개 가능 수준의 취약점 요약입니다. 조정 공개 전에는 재현 payload, 민감한 경로, 비공개 타깃 세부 사항을 포함하지 않습니다.</p>
+        </div>
+
+        <!-- gauge + counters -->
+        <div class="gaugeRow reveal">
+          <figure class="gauge">
+            <svg viewBox="0 0 320 190" aria-hidden="true" focusable="false">
+              <path d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-opacity=".16" stroke-width="10" stroke-dasharray="1.4 11.17" />
+              <path d="M34 160 A126 126 0 0 1 286 160" fill="none" stroke="#EAEAE4" stroke-opacity=".28" stroke-width="1"/>
+              <path d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-width="3.5" stroke-dasharray="125.7 999"/>
+              <line x1="160" y1="160" x2="100" y2="56.1" stroke="#EAEAE4" stroke-width="1.5"/>
+              <circle cx="100" cy="56.1" r="3" fill="#FF4D00"/>
+              <circle cx="160" cy="160" r="4.5" fill="#EAEAE4"/>
+              <circle cx="160" cy="160" r="9" fill="none" stroke="#EAEAE4" stroke-opacity=".4"/>
+            </svg>
+            <figcaption class="gauge__cap">
+              <span>0</span>
+              <span class="gauge__read">DISCLOSED&nbsp;8&nbsp;/&nbsp;TRACKED&nbsp;24</span>
+              <span>24</span>
+            </figcaption>
+          </figure>
+
+          <div class="gauge__side">
+            <div class="stats stats--tight" aria-label="취약점 공개 현황">
+              <article class="stat">
+                <span class="stat__label">TRACKED CASES</span>
+                <span class="stat__value"><i>[</i>24<i>]</i></span>
+                <span class="stat__ruler" aria-hidden="true"></span>
+              </article>
+              <article class="stat">
+                <span class="stat__label"><span class="dot-live dot-live--sm" aria-hidden="true"></span> HIGH CVE DRAFTS</span>
+                <span class="stat__value"><i>[</i>2<i>]</i></span>
+                <span class="stat__ruler" aria-hidden="true"></span>
+              </article>
+              <article class="stat">
+                <span class="stat__label">DRAFT REPORTS</span>
+                <span class="stat__value"><i>[</i>21<i>]</i></span>
+                <span class="stat__ruler" aria-hidden="true"></span>
+              </article>
+              <article class="stat">
+                <span class="stat__label">INTERNAL HARDENING NOTE</span>
+                <span class="stat__value"><i>[</i>1<i>]</i></span>
+                <span class="stat__ruler" aria-hidden="true"></span>
+              </article>
+            </div>
+            <p class="gauge__legend">16 CASES REDACTED — PENDING COORDINATION</p>
+          </div>
+        </div>
+
+        <!-- filters -->
+        <div class="filters reveal" role="group" aria-label="심각도 필터">
+          <span class="filters__label">FILTER</span>
+          <button class="filters__btn" type="button" data-filter="all" aria-pressed="true">ALL <i>8</i></button>
+          <button class="filters__btn" type="button" data-filter="high" aria-pressed="false">HIGH <i>6</i></button>
+          <button class="filters__btn" type="button" data-filter="med" aria-pressed="false">MEDIUM <i>1</i></button>
+          <button class="filters__btn" type="button" data-filter="floor" aria-pressed="false">BELOW FLOOR <i>1</i></button>
+          <span class="filters__count" id="showCount" aria-live="polite">SHOWING 8 / 8</span>
+        </div>
+
+        <div class="ledger__wrap reveal">
+          <table class="ledger" id="ledgerTable">
             <caption>Agent Zero full vulnerability disclosure ledger</caption>
             <thead>
               <tr>
@@ -98,97 +205,138 @@
                 <th scope="col">Class</th>
                 <th scope="col">Severity</th>
                 <th scope="col">Status</th>
-                <th scope="col">Disclosure</th>
                 <th scope="col">Summary</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr data-sev="high">
                 <td data-label="ID">AZ-HERMES-001</td>
                 <td data-label="Target">NousResearch/hermes-agent</td>
                 <td data-label="Class">Path Traversal</td>
-                <td data-label="Severity"><span class="disclosure__badge">High</span></td>
-                <td data-label="Status">CVE draft</td>
-                <td data-label="Disclosure">Pending GHSA</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> CVE draft · pending GHSA</span></td>
                 <td data-label="Summary">Matrix, Mattermost, WeiXin outbound media adapters can read host files through LLM-reachable file paths.</td>
               </tr>
-              <tr>
+              <tr data-sev="high">
                 <td data-label="ID">AZ-HERMES-002</td>
                 <td data-label="Target">NousResearch/hermes-agent</td>
                 <td data-label="Class">Auth Bypass</td>
-                <td data-label="Severity"><span class="disclosure__badge">High</span></td>
-                <td data-label="Status">CVE draft</td>
-                <td data-label="Disclosure">Pending GHSA</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> CVE draft · pending GHSA</span></td>
                 <td data-label="Summary">WeCom, WeiXin, WhatsApp, and Yuanbao adapters fail open when no sender allowlist is configured.</td>
               </tr>
-              <tr>
+              <tr data-sev="high">
                 <td data-label="ID">AZ-ADKJ-012</td>
                 <td data-label="Target">Google ADK Java</td>
                 <td data-label="Class">Resource Traversal</td>
-                <td data-label="Severity"><span class="disclosure__badge">High</span></td>
-                <td data-label="Status">Verified draft</td>
-                <td data-label="Disclosure">Not submitted</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status">Verified draft · not submitted</td>
                 <td data-label="Summary">Skill resource loading can escape the selected skill directory when path containment is checked before normalization.</td>
               </tr>
-              <tr>
+              <tr data-sev="high">
                 <td data-label="ID">AZ-ADKJS-009</td>
                 <td data-label="Target">Google ADK JS</td>
                 <td data-label="Class">Path Traversal</td>
-                <td data-label="Severity"><span class="disclosure__badge">High</span></td>
-                <td data-label="Status">Draft</td>
-                <td data-label="Disclosure">Not submitted</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status">Draft · not submitted</td>
                 <td data-label="Summary">Output materialization uses prefix containment checks that can write outside the intended directory.</td>
               </tr>
-              <tr>
+              <tr data-sev="high">
                 <td data-label="ID">AZ-ADKJS-015</td>
                 <td data-label="Target">Google ADK JS</td>
                 <td data-label="Class">Code Injection</td>
-                <td data-label="Severity"><span class="disclosure__badge">High</span></td>
-                <td data-label="Status">Draft</td>
-                <td data-label="Disclosure">Not submitted</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status">Draft · not submitted</td>
                 <td data-label="Summary">A skill script filename can be interpolated into JavaScript wrapper code without safe quoting.</td>
               </tr>
-              <tr>
+              <tr data-sev="high">
                 <td data-label="ID">AZ-ADKGO-011</td>
                 <td data-label="Target">Google ADK Go</td>
                 <td data-label="Class">Local Service Exposure</td>
-                <td data-label="Severity"><span class="disclosure__badge">High</span></td>
-                <td data-label="Status">Source verified</td>
-                <td data-label="Disclosure">Not submitted</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status">Source verified · not submitted</td>
                 <td data-label="Summary">The web REST API advertises localhost access while binding the development server to all interfaces.</td>
               </tr>
-              <tr>
+              <tr data-sev="med">
                 <td data-label="ID">AZ-ADKPY-017</td>
                 <td data-label="Target">Google ADK Python</td>
                 <td data-label="Class">Isolation Bypass</td>
-                <td data-label="Severity"><span class="disclosure__badge">Medium</span></td>
-                <td data-label="Status">Draft</td>
-                <td data-label="Disclosure">Not submitted</td>
+                <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
+                <td data-label="Status">Draft · not submitted</td>
                 <td data-label="Summary">File-backed artifact storage omits the application namespace and can collapse isolation across apps.</td>
               </tr>
-              <tr>
+              <tr data-sev="floor">
                 <td data-label="ID">AZ-OPENCLAW-001</td>
                 <td data-label="Target">OpenClaw</td>
                 <td data-label="Class">Env Hardening Gap</td>
-                <td data-label="Severity"><span class="disclosure__badge disclosure__badge--muted">Below floor</span></td>
-                <td data-label="Status">Verified candidate</td>
-                <td data-label="Disclosure">Internal note</td>
+                <td data-label="Severity"><span class="sev sev--floor">BELOW FLOOR</span></td>
+                <td data-label="Status">Verified candidate · internal note</td>
                 <td data-label="Summary">Host exec environment controls need approval-surface hardening, but the confirmed impact falls below the high-severity filing floor.</td>
               </tr>
             </tbody>
           </table>
         </div>
+      </section>
 
-        <div class="disclosure__notes reveal" id="discipline">
-          <p class="disclosure__note-kicker">Disclosure discipline</p>
-          <p>이 페이지는 공개 가능한 수준의 ledger입니다. 조정 공개가 끝나기 전에는 exploit payload, 정확한 재현 명령, 토큰, 개인 정보, 비공개 타깃 세부 사항을 게시하지 않습니다. 각 항목은 방어자가 위험을 이해할 수 있을 만큼만 요약하고, 원본 분석과 스킬 정리는 별도 OKF 카탈로그로 관리합니다.</p>
+      <!-- ============ 02 · PROTOCOL ============ -->
+      <section class="sect" id="discipline">
+        <div class="sect__head reveal">
+          <p class="sect__kicker"><span class="sect__index">[ 02 ]</span> DISCLOSURE PROTOCOL</p>
         </div>
-      </div>
 
-      <div class="panel__wordmark panel__wordmark--grounded" aria-hidden="true">Disclosure</div>
-      <div class="panel__ground" aria-hidden="true"></div>
-    </section>
-  </main>
+        <div class="protocol">
+          <article class="protocol__step reveal">
+            <p class="protocol__num">P.01</p>
+            <h3 class="protocol__title">공개 범위</h3>
+            <p class="protocol__text">이 페이지는 공개 가능한 수준의 ledger입니다. 방어자가 위험을 이해할 수 있을 만큼만 요약합니다.</p>
+          </article>
+          <article class="protocol__step reveal">
+            <p class="protocol__num">P.02</p>
+            <h3 class="protocol__title">조정 공개</h3>
+            <p class="protocol__text">벤더 통보와 조정 공개가 끝나기 전에는 exploit payload와 정확한 재현 명령을 게시하지 않습니다.</p>
+          </article>
+          <article class="protocol__step reveal">
+            <p class="protocol__num">P.03</p>
+            <h3 class="protocol__title">민감 정보 보류</h3>
+            <p class="protocol__text">토큰, 개인 정보, 민감한 경로, 비공개 타깃 세부 사항은 공개 여부와 무관하게 사이트에 올리지 않습니다.</p>
+          </article>
+          <article class="protocol__step reveal">
+            <p class="protocol__num">P.04</p>
+            <h3 class="protocol__title">원본 카탈로그</h3>
+            <p class="protocol__text">원본 분석과 스킬 정리는 별도 OKF 카탈로그로 관리하며, ledger에는 그 결과 요약만 반영합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <div class="band" aria-hidden="true"></div>
+
+      <footer class="footer footer--sub" id="join">
+        <div class="footer__cta">
+          <p class="footer__kicker reveal">QUESTIONS&nbsp;&nbsp;·&nbsp;&nbsp;REPORTS&nbsp;&nbsp;·&nbsp;&nbsp;COORDINATION</p>
+          <h2 class="footer__title reveal d1">TALK <em>to us</em></h2>
+          <p class="footer__text reveal d2">공개 항목에 대한 문의, 조정 공개 협의는 메일로 받습니다.</p>
+          <a class="btn btn--light reveal d3" href="mailto:hello@agentzero.team">hello@agentzero.team&nbsp;&nbsp;↗</a>
+        </div>
+
+        <div class="footer__ghost" aria-hidden="true"><span>LEDGER</span></div>
+
+        <div class="footer__meta">
+          <div class="footer__meta-col">
+            <p>AGENT ZERO — DISCLOSURE COLLECTIVE</p>
+            <p>EST. 2026 · FROM ZERO, AGENTS EMERGE</p>
+          </div>
+          <div class="footer__meta-col footer__meta-col--center">
+            <p>SEOUL, KR — <span id="footClock">--:--:--</span> KST</p>
+          </div>
+          <div class="footer__meta-col footer__meta-col--right">
+            <p>STATIC HTML · NO TRACKERS</p>
+            <p>NO PAYLOADS BEFORE COORDINATION</p>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
 
   <script src="js/main.js"></script>
 </body>

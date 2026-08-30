@@ -1,124 +1,111 @@
-# Agent Zero Design System
+# Agent Zero Design System — "Observatory" Edition
 
 ## 1. Atmosphere & Identity
 
-Agent Zero feels like a monochrome research folio: severe, archival, and technical, but still human. The signature is black-and-white engraving imagery paired with quiet monospace metadata and large editorial serif titles.
+Agent Zero reads as a calibrated monochrome observation instrument: dot-matrix (dithered) graphics, hairline HUD geometry (brackets, crosshairs, tick rulers, concentric orbits), monospace telemetry labels, and hatched caution bands — grounded by wide grotesk display type and a rare serif-italic accent word. The page itself is a framed instrument: a bordered shell, fixed corner brackets, and a live cursor-coordinate readout.
+
+References: dithered-dome hero panels, CRT construction diagrams, thin-line thermal HUDs, orbital feature maps.
 
 ## 2. Color
 
 ### Palette
 
-| Role | Token | Light | Dark | Usage |
-|------|-------|-------|------|-------|
-| Surface/primary | --bg | #0A0A0A | #0A0A0A | Main dark background |
-| Surface/paper | --paper | #F2F2F2 | #F2F2F2 | White research panel |
-| Text/light | --fg | #F2F2F2 | #F2F2F2 | Text on dark surfaces |
-| Text/light-muted | --fg-dim | rgba(242, 242, 242, 0.62) | rgba(242, 242, 242, 0.62) | Secondary text on dark surfaces |
-| Text/dark | --ink | #0A0A0A | #0A0A0A | Text on paper surfaces |
-| Text/dark-muted | --ink-dim | rgba(10, 10, 10, 0.66) | rgba(10, 10, 10, 0.66) | Secondary text on paper surfaces |
-| Border/light | --line-light | rgba(242, 242, 242, 0.25) | rgba(242, 242, 242, 0.25) | Dividers on dark surfaces |
-| Border/dark | --line-dark | rgba(10, 10, 10, 0.25) | rgba(10, 10, 10, 0.25) | Dividers on paper surfaces |
+| Role | Token | Value | Usage |
+|------|-------|-------|-------|
+| Surface | --bg | #0A0A0B | Global background |
+| Surface/raised | --bg-raise | #0D0D0F | Cards (compare, gauge) |
+| Text | --fg | #EAEAE4 | Primary text, strokes |
+| Text/dim | --fg-dim | rgba(234,234,228,.6) | Secondary text |
+| Text/faint | --fg-faint | rgba(234,234,228,.35) | Tertiary labels, indexes |
+| Border | --line | rgba(234,234,228,.14) | Hairlines, cell borders |
+| Border/strong | --line-strong | rgba(234,234,228,.32) | Emphasized frames |
+| Signal | --signal | #FF4D00 | Live markers ONLY |
 
 ### Rules
 
-The site is intentionally monochrome. No accent colors are used; emphasis comes from scale, contrast, image treatment, and spacing.
+The site is monochrome with exactly one micro-accent. `--signal` may appear only as: live-status dots, the gauge needle tip, the dome base point. Never as text color, backgrounds, or borders. Emphasis otherwise comes from scale, stroke opacity, and dot density.
 
 ## 3. Typography
 
-### Scale
-
-| Level | Size | Weight | Line Height | Tracking | Usage |
-|-------|------|--------|-------------|----------|-------|
-| Display | clamp(52px, 8.4vw, 124px) | 300 | 0.98 | 0.005em | Hero title |
-| Section title | clamp(48px, 7vw, 92px) | 300 | 0.9 | 0 | Large section titles |
-| Team title | clamp(46px, 6.5vw, 88px) | 300 | 0.95 | 0 | Team heading |
-| Card title | clamp(30px, 4vw, 58px) | 300 | 0.9 | 0 | Card and feature headings |
-| Body | clamp(13px, 1.25vw, 16px) | 400 | 1.7 | 0 | Body copy |
-| Body/sm | 12.5px | 400 | 1.65 | 0 | Member biographies |
-| Metadata | 11px | 400-700 | 1.3 | 0.12em-0.24em | Eyebrows, IDs, captions |
-
 ### Font Stack
 
-* Serif: "Cormorant Garamond", "Noto Serif KR", serif
-* Korean serif: "Noto Serif KR", "Cormorant Garamond", serif
-* Mono: "Courier Prime", "Nanum Gothic Coding", monospace
+* Display sans: "Archivo" (variable, `font-stretch` 110–125%) — English headings, uppercase
+* Mono: "IBM Plex Mono" — all telemetry labels, table data, buttons, nav
+* Body: "IBM Plex Sans KR" (300/400/500) — Korean copy
+* Accent serif: "Cormorant Garamond" italic — one or two lowercase words inside display headings (`<em>`)
+
+### Scale
+
+| Level | Size | Weight | Notes |
+|-------|------|--------|-------|
+| Hero display | clamp(42px, 6.8vw, 100px) | 500, stretch 115% | Manual uppercase; `em` stays lowercase italic |
+| Section title | clamp(34px, 4.8vw, 66px) | 500, stretch 114% | Same mixed-case rule |
+| Stat value | clamp(38px, 4.2vw, 60px) mono | 500 | Wrapped in faint `[ ]` brackets |
+| Body | 12.5–15.5px | 300 | line-height 1.8–1.9, `word-break: keep-all` |
+| Telemetry label | 9–11px mono | 400–500 | letter-spacing 0.14–0.24em |
 
 ### Rules
 
-Large headings use the serif stack. Interface labels and metadata use the mono stack. Korean body text keeps `word-break: keep-all`.
+Headings mix hand-typed uppercase sans with a lowercase serif-italic `<em>` (never `text-transform`). Mono labels are always tracked wide. Korean never renders in the display sans (falls back to Plex Sans KR).
 
 ## 4. Spacing & Layout
 
-### Base Unit
+* Shell: max-width 1520px, hairline side borders — the page is a bounded panel.
+* Gutter: `--gutter: clamp(18px, 4.5vw, 64px)`.
+* Sections separated by hairline `border-top`; hatched `.band` strips (repeating 45° 1px stripes, 22px tall) mark major transitions (below nav, above footer).
+* Grids share borders (cells/stats/protocol are bordered grids, not gapped cards).
+* Breakpoints: 1020px (grid collapse), 900px (nav → burger), 760px (stack, orbit hidden, table → key-value records).
 
-All spacing is based on 4px multiples, with responsive `clamp()` values for section rhythm.
+## 5. Signature Components
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| --space-3 | 12px | Tight metadata spacing |
-| --space-4 | 16px | Default inline and button spacing |
-| --space-5 | 20px | Mobile gutter minimum |
-| --space-6 | 24px | Card inner rhythm |
-| --space-8 | 32px | Grid gaps and compact section breaks |
-| --space-12 | 48px | Standard vertical rhythm |
-| --space-20 | 80px | Large panel padding |
-| --gutter | clamp(20px, 7vw, 110px) | Page horizontal gutter |
-| --frame | 12px | Fixed viewport frame inset |
+### Fixed HUD chrome
+Corner L-brackets at viewport edges + mono tags: coordinates (bottom-left) and live cursor `X:0000 · Y:0000` readout (bottom-right, fine pointers only). Pointer-events: none.
 
-### Grid
+### Dithered dome (home hero)
+Inline SVG: half-circle masked dot patterns (6px + 13px grids) with radial falloff, ridge silhouettes as masked dot fields, hairline orbit arcs, apex crosshair, satellite rings, one signal dot at base. The dome doubles as the brand "0".
 
-* Max content width is controlled by section-specific clamps rather than a single container.
-* Disclosure stats use 4 columns on desktop, 2 on tablet, and 1 on mobile.
-* Team grids use 4 columns on desktop, 2 on tablet, and 1 on mobile.
-* Breakpoints are approximately 980px and 640px.
+### Floating console
+Terminal card overlapping the dome (Vocel-style): live dot + `az://disclosure-feed` address bar, typed log loop, pill chips, circular go-button. On mobile it stacks above the dome.
 
-### Rules
+### Ticker
+Marquee of disclosure IDs (`AZ-… · CLASS · SEVERITY ✳`), duplicated track, 46s linear loop, pauses on hover.
 
-Preserve the asymmetric editorial spacing. Do not introduce card-in-card layouts or rounded SaaS panels.
+### Compare cards (doctrine)
+Two bordered cards — noisy polyline waveform vs clean sine waveform (SVG, `vector-effect: non-scaling-stroke`, soft glow) — joined by a dashed-ring node; mono readout strips beneath.
 
-## 5. Components
+### Orbit diagram (team)
+Concentric SVG circles (one dashed ring slowly rotating, bright arc segments), diagonal axes, node dots; HTML pill chips positioned by `--x/--y` percentages over a square container. Decorative (`aria-hidden`) — names repeat in the roster. Hidden under 760px.
 
-### Navigation
+### Roster
+Hairline-row list: halftone portrait thumb (grayscale + invert + dot-grid overlay), mono ID, name, bio, status. Portraits are the only Doré imagery retained.
 
-* Structure: text links around a centered stacked wordmark.
-* States: underline reveal on hover, mobile full-screen menu.
-* Motion: transform-only burger transition.
+### Ledger table
+Mono table between strong hairlines; severity chips use CSS squares (filled = HIGH, half = MEDIUM, hollow = BELOW FLOOR); pending-GHSA rows carry a live dot; row hover swaps a `·` marker for `›`. Mobile: stacked key-value records via `data-label`.
 
-### Button
+### Bracket counters + tick rulers
+Stat values typed inside faint `[ ]`, underlined by a two-layer CSS tick ruler (minor 8px / major 40px).
 
-* Variants: light filled and ghost outline.
-* States: hover uses color inversion or small `translateY`.
-* Accessibility: buttons and links keep visible text labels.
+### CRT hero (disclosure page)
+Uptime counter `T:HH:MM:SS`, telemetry blocks, overlapping-circle (vesica) construction SVG with big side brackets, dot-grid background, scanlines + sweeping highlight.
 
-### Member Card
+### Gauge
+Semi-circular SVG: dash-comb tick arc, value arc (disclosed/tracked ratio), needle with signal tip. Keep `stroke-dasharray` and needle coordinates in sync with the numbers.
 
-* Structure: engraving image, metadata ID, serif name, mono role, short bio.
-* Spacing: metadata and bio stay compact under a fixed-aspect image.
-* Motion: image scales on hover using transform only.
-
-### Disclosure Ledger
-
-* Structure: editorial section header, four compact stat cells, responsive table, disclosure note.
-* Spacing: table uses tight mono rows with generous vertical section margins.
-* Typography: stat values use the mono stack so digits remain unambiguous.
-* Mobile: rows become stacked key-value records using `data-label`.
-* Page split: home shows only recent rows; `disclosure.html` owns the complete ledger and disclosure discipline.
-* Page framing: `disclosure.html` opens with a full-viewport dark hero and closes with a black grounded base under the oversized wordmark.
-* Safety: public page summarizes findings without PoC payloads or unpublished exploit detail.
+### Filters
+Pill buttons with `aria-pressed`, filtering `tr[data-sev]`; count readout is `aria-live`.
 
 ## 6. Motion & Interaction
 
-| Type | Duration | Easing | Usage |
-|------|----------|--------|-------|
-| Micro | 300-350ms | var(--ease) | Hover, burger, menu |
-| Reveal | 1s | var(--ease) | Scroll reveal |
-| Typing | variable | timeout loop | Terminal simulation |
-| Parallax | requestAnimationFrame | scroll-bound | Research artwork |
+| Type | Duration | Usage |
+|------|----------|-------|
+| Reveal | 0.9s, IO threshold 0.01 | Scroll entrance (staggered .d1–.d5) |
+| Micro | 0.25–0.4s | Hover inversions, chips, links |
+| Ambient | 22–90s linear | Ticker, orbit ring, node ring |
+| Typing | timeout loop | Console feed |
+| Clocks | 1s interval | KST clock, UTC stamps, uptime |
 
-Only animate `transform`, `opacity`, `filter`, and color/background transitions. Respect `prefers-reduced-motion`.
+Only `transform`, `opacity`, `filter`, color/background transitions. Everything ambient stops under `prefers-reduced-motion`.
 
 ## 7. Depth & Surface
 
-### Strategy
-
-Mixed, but restrained: borders, tonal inversion, image contrast, and sparse shadows for terminal and light buttons. Depth should feel printed and archival, not glossy.
+Flat and printed: hairlines, tonal opacity steps, dot density. Shadows only under floating instruments (console, orbit chips). Rounded corners are reserved for "control" elements (pills, chips, circular buttons) — panels and cards stay square. Global film grain overlay stays subtle (0.5 opacity of 6% noise).

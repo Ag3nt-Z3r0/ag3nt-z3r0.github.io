@@ -9,146 +9,305 @@
   <meta property="og:description" content="자율 에이전트의 추론·협업·안전을 제로에서부터 다시 연구하는 리서치 팀" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ag3nt-z3r0.github.io/" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23f2f2f2' stroke-width='2.5'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0B'/%3E%3Cg fill='%23EAEAE4'%3E%3Ccircle cx='25' cy='16' r='1.3'/%3E%3Ccircle cx='23.8' cy='20.5' r='1.3'/%3E%3Ccircle cx='20.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='16' cy='25' r='1.3'/%3E%3Ccircle cx='11.5' cy='23.8' r='1.3'/%3E%3Ccircle cx='8.2' cy='20.5' r='1.3'/%3E%3Ccircle cx='7' cy='16' r='1.3'/%3E%3Ccircle cx='8.2' cy='11.5' r='1.3'/%3E%3Ccircle cx='11.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='16' cy='7' r='1.3'/%3E%3Ccircle cx='20.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='23.8' cy='11.5' r='1.3'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.6' fill='%23FF4D00'/%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62.5..125,100..900&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <div class="frame" aria-hidden="true"></div>
+  <!-- fixed HUD chrome -->
+  <div class="hud" aria-hidden="true">
+    <span class="hud__corner hud__corner--tl"></span>
+    <span class="hud__corner hud__corner--tr"></span>
+    <span class="hud__corner hud__corner--bl"></span>
+    <span class="hud__corner hud__corner--br"></span>
+    <span class="hud__tag hud__tag--bl">AZ/OBS — 37.56°N 126.97°E</span>
+    <span class="hud__tag hud__tag--br" id="cursorPos">X:0000 · Y:0000</span>
+  </div>
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- ============ NAV ============ -->
-  <nav class="nav" aria-label="주요 메뉴">
-    <a class="nav__link" href="#preview">ABOUT</a>
-    <a class="nav__link" href="disclosure.html">DISCLOSURE</a>
-    <div class="nav__center">
-      <a class="nav__wordmark" href="#top" aria-label="Agent Zero 홈">
-        <span class="nav__wordmark-line">AGENT</span>
-        <span class="nav__wordmark-line">ZERO</span>
+  <div class="shell">
+
+    <!-- ============ NAV ============ -->
+    <header class="nav" id="top">
+      <a class="nav__brand" href="#top" aria-label="Agent Zero 홈">
+        <svg class="nav__glyph" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
+          <g fill="currentColor">
+            <circle cx="25" cy="16" r="1.4"/><circle cx="23.8" cy="20.5" r="1.4"/><circle cx="20.5" cy="23.8" r="1.4"/>
+            <circle cx="16" cy="25" r="1.4"/><circle cx="11.5" cy="23.8" r="1.4"/><circle cx="8.2" cy="20.5" r="1.4"/>
+            <circle cx="7" cy="16" r="1.4"/><circle cx="8.2" cy="11.5" r="1.4"/><circle cx="11.5" cy="8.2" r="1.4"/>
+            <circle cx="16" cy="7" r="1.4"/><circle cx="20.5" cy="8.2" r="1.4"/><circle cx="23.8" cy="11.5" r="1.4"/>
+          </g>
+        </svg>
+        <span class="nav__wordmark">AGENT ZERO</span>
+        <span class="nav__ver">/00</span>
       </a>
-      <span class="nav__social">
-        <a href="https://github.com/Ag3nt-Z3r0" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+
+      <nav class="nav__links" aria-label="주요 메뉴">
+        <a class="nav__link" href="#about">ABOUT</a>
+        <a class="nav__link" href="disclosure.html">DISCLOSURE</a>
+        <a class="nav__link" href="#team">TEAM</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a class="nav__icon" href="https://github.com/Ag3nt-Z3r0" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
         </a>
-      </span>
-    </div>
-    <a class="nav__link" href="#team">TEAM</a>
-    <a class="nav__link nav__link--cta" href="#join">JOIN <span aria-hidden="true">→</span></a>
-    <button class="nav__burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
-  </nav>
-
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="#preview">ABOUT</a>
-    <a href="disclosure.html">DISCLOSURE</a>
-    <a href="#team">TEAM</a>
-    <a href="#join">JOIN →</a>
-  </div>
-
-  <main id="top">
-
-    <!-- ============ HERO ============ -->
-    <header class="hero">
-      <div class="hero__art" aria-hidden="true">
-        <img src="images/hero.jpg" alt="" loading="eager" />
-      </div>
-      <div class="hero__content">
-        <p class="hero__eyebrow reveal">COORDINATED DISCLOSURE&nbsp;&nbsp;•&nbsp;&nbsp;SEOUL, KR</p>
-        <h1 class="hero__title">
-          <span class="reveal d1">THE TEAM THAT</span>
-          <span class="reveal d2">TAKES AGENTS</span>
-          <span class="reveal d3">BACK TO ZERO</span>
-        </h1>
-        <p class="hero__sub reveal d4">자율 에이전트의 추론·협업·안전을<br />제로(0)에서부터 다시 연구하는 리서치 팀</p>
-        <a class="btn btn--light reveal d5" href="#disclosure"><span class="btn__icon" aria-hidden="true">◎</span> 최근 공개 보기</a>
+        <a class="btn btn--light btn--nav" href="#join">JOIN <span aria-hidden="true">→</span></a>
+        <button class="nav__burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
       </div>
     </header>
 
-    <!-- ============ PREVIEW (terminal in art frame) ============ -->
-    <section class="preview" id="preview">
-      <div class="preview__frame">
-        <div class="preview__art" aria-hidden="true"><img src="images/preview-bg.jpg" alt="" loading="lazy" /></div>
-        <div class="terminal" aria-label="에이전트 실행 데모">
-          <div class="terminal__bar">
-            <span class="terminal__dot"></span><span class="terminal__dot"></span><span class="terminal__dot"></span>
-            <span class="terminal__title">agent-zero — disclosure log</span>
-          </div>
-          <pre class="terminal__body" id="terminalBody" aria-hidden="true"></pre>
-          <div class="terminal__status">
-            <span>◈ swarm ready</span>
-            <span>312 evals · 0 regressions</span>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#about"><i>01</i> ABOUT</a>
+      <a href="disclosure.html"><i>02</i> DISCLOSURE</a>
+      <a href="#team"><i>03</i> TEAM</a>
+      <a href="#join"><i>04</i> JOIN →</a>
+    </div>
+
+    <div class="band" aria-hidden="true"></div>
+
+    <main>
+
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <p class="hero__status reveal"><span class="dot-live" aria-hidden="true"></span> SYS.ONLINE&nbsp;&nbsp;·&nbsp;&nbsp;COORDINATED DISCLOSURE&nbsp;&nbsp;·&nbsp;&nbsp;SEOUL, KR</p>
+        <h1 class="hero__title">
+          <span class="reveal d1">THE TEAM THAT TAKES</span>
+          <span class="reveal d2">AGENTS <em>back to</em> ZERO</span>
+        </h1>
+        <p class="hero__sub reveal d3">자율 에이전트의 추론·협업·안전을<br />제로(0)에서부터 다시 연구하는 리서치 팀</p>
+        <div class="hero__ctas reveal d4">
+          <a class="btn btn--light" href="#ledger-recent">최근 공개 보기 <span aria-hidden="true">↓</span></a>
+          <a class="btn btn--ghost" href="disclosure.html">DISCLOSURE LEDGER <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="hero__stage">
+          <span class="hero__ruler hero__ruler--l" aria-hidden="true"></span>
+          <span class="hero__ruler hero__ruler--r" aria-hidden="true"></span>
+
+          <svg class="dome" viewBox="0 0 1200 620" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+            <defs>
+              <pattern id="dtA" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="0.9" fill="#EAEAE4"/></pattern>
+              <pattern id="dtB" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="6.5" cy="6.5" r="1.5" fill="#EAEAE4"/></pattern>
+              <radialGradient id="gDome" cx="50%" cy="100%" r="86%">
+                <stop offset="0" stop-color="#fff" stop-opacity=".9"/>
+                <stop offset=".38" stop-color="#fff" stop-opacity=".34"/>
+                <stop offset=".72" stop-color="#fff" stop-opacity=".09"/>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="gRidgeB" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/>
+              </linearGradient>
+              <linearGradient id="gRidgeF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/>
+              </linearGradient>
+              <mask id="mDome"><path d="M75 620 A525 525 0 0 1 1125 620 Z" fill="url(#gDome)"/></mask>
+              <mask id="mRidgeB"><path d="M150 620 L235 560 300 585 405 500 470 545 585 470 660 520 780 465 855 510 960 560 1050 620 Z" fill="url(#gRidgeB)"/></mask>
+              <mask id="mRidgeF"><path d="M250 620 L330 570 400 600 480 520 545 575 610 480 665 555 745 505 815 570 900 545 990 620 Z" fill="url(#gRidgeF)"/></mask>
+            </defs>
+            <g fill="#EAEAE4">
+              <circle cx="140" cy="128" r="1.1" opacity=".5"/><circle cx="1084" cy="88" r="1.3" opacity=".55"/>
+              <circle cx="245" cy="60" r="0.9" opacity=".4"/><circle cx="985" cy="180" r="1" opacity=".45"/>
+              <circle cx="80" cy="330" r="1.1" opacity=".4"/><circle cx="1140" cy="300" r="1" opacity=".4"/>
+              <circle cx="520" cy="38" r="1" opacity=".5"/><circle cx="760" cy="70" r="0.9" opacity=".4"/>
+              <circle cx="330" cy="170" r="0.8" opacity=".35"/><circle cx="880" cy="120" r="0.8" opacity=".35"/>
+            </g>
+            <g mask="url(#mDome)">
+              <rect width="1200" height="620" fill="url(#dtB)"/>
+              <rect width="1200" height="620" fill="url(#dtA)" opacity=".5"/>
+            </g>
+            <g fill="none" stroke="#EAEAE4">
+              <path d="M75 620 A525 525 0 0 1 1125 620" stroke-opacity=".4"/>
+              <path d="M185 620 A415 415 0 0 1 1015 620" stroke-opacity=".2" stroke-dasharray="2 8"/>
+              <path d="M310 620 A290 290 0 0 1 890 620" stroke-opacity=".14"/>
+            </g>
+            <g mask="url(#mRidgeB)"><rect width="1200" height="620" fill="url(#dtB)"/></g>
+            <g mask="url(#mRidgeF)">
+              <rect width="1200" height="620" fill="url(#dtB)"/>
+              <rect width="1200" height="620" fill="url(#dtA)" opacity=".85"/>
+            </g>
+            <g stroke="#EAEAE4" stroke-opacity=".7" fill="none"><path d="M600 58v34M583 75h34"/></g>
+            <circle cx="920" cy="212" r="2" fill="#EAEAE4" opacity=".8"/>
+            <circle cx="920" cy="212" r="8" fill="none" stroke="#EAEAE4" stroke-opacity=".3"/>
+            <circle cx="263" cy="270" r="1.8" fill="#EAEAE4" opacity=".7"/>
+            <circle cx="263" cy="270" r="7" fill="none" stroke="#EAEAE4" stroke-opacity=".28"/>
+            <circle cx="600" cy="617" r="2.4" fill="#FF4D00"/>
+          </svg>
+
+          <!-- floating console -->
+          <div class="console reveal d5" aria-label="Agent Zero 공개 피드">
+            <div class="console__bar">
+              <span class="dot-live" aria-hidden="true"></span>
+              <span class="console__addr">az://disclosure-feed</span>
+              <span class="console__live">LIVE</span>
+            </div>
+            <pre class="console__body" id="feedBody" aria-hidden="true"></pre>
+            <div class="console__foot">
+              <div class="console__chips">
+                <a class="chip" href="disclosure.html">▤ LEDGER</a>
+                <a class="chip" href="#about">⌖ DOCTRINE</a>
+                <a class="chip" href="#team">◈ TEAM</a>
+              </div>
+              <a class="console__go" href="disclosure.html" aria-label="Disclosure ledger로 이동">→</a>
+            </div>
           </div>
         </div>
-        <p class="preview__caption">AGENT ZERO — DISCLOSURE TERMINAL&nbsp;&nbsp;[LIVE]</p>
+      </section>
+
+      <!-- ============ TICKER ============ -->
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span class="ticker__seq">
+            AZ-HERMES-001 · PATH TRAVERSAL · HIGH <i>✳</i> AZ-HERMES-002 · AUTH BYPASS · HIGH <i>✳</i>
+            AZ-ADKJ-012 · RESOURCE TRAVERSAL · HIGH <i>✳</i> AZ-ADKJS-009 · PATH TRAVERSAL · HIGH <i>✳</i>
+            AZ-ADKJS-015 · CODE INJECTION · HIGH <i>✳</i> AZ-ADKGO-011 · LOCAL EXPOSURE · HIGH <i>✳</i>
+            AZ-ADKPY-017 · ISOLATION BYPASS · MED <i>✳</i> AZ-OPENCLAW-001 · ENV HARDENING · NOTE <i>✳</i>
+          </span>
+          <span class="ticker__seq">
+            AZ-HERMES-001 · PATH TRAVERSAL · HIGH <i>✳</i> AZ-HERMES-002 · AUTH BYPASS · HIGH <i>✳</i>
+            AZ-ADKJ-012 · RESOURCE TRAVERSAL · HIGH <i>✳</i> AZ-ADKJS-009 · PATH TRAVERSAL · HIGH <i>✳</i>
+            AZ-ADKJS-015 · CODE INJECTION · HIGH <i>✳</i> AZ-ADKGO-011 · LOCAL EXPOSURE · HIGH <i>✳</i>
+            AZ-ADKPY-017 · ISOLATION BYPASS · MED <i>✳</i> AZ-OPENCLAW-001 · ENV HARDENING · NOTE <i>✳</i>
+          </span>
+        </div>
       </div>
-    </section>
 
-    <!-- ============ AUDIENCE (3 cards) ============ -->
-    <section class="audience" id="audience">
-      <article class="card reveal">
-        <div class="card__art" aria-hidden="true"><img src="images/aud-dev.jpg" alt="" loading="lazy" /></div>
-        <div class="card__body">
-          <p class="card__eyebrow">FOR BUILDERS</p>
-          <h3 class="card__title">Developers</h3>
-          <p class="card__text">검증된 오케스트레이션 패턴과<br />오픈소스 도구를 제공합니다</p>
-          <a class="btn btn--ghost" href="#join">⌘ 함께 만들기</a>
-        </div>
-      </article>
-      <article class="card reveal">
-        <div class="card__art" aria-hidden="true"><img src="images/aud-ent.jpg" alt="" loading="lazy" /></div>
-        <div class="card__body">
-          <p class="card__eyebrow">FOR ORGANIZATIONS</p>
-          <h3 class="card__title">Enterprises</h3>
-          <p class="card__text">에이전트 도입의 실효성을<br />PoC와 데이터로 검증합니다</p>
-          <a class="btn btn--ghost" href="#join">◳ 협업 제안하기</a>
-        </div>
-      </article>
-      <article class="card reveal">
-        <div class="card__art" aria-hidden="true"><img src="images/aud-aca.jpg" alt="" loading="lazy" /></div>
-        <div class="card__body">
-          <p class="card__eyebrow">FOR SECURITY TEAMS</p>
-          <h3 class="card__title">Disclosure</h3>
-          <p class="card__text">취약점 정리와 조정 공개로<br />방어 가능한 증거를 남깁니다</p>
-          <a class="btn btn--ghost" href="disclosure.html">✳ 전체 공개 현황</a>
-        </div>
-      </article>
-    </section>
-
-    <!-- ============ WHITE PANEL : DISCLOSURE + TEAM ============ -->
-    <section class="panel" id="disclosure">
-      <div class="panel__chips" aria-hidden="true"><span>Disclosure</span><span>Team</span></div>
-
-      <div class="disclosure">
-        <div class="disclosure__head reveal">
-          <p class="disclosure__eyebrow">RECENT AGENT SECURITY DISCLOSURES</p>
-          <h2 class="disclosure__title">Latest Disclosure</h2>
-          <p class="disclosure__sub">홈에는 최근 항목만 남깁니다. 전체 공개 ledger와 공개 원칙은 별도 DISCLOSURE 페이지에서 관리합니다.</p>
+      <!-- ============ 01 · DOCTRINE ============ -->
+      <section class="sect sect--center" id="about">
+        <div class="sect__head sect__head--center reveal">
+          <p class="sect__kicker"><span class="sect__index">[ 01 ]</span> RESEARCH DOCTRINE</p>
+          <h2 class="sect__title">RE-VERIFIED <em>from zero</em></h2>
+          <p class="sect__sub">에이전트의 추론·도구 사용·권한 경계를 가정 없이 다시 검증합니다.<br />감이 아니라 재현 가능한 로그가 결론을 만듭니다.</p>
         </div>
 
-        <div class="disclosure__stats" aria-label="취약점 공개 현황">
-          <article class="disclosure__stat reveal">
-            <span class="disclosure__stat-value">24</span>
-            <span class="disclosure__stat-label">Tracked cases</span>
+        <div class="compare reveal">
+          <figure class="compare__card">
+            <figcaption class="compare__cap">
+              <span>AGENT / UNAUDITED</span>
+              <span class="tag">RAW</span>
+            </figcaption>
+            <svg class="wave wave--noisy" viewBox="0 0 560 160" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path class="wave__echo2" d="M0 84 L18 78 26 98 38 62 50 90 62 44 70 118 82 74 96 92 108 58 118 104 132 70 144 128 158 52 170 96 184 40 196 110 210 78 224 92 236 30 246 122 260 68 274 96 288 54 300 108 314 76 326 96 340 46 352 118 366 72 380 90 394 60 406 112 420 66 434 96 448 38 458 120 472 74 486 92 500 58 512 104 526 78 540 92 560 82"/>
+              <path class="wave__echo" d="M0 84 L18 78 26 98 38 62 50 90 62 44 70 118 82 74 96 92 108 58 118 104 132 70 144 128 158 52 170 96 184 40 196 110 210 78 224 92 236 30 246 122 260 68 274 96 288 54 300 108 314 76 326 96 340 46 352 118 366 72 380 90 394 60 406 112 420 66 434 96 448 38 458 120 472 74 486 92 500 58 512 104 526 78 540 92 560 82"/>
+              <path class="wave__main" d="M0 84 L18 78 26 98 38 62 50 90 62 44 70 118 82 74 96 92 108 58 118 104 132 70 144 128 158 52 170 96 184 40 196 110 210 78 224 92 236 30 246 122 260 68 274 96 288 54 300 108 314 76 326 96 340 46 352 118 366 72 380 90 394 60 406 112 420 66 434 96 448 38 458 120 472 74 486 92 500 58 512 104 526 78 540 92 560 82"/>
+            </svg>
+            <div class="compare__reads">
+              <span>TRACE: ERRATIC</span><span>TOOLS: UNBOUNDED</span><span>EVIDENCE: —</span>
+            </div>
+          </figure>
+
+          <div class="compare__node" aria-hidden="true"><span>→</span></div>
+
+          <figure class="compare__card">
+            <figcaption class="compare__cap">
+              <span>AGENT / ZEROED</span>
+              <span class="tag tag--solid">AZ-VERIFIED</span>
+            </figcaption>
+            <svg class="wave wave--clean" viewBox="0 0 560 160" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path class="wave__echo2" d="M0 80 C40 80 50 34 90 34 S140 126 180 126 S230 48 270 48 S320 112 360 112 S410 60 450 60 S500 96 540 96 L560 92"/>
+              <path class="wave__echo" d="M0 80 C40 80 50 34 90 34 S140 126 180 126 S230 48 270 48 S320 112 360 112 S410 60 450 60 S500 96 540 96 L560 92"/>
+              <path class="wave__main" d="M0 80 C40 80 50 34 90 34 S140 126 180 126 S230 48 270 48 S320 112 360 112 S410 60 450 60 S500 96 540 96 L560 92"/>
+            </svg>
+            <div class="compare__reads">
+              <span>TRACE: REPRODUCIBLE</span><span>TOOLS: SCOPED</span><span>EVIDENCE: LOGGED</span>
+            </div>
+          </figure>
+        </div>
+
+        <div class="compare__notes">
+          <div class="reveal">
+            <h3>재현 가능한 증거.</h3>
+            <p>모든 발견은 재현 절차, 실행 로그와 함께 기록됩니다. 한 번 본 이상 현상이 아니라, 누구든 다시 밟을 수 있는 경로만 결론이 됩니다.</p>
+          </div>
+          <div class="reveal">
+            <h3>방어 가능한 결론.</h3>
+            <p>조정 공개 원칙을 지키며 방어자가 바로 쓸 수 있는 요약만 공개합니다. PoC와 민감한 세부 사항은 공개 완료 전까지 보류합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 02 · AUDIENCE ============ -->
+      <section class="sect" id="audience">
+        <div class="sect__head reveal">
+          <p class="sect__kicker"><span class="sect__index">[ 02 ]</span> WHO WE WORK WITH</p>
+        </div>
+
+        <div class="cells">
+          <article class="cell reveal">
+            <p class="cell__index">A/01 — FOR BUILDERS</p>
+            <svg class="cell__icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
+              <path d="M10 6 L3 14 L10 22 M18 6 L25 14 L18 22" fill="none" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M15.5 4 L12.5 24" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+            <h3 class="cell__title">Developers</h3>
+            <p class="cell__text">검증된 오케스트레이션 패턴과<br />오픈소스 도구를 제공합니다</p>
+            <a class="cell__link" href="#join">함께 만들기 <span aria-hidden="true">→</span></a>
           </article>
-          <article class="disclosure__stat reveal">
-            <span class="disclosure__stat-value">2</span>
-            <span class="disclosure__stat-label">High CVE drafts</span>
+          <article class="cell reveal">
+            <p class="cell__index">A/02 — FOR ORGANIZATIONS</p>
+            <svg class="cell__icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
+              <rect x="4" y="4" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.2"/>
+              <rect x="10" y="10" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+            <h3 class="cell__title">Enterprises</h3>
+            <p class="cell__text">에이전트 도입의 실효성을<br />PoC와 데이터로 검증합니다</p>
+            <a class="cell__link" href="#join">협업 제안하기 <span aria-hidden="true">→</span></a>
           </article>
-          <article class="disclosure__stat reveal">
-            <span class="disclosure__stat-value">21</span>
-            <span class="disclosure__stat-label">Draft reports</span>
+          <article class="cell reveal">
+            <p class="cell__index">A/03 — FOR SECURITY TEAMS</p>
+            <svg class="cell__icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
+              <path d="M8 3 H3 V8 M20 3 H25 V8 M8 25 H3 V20 M20 25 H25 V20" fill="none" stroke="currentColor" stroke-width="1.2"/>
+              <circle cx="14" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M14 7.5 V10 M14 18 V20.5 M7.5 14 H10 M18 14 H20.5" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+            <h3 class="cell__title">Disclosure</h3>
+            <p class="cell__text">취약점 정리와 조정 공개로<br />방어 가능한 증거를 남깁니다</p>
+            <a class="cell__link" href="disclosure.html">전체 공개 현황 <span aria-hidden="true">→</span></a>
           </article>
-          <article class="disclosure__stat reveal">
-            <span class="disclosure__stat-value">1</span>
-            <span class="disclosure__stat-label">Internal hardening note</span>
+        </div>
+      </section>
+
+      <!-- ============ 03 · DISCLOSURE LEDGER (recent) ============ -->
+      <section class="sect" id="ledger-recent">
+        <div class="sect__head reveal">
+          <p class="sect__kicker"><span class="sect__index">[ 03 ]</span> DISCLOSURE LEDGER — RECENT</p>
+          <p class="sect__stamp">LAST SYNC <span data-utc>--------- --:-- UTC</span></p>
+        </div>
+
+        <div class="ledger__intro reveal">
+          <h2 class="sect__title">LATEST <em>disclosure</em></h2>
+          <p class="sect__sub">홈에는 최근 항목만 남깁니다. 전체 공개 ledger와 공개 원칙은 별도 DISCLOSURE 페이지에서 관리합니다.</p>
+        </div>
+
+        <div class="stats" aria-label="취약점 공개 현황">
+          <article class="stat reveal">
+            <span class="stat__label">TRACKED CASES</span>
+            <span class="stat__value"><i>[</i>24<i>]</i></span>
+            <span class="stat__ruler" aria-hidden="true"></span>
+          </article>
+          <article class="stat reveal">
+            <span class="stat__label"><span class="dot-live dot-live--sm" aria-hidden="true"></span> HIGH CVE DRAFTS</span>
+            <span class="stat__value"><i>[</i>2<i>]</i></span>
+            <span class="stat__ruler" aria-hidden="true"></span>
+          </article>
+          <article class="stat reveal">
+            <span class="stat__label">DRAFT REPORTS</span>
+            <span class="stat__value"><i>[</i>21<i>]</i></span>
+            <span class="stat__ruler" aria-hidden="true"></span>
+          </article>
+          <article class="stat reveal">
+            <span class="stat__label">INTERNAL HARDENING NOTE</span>
+            <span class="stat__value"><i>[</i>1<i>]</i></span>
+            <span class="stat__ruler" aria-hidden="true"></span>
           </article>
         </div>
 
-        <div class="disclosure__table-wrap reveal">
-          <table class="disclosure__table disclosure__table--recent">
+        <div class="ledger__wrap reveal">
+          <table class="ledger">
             <caption>Recent Agent Zero vulnerability disclosures</caption>
             <thead>
               <tr>
@@ -157,7 +316,6 @@
                 <th scope="col">Class</th>
                 <th scope="col">Severity</th>
                 <th scope="col">Status</th>
-                <th scope="col">Disclosure</th>
                 <th scope="col">Summary</th>
               </tr>
             </thead>
@@ -166,108 +324,146 @@
                 <td data-label="ID">AZ-HERMES-001</td>
                 <td data-label="Target">NousResearch/hermes-agent</td>
                 <td data-label="Class">Path Traversal</td>
-                <td data-label="Severity"><span class="disclosure__badge">High</span></td>
-                <td data-label="Status">CVE draft</td>
-                <td data-label="Disclosure">Pending GHSA</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> CVE draft · pending GHSA</span></td>
                 <td data-label="Summary">Matrix, Mattermost, WeiXin outbound media adapters can read host files through LLM-reachable file paths.</td>
               </tr>
               <tr>
                 <td data-label="ID">AZ-HERMES-002</td>
                 <td data-label="Target">NousResearch/hermes-agent</td>
                 <td data-label="Class">Auth Bypass</td>
-                <td data-label="Severity"><span class="disclosure__badge">High</span></td>
-                <td data-label="Status">CVE draft</td>
-                <td data-label="Disclosure">Pending GHSA</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> CVE draft · pending GHSA</span></td>
                 <td data-label="Summary">WeCom, WeiXin, WhatsApp, and Yuanbao adapters fail open when no sender allowlist is configured.</td>
               </tr>
               <tr>
                 <td data-label="ID">AZ-ADKJ-012</td>
                 <td data-label="Target">Google ADK Java</td>
                 <td data-label="Class">Resource Traversal</td>
-                <td data-label="Severity"><span class="disclosure__badge">High</span></td>
-                <td data-label="Status">Verified draft</td>
-                <td data-label="Disclosure">Not submitted</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status">Verified draft · not submitted</td>
                 <td data-label="Summary">Skill resource loading can escape the selected skill directory when path containment is checked before normalization.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="disclosure__notes reveal">
-          <a class="disclosure__note-kicker disclosure__note-link" href="disclosure.html#discipline">Disclosure discipline</a>
-          <p>표는 공개 가능한 수준의 요약만 담습니다. 조정 공개 전에는 PoC, 민감한 경로, 토큰, 비공개 타깃 세부 사항을 사이트에 올리지 않습니다.</p>
-          <a class="disclosure__link" href="disclosure.html">View full disclosure ledger</a>
+        <div class="ledger__foot reveal">
+          <p class="ledger__note"><a href="disclosure.html#discipline">DISCLOSURE DISCIPLINE</a> — 표는 공개 가능한 수준의 요약만 담습니다. 조정 공개 전에는 PoC, 민감한 경로, 토큰, 비공개 타깃 세부 사항을 사이트에 올리지 않습니다.</p>
+          <a class="btn btn--ghost" href="disclosure.html">VIEW FULL LEDGER <span aria-hidden="true">→</span></a>
         </div>
-      </div>
+      </section>
 
-      <!-- TEAM -->
-      <div class="team" id="team">
-        <div class="team__head">
-          <p class="team__eyebrow">THE TEAM</p>
-          <h2 class="team__title">Four Minds, One Question</h2>
-          <p class="team__sub">네 명의 연구자가 각자의 영역에서 같은 질문을 파고듭니다 — "에이전트는 어디까지 스스로 할 수 있는가?"</p>
+      <!-- ============ 04 · TEAM ============ -->
+      <section class="sect sect--center" id="team">
+        <div class="sect__head sect__head--center reveal">
+          <p class="sect__kicker"><span class="sect__index">[ 04 ]</span> THE TEAM</p>
+          <h2 class="sect__title">FOUR MINDS, <em>one question</em></h2>
+          <p class="sect__sub">네 명의 연구자가 각자의 영역에서 같은 질문을 파고듭니다 —<br />"에이전트는 어디까지 스스로 할 수 있는가?"</p>
         </div>
-        <div class="members">
-          <article class="member reveal">
-            <div class="member__art" aria-hidden="true"><img class="member__art-img--zoom" src="images/r2.jpg" alt="" loading="lazy" /></div>
-            <p class="member__id">AZ-001 — LEAD</p>
-            <h3 class="member__name">류석준 <em>Seokjun Ryu</em></h3>
-            <p class="member__role">Disclosure Member</p>
-            <p class="member__bio">Agent Zero 연구 멤버. 에이전트 시스템의 가능성과 한계를 제로에서 다시 검증한다.</p>
+
+        <div class="orbit reveal" aria-hidden="true">
+          <svg class="orbit__field" viewBox="0 0 800 800" aria-hidden="true" focusable="false">
+            <g fill="none" stroke="#EAEAE4">
+              <circle cx="400" cy="400" r="120" stroke-opacity=".3"/>
+              <circle class="orbit__spin" cx="400" cy="400" r="210" stroke-opacity=".3" stroke-dasharray="2 9"/>
+              <circle cx="400" cy="400" r="300" stroke-opacity=".15"/>
+              <circle cx="400" cy="400" r="380" stroke-opacity=".09"/>
+              <circle cx="400" cy="400" r="300" stroke-opacity=".85" stroke-width="2.5" stroke-dasharray="150 1735" transform="rotate(-64 400 400)"/>
+              <circle cx="400" cy="400" r="210" stroke-opacity=".7" stroke-width="2" stroke-dasharray="80 1240" transform="rotate(122 400 400)"/>
+              <path d="M117 117 L683 683 M683 117 L117 683" stroke-opacity=".1"/>
+              <path d="M20 400 H780" stroke-opacity=".07"/>
+            </g>
+            <g fill="#EAEAE4">
+              <circle cx="593" cy="170" r="3.5"/><circle cx="603" cy="454" r="3.5"/>
+              <circle cx="110" cy="322" r="3.5"/><circle cx="322" cy="690" r="3.5"/>
+            </g>
+            <g fill="none" stroke="#EAEAE4" stroke-opacity=".35">
+              <circle cx="593" cy="170" r="9"/><circle cx="603" cy="454" r="9"/>
+              <circle cx="110" cy="322" r="9"/><circle cx="322" cy="690" r="9"/>
+            </g>
+            <circle class="orbit__pulse" cx="400" cy="400" r="14" fill="none" stroke="#EAEAE4"/>
+            <circle cx="400" cy="400" r="5" fill="#EAEAE4"/>
+            <circle cx="400" cy="400" r="14" fill="none" stroke="#EAEAE4" stroke-opacity=".5"/>
+            <circle cx="400" cy="400" r="24" fill="none" stroke="#EAEAE4" stroke-opacity=".25" stroke-dasharray="1 5"/>
+          </svg>
+          <span class="orbit__chip" style="--x:74.1%; --y:21.2%">
+            <b>AZ-001 — LEAD</b>류석준 <i>Seokjun Ryu</i>
+          </span>
+          <span class="orbit__chip" style="--x:75.4%; --y:56.8%">
+            <b>AZ-002 — SYSTEMS</b>김현민 <i>Hyunmin Kim</i>
+          </span>
+          <span class="orbit__chip" style="--x:13.8%; --y:40.2%">
+            <b>AZ-003 — EVAL</b>곽동윤 <i>Dongyun Kwak</i>
+          </span>
+          <span class="orbit__chip" style="--x:40.2%; --y:86.2%">
+            <b>AZ-004 — SAFETY</b>정태영 <i>Taeyoung Jung</i>
+          </span>
+          <span class="orbit__corelabel">Q.00 — "어디까지 스스로?"</span>
+        </div>
+
+        <div class="roster" role="list">
+          <article class="roster__row reveal" role="listitem">
+            <span class="roster__thumb" aria-hidden="true"><img src="images/r2.jpg" alt="" loading="lazy" /></span>
+            <span class="roster__id">AZ-001<br /><b>LEAD</b></span>
+            <h3 class="roster__name">류석준 <i>Seokjun Ryu</i></h3>
+            <p class="roster__bio">에이전트 시스템의 가능성과 한계를 제로에서 다시 검증한다.</p>
+            <span class="roster__status">DISCLOSURE<br /><b>MEMBER</b></span>
           </article>
-          <article class="member reveal">
-            <div class="member__art" aria-hidden="true"><img src="images/m2.jpg" alt="" loading="lazy" /></div>
-            <p class="member__id">AZ-002 — SYSTEMS</p>
-            <h3 class="member__name">김현민 <em>Hyunmin Kim</em></h3>
-            <p class="member__role">Disclosure Member</p>
-            <p class="member__bio">Agent Zero 연구 멤버. 도구 사용, 권한 경계, 실행 흐름을 관찰하며 재현 가능한 증거를 남긴다.</p>
+          <article class="roster__row reveal" role="listitem">
+            <span class="roster__thumb" aria-hidden="true"><img src="images/m2.jpg" alt="" loading="lazy" /></span>
+            <span class="roster__id">AZ-002<br /><b>SYSTEMS</b></span>
+            <h3 class="roster__name">김현민 <i>Hyunmin Kim</i></h3>
+            <p class="roster__bio">도구 사용, 권한 경계, 실행 흐름을 관찰하며 재현 가능한 증거를 남긴다.</p>
+            <span class="roster__status">DISCLOSURE<br /><b>MEMBER</b></span>
           </article>
-          <article class="member reveal">
-            <div class="member__art" aria-hidden="true"><img src="images/m3.jpg" alt="" loading="lazy" /></div>
-            <p class="member__id">AZ-003 — EVAL</p>
-            <h3 class="member__name">곽동윤 <em>Dongyun Kwak</em></h3>
-            <p class="member__role">Disclosure Member</p>
-            <p class="member__bio">Agent Zero 연구 멤버. 취약한 패턴과 평가 기준을 연결해 검증 가능한 연구 기록으로 정리한다.</p>
+          <article class="roster__row reveal" role="listitem">
+            <span class="roster__thumb" aria-hidden="true"><img src="images/m3.jpg" alt="" loading="lazy" /></span>
+            <span class="roster__id">AZ-003<br /><b>EVAL</b></span>
+            <h3 class="roster__name">곽동윤 <i>Dongyun Kwak</i></h3>
+            <p class="roster__bio">취약한 패턴과 평가 기준을 연결해 검증 가능한 연구 기록으로 정리한다.</p>
+            <span class="roster__status">DISCLOSURE<br /><b>MEMBER</b></span>
           </article>
-          <article class="member reveal">
-            <div class="member__art" aria-hidden="true"><img src="images/m4.jpg" alt="" loading="lazy" /></div>
-            <p class="member__id">AZ-004 — SAFETY</p>
-            <h3 class="member__name">정태영 <em>Taeyoung Jung</em></h3>
-            <p class="member__role">Disclosure Member</p>
-            <p class="member__bio">Agent Zero 연구 멤버. 에이전트 안전성과 실제 영향도를 함께 보며 방어 가능한 결론을 만든다.</p>
+          <article class="roster__row reveal" role="listitem">
+            <span class="roster__thumb" aria-hidden="true"><img src="images/m4.jpg" alt="" loading="lazy" /></span>
+            <span class="roster__id">AZ-004<br /><b>SAFETY</b></span>
+            <h3 class="roster__name">정태영 <i>Taeyoung Jung</i></h3>
+            <p class="roster__bio">에이전트 안전성과 실제 영향도를 함께 보며 방어 가능한 결론을 만든다.</p>
+            <span class="roster__status">DISCLOSURE<br /><b>MEMBER</b></span>
           </article>
         </div>
-      </div>
+      </section>
 
-      <div class="panel__wordmark" aria-hidden="true">Agent Zero</div>
-    </section>
+      <div class="band" aria-hidden="true"></div>
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer" id="join">
-      <div class="footer__cta">
-        <p class="footer__eyebrow">COLLABORATE&nbsp;&nbsp;•&nbsp;&nbsp;JOIN&nbsp;&nbsp;•&nbsp;&nbsp;PARTNER</p>
-        <h2 class="footer__title">Open Invitation</h2>
-        <p class="footer__text">공동 연구, 협업 제안, 합류 문의 — 무엇이든 환영합니다.<br />에이전트의 다음 단계를 함께 만들 사람을 찾습니다.</p>
-        <a class="btn btn--light" href="mailto:hello@agentzero.team">hello@agentzero.team&nbsp;&nbsp;↗</a>
-      </div>
+      <!-- ============ FOOTER ============ -->
+      <footer class="footer" id="join">
+        <div class="footer__cta">
+          <p class="footer__kicker reveal">COLLABORATE&nbsp;&nbsp;·&nbsp;&nbsp;JOIN&nbsp;&nbsp;·&nbsp;&nbsp;PARTNER</p>
+          <h2 class="footer__title reveal d1">OPEN <em>invitation</em></h2>
+          <p class="footer__text reveal d2">공동 연구, 협업 제안, 합류 문의 — 무엇이든 환영합니다.<br />에이전트의 다음 단계를 함께 만들 사람을 찾습니다.</p>
+          <a class="btn btn--light reveal d3" href="mailto:hello@agentzero.team">hello@agentzero.team&nbsp;&nbsp;↗</a>
+        </div>
 
-      <div class="footer__ghost" aria-hidden="true">
-        <span>Agent</span>
-        <span>Zero</span>
-      </div>
-      <img class="footer__figure" src="images/footer-figure.jpg" alt="" loading="lazy" aria-hidden="true" />
+        <div class="footer__ghost" aria-hidden="true"><span>AGENT&nbsp;ZERO</span></div>
 
-      <div class="footer__meta footer__meta--left">
-        <p>AGENT ZERO — DISCLOSURE COLLECTIVE</p>
-        <p>EST. 2026 · FROM ZERO, AGENTS EMERGE</p>
-      </div>
-      <div class="footer__meta footer__meta--right">
-        <p>SEOUL, KR — <span id="footClock">--:--:--</span> KST</p>
-        <p>ART: GUSTAVE DORÉ (PUBLIC DOMAIN)</p>
-      </div>
-    </footer>
+        <div class="footer__meta">
+          <div class="footer__meta-col">
+            <p>AGENT ZERO — DISCLOSURE COLLECTIVE</p>
+            <p>EST. 2026 · FROM ZERO, AGENTS EMERGE</p>
+          </div>
+          <div class="footer__meta-col footer__meta-col--center">
+            <p>SEOUL, KR — <span id="footClock">--:--:--</span> KST</p>
+          </div>
+          <div class="footer__meta-col footer__meta-col--right">
+            <p>STATIC HTML · NO TRACKERS</p>
+            <p>PORTRAITS: GUSTAVE DORÉ (PUBLIC DOMAIN)</p>
+          </div>
+        </div>
+      </footer>
 
-  </main>
+    </main>
+  </div>
 
   <script src="js/main.js"></script>
 </body>
