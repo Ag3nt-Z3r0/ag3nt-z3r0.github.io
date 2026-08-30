@@ -1185,6 +1185,9 @@ i { font-style: normal; }
   margin-bottom: 20px;
 }
 .unit__desc {
+  /* the copy carries long unbreakable runs like "(MCP·LangChain·CrewAI·…)";
+     keep-all would otherwise push the card past narrow viewports */
+  overflow-wrap: anywhere;
   font-size: 14px; line-height: 1.85;
   color: var(--fg-dim);
   margin-bottom: clamp(22px, 3vw, 30px);
