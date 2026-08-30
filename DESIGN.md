@@ -40,8 +40,9 @@ The site is monochrome with exactly one micro-accent. `--signal` may appear only
 | Hero display | clamp(42px, 6.8vw, 100px) | 500, stretch 115% | Hand-typed uppercase |
 | Section title | clamp(34px, 4.8vw, 66px) | 500, stretch 114% | Same uppercase rule |
 | Stat value | clamp(38px, 4.2vw, 60px) mono | 500 | Wrapped in faint `[ ]` brackets |
-| Body | 12.5–15.5px | 300 | line-height 1.8–1.9, `word-break: keep-all` |
-| Telemetry label | 9–11px mono | 400–500 | letter-spacing 0.14–0.24em |
+| Body | 13–17px | 300 | line-height 1.8–1.9, `word-break: keep-all` |
+| Body sub-head | 16.5–18.5px | 500 | `.compare__notes h3`, `.pipeline__title`, `.roster__name` |
+| Telemetry label | 9.5–12.5px mono | 400–500 | letter-spacing 0.14–0.24em |
 
 ### Rules
 
