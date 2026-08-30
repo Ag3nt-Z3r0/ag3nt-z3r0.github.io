@@ -62,7 +62,7 @@ Headings mix hand-typed uppercase sans with a lowercase serif-italic `<em>` (nev
 Corner L-brackets at viewport edges + mono tags: coordinates (bottom-left) and live cursor `X:0000 · Y:0000` readout (bottom-right, fine pointers only). Pointer-events: none.
 
 ### Page map
-Home = dome hero + console + ticker + recent ledger + dirlist. About = spec-sheet hero + compare + pipeline + audience cells. Team = orbit hero + roster + open-seat. Disclosure = CRT hero + gauge + filters + full table + protocol. Nav links are page links (about.html / disclosure.html / team.html); JOIN targets each page's own `#join` footer.
+Home = dome hero + console + ticker + dirlist (site index). About = spec-sheet hero + compare + pipeline + audience cells. Team = orbit hero + roster + open-seat. Disclosure = CRT hero + gauge + filters + full table + protocol. Nav links are page links (about.html / disclosure.html / team.html); JOIN targets each page's own `#join` footer.
 
 ### Dithered dome (home hero)
 Inline SVG: half-circle masked dot patterns (6px + 13px grids) with radial falloff, ridge silhouettes as masked dot fields, hairline orbit arcs, apex crosshair, satellite rings, one signal dot at base. The dome doubles as the brand "0".

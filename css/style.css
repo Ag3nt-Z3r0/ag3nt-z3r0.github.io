@@ -680,26 +680,6 @@ i { font-style: normal; }
 .sev--med { color: var(--fg-dim); }
 .sev--floor { color: var(--fg-faint); }
 
-.ledger__foot {
-  margin-top: clamp(30px, 4vw, 52px);
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 28px; flex-wrap: wrap;
-}
-.ledger__note {
-  max-width: 640px;
-  font-size: 12.5px; line-height: 1.8;
-  color: var(--fg-dim);
-}
-.ledger__note a {
-  font-family: var(--mono);
-  font-size: 10px; letter-spacing: 0.18em;
-  color: var(--fg);
-  text-decoration: none;
-  border-bottom: 1px solid var(--line-strong);
-  padding-bottom: 2px;
-}
-.ledger__note a:hover { border-color: var(--fg); }
-
 /* ============ team orbit ============ */
 .orbit {
   position: relative;
@@ -1418,7 +1398,6 @@ i { font-style: normal; }
   }
 
   .sect__head { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .ledger__foot { flex-direction: column; align-items: flex-start; }
 
   .dirlist__desc { display: none; }
   .dirlist__row { grid-template-columns: auto 1fr auto; gap: 14px; }
