@@ -92,7 +92,7 @@ Two bordered cards — noisy polyline waveform vs clean sine waveform (SVG, `vec
 Concentric SVG circles (one dashed ring slowly rotating, bright arc segments), diagonal axes, node dots; HTML pill chips positioned by `--x/--y` percentages over a square container. Decorative (`aria-hidden`) — names repeat in the roster. Hidden under 760px.
 
 ### Roster
-Hairline-row list: halftone portrait thumb (grayscale + invert + dot-grid overlay), mono ID, name, bio, status. Portraits are the only Doré imagery retained.
+Hairline-row list: halftone avatar thumb (dot-grid overlay), mono ID, name, bio, status. Member avatars (`.roster__thumb--photo`) render in muted color — desaturated and dimmed (`saturate(.62) brightness(.76)`) so they sit in the dark panel — the one sanctioned break from strict monochrome. Any Doré-engraving thumb keeps the `grayscale + invert` treatment instead.
 
 ### Ledger table
 Mono table between strong hairlines; severity chips use CSS squares (filled = HIGH, half = MEDIUM, hollow = BELOW FLOOR); pending-GHSA rows carry a live dot; row hover swaps a `·` marker for `›`. Mobile: stacked key-value records via `data-label`.

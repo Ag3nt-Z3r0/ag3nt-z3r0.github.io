@@ -794,10 +794,10 @@ i { font-style: normal; }
   object-fit: cover; object-position: center 15%;
   filter: grayscale(1) invert(1) contrast(1.25);
 }
-/* photo avatars: monochrome without inversion (Doré engravings keep invert) */
+/* photo avatars: muted color, dimmed to sit in the dark panel (no invert) */
 .roster__thumb--photo img {
   object-position: center;
-  filter: grayscale(1) contrast(1.05);
+  filter: saturate(0.62) brightness(0.76) contrast(1.08);
 }
 .roster__thumb::after {
   content: ""; position: absolute; inset: 0;
