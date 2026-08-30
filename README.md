@@ -12,7 +12,7 @@ AI 에이전트 전문 리서치 팀 **Agent Zero**의 공식 사이트입니다
 해칭 밴드, CRT 스캔라인. 시그널 오렌지(#FF4D00)는 라이브 마커에만 극소량 사용.
 
 폰트: Archivo(확장 그로테스크 디스플레이) × IBM Plex Mono(HUD 라벨) ×
-IBM Plex Sans KR(본문) × Cormorant Garamond 이탤릭(악센트).
+IBM Plex Sans KR(본문). 제목은 악센트 서체 없이 전부 대문자로 통일.
 
 페이지별 시그니처 컴포넌트:
 
