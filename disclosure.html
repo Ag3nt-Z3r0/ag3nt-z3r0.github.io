@@ -122,7 +122,7 @@
           <h1 class="crt__title">
             <span class="reveal d1">DISCLOSURE <em>ledger</em></span>
           </h1>
-          <p class="crt__sub reveal d2">에이전트 보안 이슈를 공개 단계, 영향도, 검증 상태별로 정리합니다.<br />공개 전 민감 정보는 의도적으로 생략합니다.</p>
+          <p class="crt__sub reveal d2">에이전트와 인프라 스택에서 조정 공개 중인 보안 취약점을 상태·영향도별로 정리합니다.<br />공개(disclosed) 항목은 GHSA·CVE로 확인할 수 있고, draft는 요약만 싣습니다.</p>
           <p class="crt__down reveal d3" aria-hidden="true">↓ SCROLL FOR CASES</p>
         </div>
       </section>
@@ -136,7 +136,7 @@
 
         <div class="ledger__intro reveal">
           <h2 class="sect__title">ALL <em>cases</em></h2>
-          <p class="sect__sub">CrayFisher와 Agent Zero가 추적한 공개 가능 수준의 취약점 요약입니다. 조정 공개 전에는 재현 payload, 민감한 경로, 비공개 타깃 세부 사항을 포함하지 않습니다.</p>
+          <p class="sect__sub">Agent Zero가 GitHub Security Advisory(GHSA)로 조정 공개 중인 취약점입니다. 조정 공개 전에는 재현 payload, 민감한 경로, 비공개 타깃 세부 사항을 포함하지 않습니다.</p>
         </div>
 
         <!-- gauge + counters -->
@@ -145,54 +145,54 @@
             <svg viewBox="0 0 320 190" aria-hidden="true" focusable="false">
               <path d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-opacity=".16" stroke-width="10" stroke-dasharray="1.4 11.17" />
               <path d="M34 160 A126 126 0 0 1 286 160" fill="none" stroke="#EAEAE4" stroke-opacity=".28" stroke-width="1"/>
-              <path d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-width="3.5" stroke-dasharray="125.7 999"/>
-              <line x1="160" y1="160" x2="100" y2="56.1" stroke="#EAEAE4" stroke-width="1.5"/>
-              <circle cx="100" cy="56.1" r="3" fill="#FF4D00"/>
+              <path d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-width="3.5" stroke-dasharray="99.8 999"/>
+              <line x1="160" y1="160" x2="79.2" y2="71.3" stroke="#EAEAE4" stroke-width="1.5"/>
+              <circle cx="79.2" cy="71.3" r="3" fill="#FF4D00"/>
               <circle cx="160" cy="160" r="4.5" fill="#EAEAE4"/>
               <circle cx="160" cy="160" r="9" fill="none" stroke="#EAEAE4" stroke-opacity=".4"/>
             </svg>
             <figcaption class="gauge__cap">
               <span>0</span>
-              <span class="gauge__read">DISCLOSED&nbsp;8&nbsp;/&nbsp;TRACKED&nbsp;24</span>
-              <span>24</span>
+              <span class="gauge__read">DISCLOSED&nbsp;9&nbsp;/&nbsp;TRACKED&nbsp;34</span>
+              <span>34</span>
             </figcaption>
           </figure>
 
           <div class="gauge__side">
-            <div class="stats stats--tight" aria-label="취약점 공개 현황">
+            <div class="stats stats--tight" aria-label="공개 현황">
               <article class="stat">
                 <span class="stat__label">TRACKED CASES</span>
-                <span class="stat__value"><i>[</i>24<i>]</i></span>
+                <span class="stat__value"><i>[</i>34<i>]</i></span>
                 <span class="stat__ruler" aria-hidden="true"></span>
               </article>
               <article class="stat">
-                <span class="stat__label"><span class="dot-live dot-live--sm" aria-hidden="true"></span> HIGH CVE DRAFTS</span>
-                <span class="stat__value"><i>[</i>2<i>]</i></span>
+                <span class="stat__label"><span class="dot-live dot-live--sm" aria-hidden="true"></span> DISCLOSED · GHSA</span>
+                <span class="stat__value"><i>[</i>9<i>]</i></span>
                 <span class="stat__ruler" aria-hidden="true"></span>
               </article>
               <article class="stat">
-                <span class="stat__label">DRAFT REPORTS</span>
-                <span class="stat__value"><i>[</i>21<i>]</i></span>
+                <span class="stat__label">CVE ASSIGNED</span>
+                <span class="stat__value"><i>[</i>7<i>]</i></span>
                 <span class="stat__ruler" aria-hidden="true"></span>
               </article>
               <article class="stat">
-                <span class="stat__label">INTERNAL HARDENING NOTE</span>
-                <span class="stat__value"><i>[</i>1<i>]</i></span>
+                <span class="stat__label">PROJECTS TRACKED</span>
+                <span class="stat__value"><i>[</i>9<i>]</i></span>
                 <span class="stat__ruler" aria-hidden="true"></span>
               </article>
             </div>
-            <p class="gauge__legend">16 CASES REDACTED — PENDING COORDINATION</p>
+            <p class="gauge__legend">25 DRAFTS · COORDINATION IN PROGRESS</p>
           </div>
         </div>
 
         <!-- filters -->
-        <div class="filters reveal" role="group" aria-label="심각도 필터">
+        <div class="filters reveal" role="group" aria-label="상태 필터">
           <span class="filters__label">FILTER</span>
-          <button class="filters__btn" type="button" data-filter="all" aria-pressed="true">ALL <i>8</i></button>
-          <button class="filters__btn" type="button" data-filter="high" aria-pressed="false">HIGH <i>6</i></button>
-          <button class="filters__btn" type="button" data-filter="med" aria-pressed="false">MEDIUM <i>1</i></button>
-          <button class="filters__btn" type="button" data-filter="floor" aria-pressed="false">BELOW FLOOR <i>1</i></button>
-          <span class="filters__count" id="showCount" aria-live="polite">SHOWING 8 / 8</span>
+          <button class="filters__btn" type="button" data-filter="all" aria-pressed="true">ALL <i>34</i></button>
+          <button class="filters__btn" type="button" data-filter="published" aria-pressed="false">DISCLOSED <i>9</i></button>
+          <button class="filters__btn" type="button" data-filter="draft" aria-pressed="false">DRAFT <i>25</i></button>
+          <button class="filters__btn" type="button" data-filter="cve" aria-pressed="false">CVE <i>7</i></button>
+          <span class="filters__count" id="showCount" aria-live="polite">SHOWING 34 / 34</span>
         </div>
 
         <div class="ledger__wrap reveal">
@@ -209,69 +209,277 @@
               </tr>
             </thead>
             <tbody>
-              <tr data-sev="high">
-                <td data-label="ID">AZ-HERMES-001</td>
-                <td data-label="Target">NousResearch/hermes-agent</td>
-                <td data-label="Class">Path Traversal</td>
+              <tr data-status="published" data-cve="y">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/qbee-io/qbee-agent/security/advisories/GHSA-xhv5-8fpq-g7hf" target="_blank" rel="noopener noreferrer">GHSA-xhv5-8fpq-g7hf</a><br /><span class="ghsa__cve">CVE-2026-62336</span></td>
+                <td data-label="Target">qbee / qbee-agent</td>
+                <td data-label="Class">Privilege Escalation</td>
                 <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> CVE draft · pending GHSA</span></td>
-                <td data-label="Summary">Matrix, Mattermost, WeiXin outbound media adapters can read host files through LLM-reachable file paths.</td>
+                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="Summary">Symlink following in a privileged file helper allows local privilege escalation and arbitrary file tampering to root.</td>
               </tr>
-              <tr data-sev="high">
-                <td data-label="ID">AZ-HERMES-002</td>
-                <td data-label="Target">NousResearch/hermes-agent</td>
+              <tr data-status="published" data-cve="n">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/n8n-io/n8n/security/advisories/GHSA-35q8-9mj6-wjmf" target="_blank" rel="noopener noreferrer">GHSA-35q8-9mj6-wjmf</a></td>
+                <td data-label="Target">n8n</td>
+                <td data-label="Class">Privilege Escalation</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="Summary">Enterprise SSO instance-role provisioning lets an attacker controlling the IdP role claim escalate to full instance owner.</td>
+              </tr>
+              <tr data-status="published" data-cve="y">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/coturn/coturn/security/advisories/GHSA-69wx-x7x6-pjj8" target="_blank" rel="noopener noreferrer">GHSA-69wx-x7x6-pjj8</a><br /><span class="ghsa__cve">CVE-2026-65981</span></td>
+                <td data-label="Target">coturn</td>
                 <td data-label="Class">Auth Bypass</td>
                 <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> CVE draft · pending GHSA</span></td>
-                <td data-label="Summary">WeCom, WeiXin, WhatsApp, and Yuanbao adapters fail open when no sender allowlist is configured.</td>
+                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="Summary">With --mobility enabled, a session-resume authorization flaw lets an authenticated attacker hijack another user's active TURN allocation.</td>
               </tr>
-              <tr data-sev="high">
-                <td data-label="ID">AZ-ADKJ-012</td>
-                <td data-label="Target">Google ADK Java</td>
-                <td data-label="Class">Resource Traversal</td>
+              <tr data-status="published" data-cve="y">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/coturn/coturn/security/advisories/GHSA-4g7c-p5wg-j4hp" target="_blank" rel="noopener noreferrer">GHSA-4g7c-p5wg-j4hp</a><br /><span class="ghsa__cve">CVE-2026-68553</span></td>
+                <td data-label="Target">coturn</td>
+                <td data-label="Class">Format String</td>
                 <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Verified draft · not submitted</td>
-                <td data-label="Summary">Skill resource loading can escape the selected skill directory when path containment is checked before normalization.</td>
+                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="Summary">An authenticated TURN user can inject format specifiers via STUN USERNAME/REALM, causing crashes or memory disclosure.</td>
               </tr>
-              <tr data-sev="high">
-                <td data-label="ID">AZ-ADKJS-009</td>
-                <td data-label="Target">Google ADK JS</td>
-                <td data-label="Class">Path Traversal</td>
-                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Draft · not submitted</td>
-                <td data-label="Summary">Output materialization uses prefix containment checks that can write outside the intended directory.</td>
-              </tr>
-              <tr data-sev="high">
-                <td data-label="ID">AZ-ADKJS-015</td>
-                <td data-label="Target">Google ADK JS</td>
-                <td data-label="Class">Code Injection</td>
-                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Draft · not submitted</td>
-                <td data-label="Summary">A skill script filename can be interpolated into JavaScript wrapper code without safe quoting.</td>
-              </tr>
-              <tr data-sev="high">
-                <td data-label="ID">AZ-ADKGO-011</td>
-                <td data-label="Target">Google ADK Go</td>
-                <td data-label="Class">Local Service Exposure</td>
-                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
-                <td data-label="Status">Source verified · not submitted</td>
-                <td data-label="Summary">The web REST API advertises localhost access while binding the development server to all interfaces.</td>
-              </tr>
-              <tr data-sev="med">
-                <td data-label="ID">AZ-ADKPY-017</td>
-                <td data-label="Target">Google ADK Python</td>
-                <td data-label="Class">Isolation Bypass</td>
-                <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
-                <td data-label="Status">Draft · not submitted</td>
-                <td data-label="Summary">File-backed artifact storage omits the application namespace and can collapse isolation across apps.</td>
-              </tr>
-              <tr data-sev="floor">
-                <td data-label="ID">AZ-OPENCLAW-001</td>
+              <tr data-status="published" data-cve="n">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/openclaw/openclaw/security/advisories/GHSA-mm9g-83wh-mhwj" target="_blank" rel="noopener noreferrer">GHSA-mm9g-83wh-mhwj</a></td>
                 <td data-label="Target">OpenClaw</td>
-                <td data-label="Class">Env Hardening Gap</td>
-                <td data-label="Severity"><span class="sev sev--floor">BELOW FLOOR</span></td>
-                <td data-label="Status">Verified candidate · internal note</td>
-                <td data-label="Summary">Host exec environment controls need approval-surface hardening, but the confirmed impact falls below the high-severity filing floor.</td>
+                <td data-label="Class">Privilege Escalation</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="Summary">Isolated cron jobs could regain access to exec tools that had been denied, exceeding intended authorization.</td>
+              </tr>
+              <tr data-status="published" data-cve="n">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/openclaw/openclaw/security/advisories/GHSA-p5xh-frrh-cmgj" target="_blank" rel="noopener noreferrer">GHSA-p5xh-frrh-cmgj</a></td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Auth Bypass</td>
+                <td data-label="Severity"><span class="sev sev--high">HIGH</span></td>
+                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="Summary">MS Teams message actions could skip requester authorization, letting a lower-trust caller act without required checks.</td>
+              </tr>
+              <tr data-status="published" data-cve="y">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/qbee-io/transport/security/advisories/GHSA-f9m7-vc86-p6jj" target="_blank" rel="noopener noreferrer">GHSA-f9m7-vc86-p6jj</a><br /><span class="ghsa__cve">CVE-2026-55828</span></td>
+                <td data-label="Target">qbee / transport</td>
+                <td data-label="Class">Path Traversal</td>
+                <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
+                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="Summary">Symlink-chain path traversal in tar extraction lets a crafted archive write a file one level above the target directory.</td>
+              </tr>
+              <tr data-status="published" data-cve="y">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/traefik/traefik/security/advisories/GHSA-62fc-8686-hfmq" target="_blank" rel="noopener noreferrer">GHSA-62fc-8686-hfmq</a><br /><span class="ghsa__cve">CVE-2026-71325</span></td>
+                <td data-label="Target">Traefik</td>
+                <td data-label="Class">Auth Bypass</td>
+                <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
+                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="Summary">With allowCrossNamespace=false, Traefik fails to block cross-namespace TraefikService backendRefs, letting tenants bypass isolation.</td>
+              </tr>
+              <tr data-status="published" data-cve="n">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/openclaw/openclaw/security/advisories/GHSA-4xwj-mcc7-x7x5" target="_blank" rel="noopener noreferrer">GHSA-4xwj-mcc7-x7x5</a></td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Denial of Service</td>
+                <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
+                <td data-label="Status">Disclosed via GHSA</td>
+                <td data-label="Summary">Remote media URLs can slow-read exhaust tool workers, consuming gateway resources and reducing availability.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-224w-vfr9-h35c</td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Command Execution</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">A command bypass in the Google Meet node enables arbitrary command execution on paired nodes.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-pjjr-5qhr-5w6r</td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Command Execution</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">A non-owner can install arbitrary Codex plugins and trigger host MCP process execution.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-39v8-jmqg-wmgg</td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Command Execution</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">A non-owner chat ACP control can enable approve-all permissions and drive host command execution.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-9p6m-2872-xm7x</td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Auth Bypass</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Missing owner/admin gate on codex bind lets non-owner senders create full-access native Codex host turns.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-qp57-96hf-xr3v</td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Auth Bypass</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">An authorization bypass in iMessage message-action group management allows unauthorized group management.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-9x88-f7rh-4c83</td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Sandbox Escape</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">A browser sandbox bypass lets a target node evade host control.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-jghr-xp78-995p</td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Privilege Escalation</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">A browser proxy node invoke path permits a scope downgrade that weakens permission enforcement.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-rgjw-6v73-php6</td>
+                <td data-label="Target">OpenClaw</td>
+                <td data-label="Class">Allowlist Bypass</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">A Windows PowerShell allowlist rewrite can run a workspace shadow executable instead of the allowlisted path.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-mjg9-4wvm-gjmx</td>
+                <td data-label="Target">Flowise</td>
+                <td data-label="Class">Sandbox Escape</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">An allowed google-auth-library dependency enables host command execution, escaping the Flowise NodeVM sandbox.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-298j-7vrq-9226</td>
+                <td data-label="Target">Flowise</td>
+                <td data-label="Class">Improper Access Control</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Missing ownership and permission checks on workspace sharing let a low-privileged user use another workspace's credentials.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-3q7x-jp48-42h8</td>
+                <td data-label="Target">Flowise</td>
+                <td data-label="Class">Improper Authorization</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Expired enterprise workspace invites may be revived via the forgot/reset password and first-login flow.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-jq6j-rw7p-c9vh</td>
+                <td data-label="Target">Flowise</td>
+                <td data-label="Class">Improper Privilege Mgmt</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Insufficient session expiration combined with improper privilege management and improper authorization.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-4rfp-m4c3-rwj4</td>
+                <td data-label="Target">Flowise</td>
+                <td data-label="Class">Stored XSS</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Stored cross-site scripting from improper neutralization of script-related HTML tags.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-x68r-67j8-x5mg</td>
+                <td data-label="Target">Flowise</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-g9p6-654w-mr9v</td>
+                <td data-label="Target">NATS Server</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-gc58-jp35-x246</td>
+                <td data-label="Target">NATS Server</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-hwrp-2926-g93m</td>
+                <td data-label="Target">NATS Server</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-9qgw-9q78-p7xv</td>
+                <td data-label="Target">NATS Server</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-5xw9-67vx-qppr</td>
+                <td data-label="Target">NATS Server</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-m996-6cph-cjhc</td>
+                <td data-label="Target">NATS Server</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-h9r4-8j36-3c2f</td>
+                <td data-label="Target">NATS Server</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">Advisory under coordination; public details pending disclosure.</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-vx32-xf7g-9ghr</td>
+                <td data-label="Target">qbee / qbee-agent</td>
+                <td data-label="Class">Zip Slip</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">A Docker Compose build-context archive can write files outside the intended context directory (Zip Slip).</td>
+              </tr>
+              <tr data-status="draft" data-cve="n">
+                <td data-label="ID">GHSA-9mch-mvp9-xx79</td>
+                <td data-label="Target">qbee / qbee-agent</td>
+                <td data-label="Class">Privilege Escalation</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; coordinating</span></td>
+                <td data-label="Summary">A predictable installer working directory allows local package substitution that runs as root.</td>
+              </tr>
+              <tr data-status="draft" data-cve="y">
+                <td data-label="ID">GHSA-vg53-h6qq-xx7h<br /><span class="ghsa__cve">CVE-2026-14368</span></td>
+                <td data-label="Target">Zephyr RTOS</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; CVE assigned</span></td>
+                <td data-label="Summary">Advisory under embargo; tracked as CVE-2026-14368, public details pending.</td>
+              </tr>
+              <tr data-status="draft" data-cve="y">
+                <td data-label="ID">GHSA-4q9g-2mhh-m7w7<br /><span class="ghsa__cve">CVE-2026-18746</span></td>
+                <td data-label="Target">Zephyr RTOS</td>
+                <td data-label="Class">&mdash;</td>
+                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Status"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Draft &middot; CVE assigned</span></td>
+                <td data-label="Summary">Advisory under embargo; tracked as CVE-2026-18746, public details pending.</td>
               </tr>
             </tbody>
           </table>

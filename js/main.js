@@ -91,11 +91,11 @@
   if (feed) {
     var LINES = [
       "$ az feed --tail 5",
-      "[scan]   hermes-agent · outbound media adapters",
-      "[repro]  path traversal · 3 adapters confirmed",
-      "[draft]  AZ-HERMES-001 · severity HIGH",
-      "[coord]  GHSA requested · vendor ack pending",
-      "→ ledger sync · 24 tracked · 0 payloads public"
+      "[scan]   coturn · TURN session-resume authz",
+      "[repro]  auth bypass · allocation hijack confirmed",
+      "[draft]  CVE-2026-65981 · severity HIGH",
+      "[coord]  GHSA published · fix released upstream",
+      "→ ledger sync · 34 tracked · 9 disclosed"
     ];
 
     if (prefersReduced) {
@@ -155,7 +155,9 @@
         });
         var visible = 0;
         rows.forEach(function (row) {
-          var match = f === "all" || row.getAttribute("data-sev") === f;
+          var match = f === "all" ||
+            (f === "cve" ? row.getAttribute("data-cve") === "y"
+                         : row.getAttribute("data-status") === f);
           row.classList.toggle("is-hidden", !match);
           if (match) visible++;
         });
