@@ -213,7 +213,6 @@ i { font-style: normal; }
 .d2 { transition-delay: 0.18s; }
 .d3 { transition-delay: 0.28s; }
 .d4 { transition-delay: 0.4s; }
-.d5 { transition-delay: 0.55s; }
 
 /* ============ hero ============ */
 .hero {
@@ -251,11 +250,13 @@ i { font-style: normal; }
   display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
 }
 
-/* hero stage: dithered dome + floating console */
+/* hero stage: dithered dome — decorative only, and it rides up
+   under the CTAs, so nothing in here may capture clicks */
 .hero__stage {
   position: relative;
-  margin: clamp(36px, 5.5vw, 72px) auto 0;
+  margin: clamp(-64px, -3vw, -14px) auto 0;
   max-width: 1240px;
+  pointer-events: none;
 }
 .dome {
   display: block;
@@ -272,83 +273,6 @@ i { font-style: normal; }
 }
 .hero__ruler--l { left: 0; }
 .hero__ruler--r { right: 0; transform: scaleX(-1); }
-
-.console {
-  position: absolute;
-  left: 50%; top: 24%;
-  transform: translateX(-50%);
-  width: min(640px, 88%);
-  z-index: 2;
-  background: rgba(12, 12, 14, 0.9);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid var(--line-strong);
-  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.7);
-  text-align: left;
-}
-.console.reveal { transform: translateX(-50%) translateY(24px); }
-.console.reveal.in { transform: translateX(-50%); }
-.console__bar {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 18px;
-  border-bottom: 1px solid var(--line);
-}
-.console__addr {
-  font-family: var(--mono);
-  font-size: 11px; letter-spacing: 0.08em;
-  color: var(--fg-dim);
-}
-.console__live {
-  margin-left: auto;
-  font-family: var(--mono);
-  font-size: 9px; letter-spacing: 0.24em;
-  color: var(--fg-dim);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 4px 11px;
-}
-.console__body {
-  font-family: var(--mono);
-  font-size: clamp(10.5px, 1vw, 12px);
-  line-height: 1.8;
-  padding: 16px 18px;
-  min-height: 164px;
-  white-space: pre-wrap;
-  color: rgba(234, 234, 228, 0.85);
-}
-.console__body .caret {
-  display: inline-block; width: 0.6em; height: 1em;
-  background: var(--fg); vertical-align: -0.15em;
-  animation: caret 1s steps(2) infinite;
-}
-@keyframes caret { 50% { opacity: 0; } }
-.console__foot {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 12px 14px;
-  border-top: 1px solid var(--line);
-}
-.console__chips { display: flex; gap: 8px; flex-wrap: wrap; }
-.chip {
-  font-family: var(--mono);
-  font-size: 9.5px; letter-spacing: 0.14em;
-  color: var(--fg-dim); text-decoration: none;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 8px 14px;
-  transition: color 0.3s, border-color 0.3s;
-}
-.chip:hover { color: var(--fg); border-color: var(--fg); }
-.console__go {
-  flex: 0 0 auto;
-  display: grid; place-items: center;
-  width: 38px; height: 38px;
-  border: 1px solid var(--fg);
-  border-radius: 50%;
-  color: var(--fg); text-decoration: none;
-  font-family: var(--mono); font-size: 15px;
-  transition: background 0.3s, color 0.3s;
-}
-.console__go:hover { background: var(--fg); color: var(--bg); }
 
 /* ============ ticker ============ */
 .ticker {
@@ -1513,16 +1437,6 @@ i { font-style: normal; }
 
   .hero__title { font-size: clamp(36px, 10.5vw, 54px); }
   .hero__ruler { display: none; }
-  .hero__stage { display: flex; flex-direction: column; }
-  .console {
-    position: relative; left: auto; top: auto;
-    transform: none;
-    width: 100%;
-    order: 1;
-  }
-  .console.reveal { transform: translateY(24px); }
-  .console.reveal.in { transform: none; }
-  .dome { order: 2; margin-top: -13vw; }
 
   .compare__notes { grid-template-columns: 1fr; gap: 28px; }
   .protocol { grid-template-columns: 1fr; }
@@ -1606,8 +1520,6 @@ i { font-style: normal; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .console.reveal { transform: translateX(-50%); }
-  .console__body .caret { animation: none; }
   .ticker__track { animation: none; }
   .orbit__spin, .orbit__pulse, .compare__node::before,
   .crt__scan::after, .crt__down, .dot-live { animation: none; }
