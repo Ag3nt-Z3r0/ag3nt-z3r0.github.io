@@ -146,18 +146,21 @@
         <!-- gauge + counters -->
         <div class="gaugeRow reveal">
           <figure class="gauge">
-            <svg viewBox="0 0 320 190" aria-hidden="true" focusable="false">
+            <svg id="gaugeSvg" class="gauge__svg" viewBox="0 0 320 190" data-total="38" data-count="9" aria-hidden="true" focusable="false">
               <path d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-opacity=".16" stroke-width="10" stroke-dasharray="1.4 11.17" />
               <path d="M34 160 A126 126 0 0 1 286 160" fill="none" stroke="#EAEAE4" stroke-opacity=".28" stroke-width="1"/>
-              <path d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-width="3.5" stroke-dasharray="89.3 999"/>
-              <line x1="160" y1="160" x2="71.7" y2="78.7" stroke="#EAEAE4" stroke-width="1.5"/>
-              <circle cx="71.7" cy="78.7" r="3" fill="#FF4D00"/>
+              <path id="gaugeValue" class="gauge__value" d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-width="3.5"
+                    stroke-dasharray="377" stroke-dashoffset="377"/>
+              <g id="gaugeNeedle" class="gauge__needle">
+                <line x1="160" y1="160" x2="40" y2="160" stroke="#EAEAE4" stroke-width="1.5"/>
+                <circle cx="40" cy="160" r="3" fill="#FF4D00"/>
+              </g>
               <circle cx="160" cy="160" r="4.5" fill="#EAEAE4"/>
               <circle cx="160" cy="160" r="9" fill="none" stroke="#EAEAE4" stroke-opacity=".4"/>
             </svg>
             <figcaption class="gauge__cap">
               <span>0</span>
-              <span class="gauge__read">DISCLOSED&nbsp;9&nbsp;/&nbsp;TRACKED&nbsp;38</span>
+              <span class="gauge__read" id="gaugeRead" aria-live="polite">DISCLOSED&nbsp;9&nbsp;/&nbsp;TRACKED&nbsp;38</span>
               <span>38</span>
             </figcaption>
           </figure>

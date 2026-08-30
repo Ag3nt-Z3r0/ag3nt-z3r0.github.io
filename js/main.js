@@ -140,12 +140,49 @@
     }
   }
 
-  /* ---------- ledger severity filter ---------- */
+  /* ---------- gauge (disclosure) ---------- */
+  var gaugeSvg = document.getElementById("gaugeSvg");
+  var gauge = null;
+  if (gaugeSvg) {
+    var ARC = 377; // semicircle length: pi * r(120)
+    var needle = document.getElementById("gaugeNeedle");
+    var valueArc = document.getElementById("gaugeValue");
+    var readEl = document.getElementById("gaugeRead");
+    var gTotal = parseInt(gaugeSvg.getAttribute("data-total"), 10) || 1;
+
+    gauge = function (count, label) {
+      var f = Math.max(0, Math.min(1, count / gTotal));
+      if (needle) needle.style.transform = "rotate(" + (f * 180).toFixed(2) + "deg)";
+      if (valueArc) valueArc.setAttribute("stroke-dashoffset", (ARC * (1 - f)).toFixed(1));
+      if (readEl && label) {
+        readEl.classList.add("is-swap");
+        setTimeout(function () {
+          readEl.textContent = label + " " + count + " / TRACKED " + gTotal;
+          readEl.classList.remove("is-swap");
+        }, 180);
+      }
+    };
+
+    var gInitial = parseInt(gaugeSvg.getAttribute("data-count"), 10) || 0;
+    var runGauge = function () { gauge(gInitial, null); };
+
+    if (prefersReduced || !("IntersectionObserver" in window)) {
+      runGauge();
+    } else {
+      var gio = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { runGauge(); gio.disconnect(); }
+      }, { threshold: 0.35 });
+      gio.observe(gaugeSvg);
+    }
+  }
+
+  /* ---------- ledger status filter ---------- */
   var filterBtns = document.querySelectorAll(".filters__btn");
   var ledgerTable = document.getElementById("ledgerTable");
   if (filterBtns.length && ledgerTable) {
     var rows = ledgerTable.querySelectorAll("tbody tr");
     var showCount = document.getElementById("showCount");
+    var GAUGE_LABELS = { all: "SHOWING", published: "DISCLOSED", draft: "DRAFT", cve: "CVE" };
 
     filterBtns.forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -164,6 +201,7 @@
         if (showCount) {
           showCount.textContent = "SHOWING " + visible + " / " + rows.length;
         }
+        if (gauge) gauge(visible, GAUGE_LABELS[f] || "SHOWING");
       });
     });
   }
