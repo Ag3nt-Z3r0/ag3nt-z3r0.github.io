@@ -95,7 +95,7 @@
       "[repro]  auth bypass · allocation hijack confirmed",
       "[draft]  CVE-2026-65981 · severity HIGH",
       "[coord]  GHSA published · fix released upstream",
-      "→ ledger sync · 34 tracked · 9 disclosed"
+      "→ ledger sync · 38 tracked · 9 disclosed"
     ];
 
     if (prefersReduced) {
