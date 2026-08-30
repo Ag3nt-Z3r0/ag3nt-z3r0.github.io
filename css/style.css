@@ -424,6 +424,12 @@ i { font-style: normal; }
   line-height: 1.9;
   color: var(--fg-dim);
 }
+.inline-link {
+  color: var(--fg); text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+  transition: border-color 0.3s;
+}
+.inline-link:hover { border-color: var(--fg); }
 
 /* ============ compare (doctrine) ============ */
 .compare {
@@ -1186,6 +1192,106 @@ i { font-style: normal; }
   font-size: 12.5px; line-height: 1.85;
   color: var(--fg-dim);
 }
+.pipeline--3 { grid-template-columns: repeat(3, 1fr); }
+
+/* ============ agents (fleet) ============ */
+.fleet {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  border: 1px solid var(--line);
+}
+.unit {
+  position: relative;
+  padding: clamp(28px, 3.4vw, 48px);
+  border-right: 1px solid var(--line);
+  transition: background 0.4s;
+}
+.unit:last-child { border-right: 0; }
+.unit:hover { background: rgba(234, 234, 228, 0.025); }
+.unit::before, .unit::after {
+  content: ""; position: absolute; width: 9px; height: 9px;
+  border: 0 solid var(--fg);
+  opacity: 0; transition: opacity 0.35s;
+}
+.unit::before { top: 8px; left: 8px; border-top-width: 1px; border-left-width: 1px; }
+.unit::after { bottom: 8px; right: 8px; border-bottom-width: 1px; border-right-width: 1px; }
+.unit:hover::before, .unit:hover::after { opacity: 0.8; }
+
+.unit__top {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 0.18em;
+  color: var(--fg-faint);
+}
+.unit__state {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--fg-dim);
+}
+.unit__emblem {
+  display: block;
+  width: 100%; height: clamp(120px, 15vw, 168px);
+  margin: clamp(22px, 3vw, 34px) 0;
+  color: var(--fg);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(rgba(234, 234, 228, 0.06) 0.7px, transparent 0.9px) 0 0 / 14px 14px;
+}
+.unit__role {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 0.18em;
+  color: var(--fg-dim);
+  margin-bottom: 12px;
+}
+.unit__name {
+  font-family: var(--sans);
+  font-weight: 500; font-stretch: 114%;
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.unit__tag {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--fg-dim);
+  margin-bottom: 20px;
+}
+.unit__desc {
+  font-size: 13px; line-height: 1.85;
+  color: var(--fg-dim);
+  margin-bottom: clamp(22px, 3vw, 30px);
+}
+.unit__spec { border-top: 1px solid var(--line); }
+.unit__row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 18px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+}
+.unit__row:last-child { border-bottom: 0; }
+.unit__row dt {
+  font-size: 9.5px; letter-spacing: 0.18em;
+  color: var(--fg-faint);
+}
+.unit__row dd {
+  font-size: 10.5px; letter-spacing: 0.08em;
+  color: var(--fg);
+  text-align: right;
+}
+.unit__cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: clamp(30px, 4vw, 48px);
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: 0.16em;
+  color: var(--fg); text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 5px;
+  transition: border-color 0.3s;
+}
+.unit__cta:hover { border-color: var(--fg); }
+.unit__cta span { transition: transform 0.3s var(--ease); }
+.unit__cta:hover span { transform: translateX(6px); }
 
 /* ============ dirlist (home site index) ============ */
 .dirlist { border-top: 1px solid var(--line); }
@@ -1342,6 +1448,10 @@ i { font-style: normal; }
   .protocol { grid-template-columns: 1fr; }
   .protocol__step { border-right: 0; border-bottom: 1px solid var(--line); }
   .protocol__step:last-child { border-bottom: 0; }
+
+  .fleet { grid-template-columns: 1fr; }
+  .unit { border-right: 0; border-bottom: 1px solid var(--line); }
+  .unit:last-child { border-bottom: 0; }
 
   .stats { grid-template-columns: 1fr; }
   .stat, .stat:nth-child(2n) { border-right: 0; border-bottom: 1px solid var(--line); }
