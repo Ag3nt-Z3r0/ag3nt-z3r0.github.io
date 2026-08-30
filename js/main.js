@@ -176,33 +176,49 @@
     }
   }
 
-  /* ---------- ledger status filter ---------- */
+  /* ---------- ledger status filter + text search ---------- */
   var filterBtns = document.querySelectorAll(".filters__btn");
   var ledgerTable = document.getElementById("ledgerTable");
-  if (filterBtns.length && ledgerTable) {
+  if (ledgerTable) {
     var rows = ledgerTable.querySelectorAll("tbody tr");
     var showCount = document.getElementById("showCount");
+    var searchInput = document.getElementById("ledgerSearch");
+    var searchHint = document.getElementById("searchHint");
     var GAUGE_LABELS = { all: "SHOWING", published: "DISCLOSED", draft: "DRAFT", cve: "CVE" };
+    var activeFilter = "all";
+    var query = "";
+
+    rows.forEach(function (row) { row._text = row.textContent.toLowerCase(); });
+
+    function applyLedger() {
+      var visible = 0;
+      rows.forEach(function (row) {
+        var fMatch = activeFilter === "all" ||
+          (activeFilter === "cve" ? row.getAttribute("data-cve") === "y"
+                                  : row.getAttribute("data-status") === activeFilter);
+        var qMatch = !query || row._text.indexOf(query) !== -1;
+        var show = fMatch && qMatch;
+        row.classList.toggle("is-hidden", !show);
+        if (show) visible++;
+      });
+      if (showCount) showCount.textContent = "SHOWING " + visible + " / " + rows.length;
+      if (searchHint) searchHint.textContent = query ? (visible + " MATCH" + (visible === 1 ? "" : "ES")) : "";
+      if (gauge) gauge(visible, GAUGE_LABELS[activeFilter] || "SHOWING");
+    }
 
     filterBtns.forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var f = btn.getAttribute("data-filter");
-        filterBtns.forEach(function (b) {
-          b.setAttribute("aria-pressed", String(b === btn));
-        });
-        var visible = 0;
-        rows.forEach(function (row) {
-          var match = f === "all" ||
-            (f === "cve" ? row.getAttribute("data-cve") === "y"
-                         : row.getAttribute("data-status") === f);
-          row.classList.toggle("is-hidden", !match);
-          if (match) visible++;
-        });
-        if (showCount) {
-          showCount.textContent = "SHOWING " + visible + " / " + rows.length;
-        }
-        if (gauge) gauge(visible, GAUGE_LABELS[f] || "SHOWING");
+        activeFilter = btn.getAttribute("data-filter");
+        filterBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        applyLedger();
       });
     });
+
+    if (searchInput) {
+      searchInput.addEventListener("input", function () {
+        query = searchInput.value.trim().toLowerCase();
+        applyLedger();
+      });
+    }
   }
 })();

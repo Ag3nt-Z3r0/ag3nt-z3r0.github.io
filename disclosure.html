@@ -33,6 +33,38 @@
     .ledger .cvecell--none {
       color: var(--fg-faint); letter-spacing: 0.1em;
     }
+
+    /* interactive neon hero — cursor parallax + glow */
+    #crtScope { transition: transform 0.18s ease-out, filter 0.3s; will-change: transform, filter; }
+
+    /* ledger search box */
+    .ledgersearch {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 16px; margin-bottom: 14px;
+      border: 1px solid var(--line-strong);
+      background: var(--bg-raise);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .ledgersearch:focus-within {
+      border-color: rgba(0, 229, 255, 0.6);
+      box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.3), 0 0 18px rgba(0, 229, 255, 0.15);
+    }
+    .ledgersearch__icon { flex: 0 0 auto; color: var(--fg-faint); transition: color 0.3s; }
+    .ledgersearch:focus-within .ledgersearch__icon { color: #00e5ff; }
+    .ledgersearch__input {
+      flex: 1 1 auto; min-width: 0;
+      background: transparent; border: 0; outline: none;
+      color: var(--fg);
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    }
+    .ledgersearch__input::placeholder { color: var(--fg-faint); letter-spacing: 0.14em; }
+    .ledgersearch__input::-webkit-search-cancel-button { -webkit-appearance: none; }
+    .ledgersearch__hint {
+      flex: 0 0 auto;
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.16em;
+      color: #00e5ff; text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+    }
+    .ledger tr.is-search-hidden { display: none; }
   </style>
 </head>
 <body>
@@ -109,7 +141,7 @@
         </div>
 
         <div class="crt__stage reveal">
-          <svg class="crt__circles" viewBox="0 0 1040 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.45));">
+          <svg id="crtScope" class="crt__circles" viewBox="0 0 1040 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.45));">
             <rect x="430" y="70" width="140" height="260" fill="#00E5FF" opacity=".05"/>
             <rect x="356" y="90" width="60" height="220" fill="#00E5FF" opacity=".03"/>
             <rect x="600" y="100" width="44" height="200" fill="#00E5FF" opacity=".03"/>
@@ -122,7 +154,6 @@
               <circle cx="500" cy="200" r="75" stroke-opacity=".5"/>
               <circle cx="578" cy="200" r="75" stroke-opacity=".25"/>
               <path d="M40 200 H1000" stroke-opacity=".22"/>
-              <path d="M500 176 V224 M476 200 H524" stroke="#FF2D95" stroke-opacity=".85"/>
             </g>
             <g fill="#00E5FF">
               <circle cx="190" cy="200" r="1.4" opacity=".7"/>
@@ -130,9 +161,23 @@
               <circle cx="655" cy="200" r="1.4" opacity=".8"/>
               <circle cx="810" cy="200" r="1.4" opacity=".7"/>
             </g>
-            <g fill="#FF2D95">
-              <circle cx="500" cy="200" r="2.6" style="filter: drop-shadow(0 0 6px rgba(255, 45, 149, 0.9));"/>
-              <circle cx="500" cy="200" r="7" opacity=".2"/>
+            <!-- targeting reticle — tracks the cursor, auto-acquires targets when idle -->
+            <g id="crtReticle" transform="translate(500 200)" style="transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);">
+              <circle r="7" fill="none" stroke="#FF2D95" stroke-width="2" opacity="0">
+                <animate attributeName="r" values="7;120" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.5;0" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <g stroke="#FF2D95" fill="none" style="filter: drop-shadow(0 0 6px rgba(255, 45, 149, 0.9));">
+                <circle r="22" stroke-width="1.6" stroke-opacity=".8"/>
+                <circle r="34" stroke-width="1" stroke-opacity=".28" stroke-dasharray="2 6">
+                  <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="14s" repeatCount="indefinite"/>
+                </circle>
+                <path d="M0 -36 V-12 M0 12 V36 M-36 0 H-12 M12 0 H36" stroke-width="1.6"/>
+                <path d="M-31 -21 V-31 H-21 M21 -31 H31 V-21 M31 21 V31 H21 M-21 31 H-31 V21" stroke-width="1.4" stroke-opacity=".85"/>
+              </g>
+              <circle r="2.4" fill="#FF2D95" style="filter: drop-shadow(0 0 5px rgba(255, 45, 149, 1));">
+                <animate attributeName="r" values="2.4;3.4;2.4" dur="2.2s" repeatCount="indefinite"/>
+              </circle>
             </g>
             <g fill="none" stroke="#00E5FF" stroke-width="1.5" stroke-opacity=".8">
               <path d="M78 60 H48 V340 H78"/>
@@ -159,7 +204,7 @@
 
         <div class="ledger__intro reveal">
           <h2 class="sect__title">ALL CASES</h2>
-          <p class="sect__sub"><a class="inline-link" href="agents.html">CrayFisher와 DeepSealer</a>가 찾아낸 뒤 Agent Zero가 GitHub Security Advisory(GHSA)로 조정 공개 중인 취약점입니다. 조정 공개 전에는 재현 payload, 민감한 경로, 비공개 타깃 세부 사항을 포함하지 않습니다.</p>
+          <p class="sect__sub"><a class="inline-link" href="agents.html">CrayFisher와 DeepSealer</a>가 찾아낸 뒤 Agent Zero가 GitHub Security Advisory(GHSA)로 조정 공개 중인 취약점입니다.<br />조정 공개 전에는 재현 payload, 민감한 경로, 비공개 타깃 세부 사항을 포함하지 않습니다.</p>
         </div>
 
         <!-- gauge + counters -->
@@ -209,6 +254,15 @@
             </div>
             <p class="gauge__legend">29 DRAFTS · COORDINATION IN PROGRESS</p>
           </div>
+        </div>
+
+        <!-- search -->
+        <div class="ledgersearch reveal">
+          <svg class="ledgersearch__icon" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="7" cy="7" r="5"/><path d="M11 11 L14.5 14.5" stroke-linecap="round"/>
+          </svg>
+          <input id="ledgerSearch" class="ledgersearch__input" type="search" placeholder="SEARCH — target · class · CVE · GHSA · summary" aria-label="케이스 검색" autocomplete="off" spellcheck="false" />
+          <span class="ledgersearch__hint" id="searchHint" aria-hidden="true"></span>
         </div>
 
         <!-- filters -->
@@ -605,5 +659,52 @@
   </div>
 
   <script src="js/main.js"></script>
+  <script>
+    /* interactive neon hero: targeting reticle tracks cursor + auto-acquires targets when idle */
+    (function () {
+      var crt = document.querySelector('.crt');
+      var svg = document.getElementById('crtScope');
+      var reticle = document.getElementById('crtReticle');
+      if (!crt || !svg) return;
+      var base = 'drop-shadow(0 0 5px rgba(0, 229, 255, 0.45))';
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        try { svg.pauseAnimations && svg.pauseAnimations(); } catch (e) {}
+        return;
+      }
+
+      var targets = [[190, 200], [345, 200], [500, 200], [655, 200], [810, 200]];
+      function move(x, y) { if (reticle) reticle.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ')'); }
+
+      var autoTimer = null, ai = 2;
+      function tick() { ai = (ai + 1) % targets.length; move(targets[ai][0], targets[ai][1]); }
+      function startAuto() { if (autoTimer || !reticle) return; move(targets[ai][0], targets[ai][1]); autoTimer = setInterval(tick, 1800); }
+      function stopAuto() { clearInterval(autoTimer); autoTimer = null; }
+
+      var idle;
+      crt.addEventListener('pointermove', function (e) {
+        // reticle follows the cursor (mapped into viewBox coords)
+        if (reticle && svg.getScreenCTM) {
+          var m = svg.getScreenCTM();
+          if (m) {
+            var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+            var loc = pt.matrixTransform(m.inverse());
+            move(Math.max(60, Math.min(980, loc.x)), Math.max(72, Math.min(330, loc.y)));
+            stopAuto(); clearTimeout(idle); idle = setTimeout(startAuto, 2200);
+          }
+        }
+        // subtle whole-field parallax + glow
+        var r = crt.getBoundingClientRect();
+        var nx = (e.clientX - r.left) / r.width - 0.5;
+        var ny = (e.clientY - r.top) / r.height - 0.5;
+        svg.style.transform = 'translate(' + (nx * 12).toFixed(1) + 'px, ' + (ny * 8).toFixed(1) + 'px)';
+        svg.style.filter = 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.78))';
+      });
+      crt.addEventListener('pointerleave', function () {
+        svg.style.transform = ''; svg.style.filter = base;
+        clearTimeout(idle); startAuto();
+      });
+      startAuto();
+    })();
+  </script>
 </body>
 </html>
