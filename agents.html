@@ -15,6 +15,72 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62.5..125,100..900&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- cyberpunk treatment — scoped to the two agent cards only -->
+  <style>
+    .fleet {
+      --cy: #00e5ff;
+      --mg: #ff2d95;
+    }
+    /* neon frame + inner glow on each card */
+    .fleet .unit {
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(0, 229, 255, 0.035), transparent 55%);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    .fleet .unit:hover {
+      background: linear-gradient(180deg, rgba(0, 229, 255, 0.06), transparent 55%);
+      box-shadow: inset 0 0 46px rgba(0, 229, 255, 0.07);
+    }
+    /* per-card duotone: CrayFisher = cyan, DeepSealer = magenta */
+    .fleet .unit:nth-child(1) { --accent: var(--cy); --accent-rgb: 0, 229, 255; }
+    .fleet .unit:nth-child(2) { --accent: var(--mg); --accent-rgb: 255, 45, 149; }
+    /* neon top accent bar */
+    .fleet .unit::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      width: auto; border: 0;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.8), 0 0 4px rgba(var(--accent-rgb), 0.9);
+      opacity: 0.85;
+    }
+    /* corner ticks glow in the accent color on hover */
+    .fleet .unit:hover::after {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.7);
+    }
+    /* emblem art keeps its lines, gains neon color + glow */
+    .fleet .unit__emblem {
+      color: var(--accent);
+      border-color: rgba(var(--accent-rgb), 0.3);
+      background:
+        radial-gradient(rgba(var(--accent-rgb), 0.09) 0.7px, transparent 0.9px) 0 0 / 14px 14px;
+      filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.5));
+      transition: filter 0.4s;
+    }
+    .fleet .unit:hover .unit__emblem { filter: drop-shadow(0 0 13px rgba(var(--accent-rgb), 0.75)); }
+    /* role tag + designation in accent */
+    .fleet .unit__role { color: var(--accent); text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.4); }
+    .fleet .unit__desig { color: var(--accent); }
+    /* agent name gets a soft neon glow */
+    .fleet .unit__name { text-shadow: 0 0 16px rgba(var(--accent-rgb), 0.4); }
+    /* live dot + state recolored to the accent */
+    .fleet .unit__state { color: var(--accent); }
+    .fleet .dot-live {
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.9), 0 0 4px rgba(var(--accent-rgb), 0.95);
+    }
+    /* spec values pop in the accent */
+    .fleet .unit__row dd { color: var(--accent); text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.35); }
+    /* subtle scanlines inside the fleet block only */
+    .fleet {
+      background-image: repeating-linear-gradient(0deg, rgba(0, 229, 255, 0.035) 0 1px, transparent 1px 3px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fleet .unit__emblem { transition: none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -135,7 +201,7 @@
             <p class="unit__role">RECON · WIDE-NET SCAN</p>
             <h3 class="unit__name">CrayFisher</h3>
             <p class="unit__tag">광역 정찰 에이전트</p>
-            <p class="unit__desc">여러 에이전트 프레임워크의 코드베이스를 넓게 훑으며 도구 호출·권한 경계·파일 경로에서 이상 신호를 낚아 올립니다. 넓게 던지고, 걸린 후보만 남깁니다.</p>
+            <p class="unit__desc">여러 LLM 에이전트 프레임워크(MCP·LangChain·CrewAI·AutoGen·openai-agents 등)의 코드베이스를 넓게 훑으며 도구 호출·권한 경계·파일 경로에서 이상 신호를 낚아 올립니다. 647건의 GHSA 코퍼스에서 distill한 우선순위 — 과도한 에이전시(LLM06)·프롬프트 인젝션(LLM01)·잘못된 인가(CWE-863) — 로 후보를 거르고, 확인된 프리미티브를 RCE·권한상승 체인으로 엮되 모든 연결에 코드 근거를 요구합니다. 넓게 던지고, 걸린 후보만 다음 단계로 넘깁니다.</p>
 
             <dl class="unit__spec">
               <div class="unit__row"><dt>STAGE</dt><dd>SCAN → REPRO</dd></div>
@@ -173,7 +239,7 @@
             <p class="unit__role">VERIFY · DEEP DIVE</p>
             <h3 class="unit__name">DeepSealer</h3>
             <p class="unit__tag">심층 검증 에이전트</p>
-            <p class="unit__desc">CrayFisher가 건져 올린 후보를 깊이 파고들어 재현 절차와 실행 로그로 고정합니다. 재현되지 않으면 버리고, 재현되면 방어 가능한 증거로 봉인(seal)합니다.</p>
+            <p class="unit__desc">5-에이전트 파이프라인(Recon → Analyzer → Defender → Judgement → PoC-Validator)으로 후보를 깊이 파고들어, 익스플로잇이 분석 대상 클론에서 실제로 발화한 뒤에야 케이스를 인정합니다. 재현되지 않으면 버리고, 재현되면 재현 절차·실행 로그로 방어 가능한 증거를 봉인(seal)한 뒤 GHSA 형식 리포트로 남깁니다. 확인된 사례는 다음 사냥터를, 기각된 오탐은 재발 방지 규칙을 스스로 학습합니다.</p>
 
             <dl class="unit__spec">
               <div class="unit__row"><dt>STAGE</dt><dd>REPRO → DRAFT</dd></div>
