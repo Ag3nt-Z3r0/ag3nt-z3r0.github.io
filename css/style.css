@@ -775,7 +775,7 @@ i { font-style: normal; }
 }
 .roster__row {
   display: grid;
-  grid-template-columns: 64px 118px 1.1fr 1.9fr 128px;
+  grid-template-columns: 92px 118px 1.1fr 1.9fr 128px;
   gap: clamp(14px, 2vw, 28px);
   align-items: center;
   padding: 16px 0;
@@ -785,7 +785,7 @@ i { font-style: normal; }
 .roster__row:hover { background: rgba(234, 234, 228, 0.025); }
 .roster__thumb {
   position: relative;
-  width: 52px; aspect-ratio: 1;
+  width: 78px; aspect-ratio: 1;
   overflow: hidden;
   border: 1px solid var(--line);
 }
@@ -794,9 +794,17 @@ i { font-style: normal; }
   object-fit: cover; object-position: center 15%;
   filter: grayscale(1) invert(1) contrast(1.25);
 }
+/* photo avatars: monochrome without inversion (Doré engravings keep invert) */
+.roster__thumb--photo img {
+  object-position: center;
+  filter: grayscale(1) contrast(1.05);
+}
 .roster__thumb::after {
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(rgba(10, 10, 11, 0.85) 0.7px, transparent 0.85px) 0 0 / 3px 3px;
+}
+.roster__thumb--photo::after {
+  background: radial-gradient(rgba(10, 10, 11, 0.5) 0.6px, transparent 0.8px) 0 0 / 3px 3px;
 }
 .roster__id, .roster__status {
   font-family: var(--mono);
@@ -1433,7 +1441,7 @@ i { font-style: normal; }
   .protocol__step:nth-child(2n) { border-right: 0; }
   .protocol__step:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
 
-  .roster__row { grid-template-columns: 56px 100px 1fr 110px; }
+  .roster__row { grid-template-columns: 92px 100px 1fr 110px; }
   .roster__bio { grid-column: 2 / -1; }
 }
 
@@ -1480,7 +1488,7 @@ i { font-style: normal; }
   .orbit { display: none; }
 
   .roster__row {
-    grid-template-columns: 56px 1fr;
+    grid-template-columns: 84px 1fr;
     grid-template-areas:
       "thumb name"
       "thumb id"
