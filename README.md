@@ -20,6 +20,8 @@ IBM Plex Sans KR(본문) × Cormorant Garamond 이탤릭(악센트).
   사이트 인덱스 리스트(dirlist)
 - **About**: 스펙 시트 히어로, 파형 비교 카드(UNAUDITED vs ZEROED),
   공개 파이프라인 다이어그램(SCAN→REPRO→DRAFT→COORD), 협업 대상 셀
+- **Agents**: 스펙 시트 히어로 + 에이전트 유닛 카드 2종(CrayFisher · DeepSealer,
+  인라인 SVG 엠블럼 + 스펙 리스트), 핸드오프 파이프라인(CAST→SEAL→COORD)
 - **Team**: 궤도 다이어그램 히어로 + 계측 로스터(하프톤 초상), 공석(AZ-005) 카드
 - **Disclosure**: CRT 히어로(업타임 카운터/스캔라인/겹친 원 구조도), 반원 게이지,
   작동하는 심각도 필터, 브래킷 카운터, 프로토콜 카드
@@ -29,6 +31,7 @@ IBM Plex Sans KR(본문) × Cormorant Garamond 이탤릭(악센트).
 ```
 index.html      # 홈 (히어로+돔+콘솔 / 티커 / 사이트 인덱스 / 푸터)
 about.html      # 독트린 (스펙 시트 히어로 / 비교 카드 / 파이프라인 / 협업 대상)
+agents.html     # 에이전트 (스펙 시트 히어로 / 유닛 카드 2종 / 핸드오프 파이프라인)
 team.html       # 팀 (궤도 히어로 / 로스터 / 공석 카드)
 disclosure.html # 전체 취약점 공개 ledger (CRT 히어로 / 게이지 / 필터 / 전체 표 / 프로토콜)
 css/style.css   # 스타일 (모노크롬 HUD 테마, :root 토큰)
@@ -53,6 +56,7 @@ python -m http.server 4173
 ## 내용 수정 가이드
 
 - **팀원**: `team.html`의 `.orbit__chip`(궤도 다이어그램)과 `.roster__row`(로스터) 블록 수정
+- **에이전트**: `agents.html`의 `.unit`(유닛 카드: 이름·역할·설명·스펙)과 `.pipeline--3`(핸드오프) 블록 수정
 - **이메일**: `hello@agentzero.team`을 실제 주소로 교체
 - **공개 표**: `disclosure.html`의 `#ledgerTable` 행 수정 (`data-sev` 속성이 필터 기준)
 - **통계 숫자**: 두 페이지의 `.stat__value` + 게이지 SVG의 `stroke-dasharray`/바늘 좌표
