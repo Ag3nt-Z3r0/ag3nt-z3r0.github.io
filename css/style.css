@@ -18,7 +18,6 @@
   --sans: "Archivo", "IBM Plex Sans KR", sans-serif;
   --body: "IBM Plex Sans KR", "Archivo", sans-serif;
   --mono: "IBM Plex Mono", "IBM Plex Sans KR", monospace;
-  --serif: "Cormorant Garamond", Georgia, serif;
 
   --gutter: clamp(18px, 4.5vw, 64px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -241,13 +240,6 @@ i { font-style: normal; }
   letter-spacing: -0.015em;
 }
 .hero__title span { display: block; }
-.hero__title em {
-  font-family: var(--serif);
-  font-style: italic; font-weight: 500;
-  font-size: 1.04em;
-  letter-spacing: 0;
-  margin: 0 0.06em;
-}
 .hero__sub {
   margin-top: clamp(20px, 3vh, 34px);
   font-size: clamp(13px, 1.2vw, 15.5px);
@@ -410,13 +402,6 @@ i { font-style: normal; }
   line-height: 1.04;
   letter-spacing: -0.012em;
   margin-top: clamp(20px, 3vw, 34px);
-}
-.sect__title em {
-  font-family: var(--serif);
-  font-style: italic; font-weight: 500;
-  font-size: 1.05em;
-  letter-spacing: 0;
-  margin: 0 0.05em;
 }
 .sect__sub {
   margin-top: clamp(16px, 2vw, 24px);
@@ -860,12 +845,6 @@ i { font-style: normal; }
   line-height: 1;
   letter-spacing: -0.01em;
 }
-.footer__title em {
-  font-family: var(--serif);
-  font-style: italic; font-weight: 500;
-  font-size: 1.05em;
-  margin-left: 0.06em;
-}
 .footer__text {
   font-size: clamp(12.5px, 1.1vw, 14.5px);
   line-height: 1.85;
@@ -975,12 +954,6 @@ i { font-style: normal; }
   font-size: clamp(40px, 6.2vw, 82px);
   line-height: 1;
   letter-spacing: -0.012em;
-}
-.crt__title em {
-  font-family: var(--serif);
-  font-style: italic; font-weight: 500;
-  font-size: 1.05em;
-  margin-left: 0.06em;
 }
 .crt__sub {
   margin: clamp(16px, 2.4vh, 26px) auto 0;
@@ -1130,13 +1103,6 @@ i { font-style: normal; }
   letter-spacing: -0.015em;
 }
 .page-hero__title span { display: block; }
-.page-hero__title em {
-  font-family: var(--serif);
-  font-style: italic; font-weight: 500;
-  font-size: 1.04em;
-  letter-spacing: 0;
-  margin: 0 0.06em;
-}
 .page-hero__sub {
   margin-top: clamp(18px, 2.8vh, 30px);
   font-size: clamp(12.5px, 1.15vw, 15px);
@@ -1440,12 +1406,6 @@ i { font-style: normal; }
   font-size: clamp(24px, 3.4vw, 46px);
   line-height: 1.05;
   letter-spacing: -0.01em;
-}
-.dirlist__title em {
-  font-family: var(--serif);
-  font-style: italic; font-weight: 500;
-  font-size: 1.05em;
-  letter-spacing: 0;
 }
 .dirlist__desc {
   font-size: 12px;

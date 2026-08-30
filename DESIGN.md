@@ -2,7 +2,7 @@
 
 ## 1. Atmosphere & Identity
 
-Agent Zero reads as a calibrated monochrome observation instrument: dot-matrix (dithered) graphics, hairline HUD geometry (brackets, crosshairs, tick rulers, concentric orbits), monospace telemetry labels, and hatched caution bands — grounded by wide grotesk display type and a rare serif-italic accent word. The page itself is a framed instrument: a bordered shell, fixed corner brackets, and a live cursor-coordinate readout.
+Agent Zero reads as a calibrated monochrome observation instrument: dot-matrix (dithered) graphics, hairline HUD geometry (brackets, crosshairs, tick rulers, concentric orbits), monospace telemetry labels, and hatched caution bands — grounded by wide grotesk display type set in uniform uppercase. The page itself is a framed instrument: a bordered shell, fixed corner brackets, and a live cursor-coordinate readout.
 
 References: dithered-dome hero panels, CRT construction diagrams, thin-line thermal HUDs, orbital feature maps.
 
@@ -32,21 +32,20 @@ The site is monochrome with exactly one micro-accent. `--signal` may appear only
 * Display sans: "Archivo" (variable, `font-stretch` 110–125%) — English headings, uppercase
 * Mono: "IBM Plex Mono" — all telemetry labels, table data, buttons, nav
 * Body: "IBM Plex Sans KR" (300/400/500) — Korean copy
-* Accent serif: "Cormorant Garamond" italic — one or two lowercase words inside display headings (`<em>`)
 
 ### Scale
 
 | Level | Size | Weight | Notes |
 |-------|------|--------|-------|
-| Hero display | clamp(42px, 6.8vw, 100px) | 500, stretch 115% | Manual uppercase; `em` stays lowercase italic |
-| Section title | clamp(34px, 4.8vw, 66px) | 500, stretch 114% | Same mixed-case rule |
+| Hero display | clamp(42px, 6.8vw, 100px) | 500, stretch 115% | Hand-typed uppercase |
+| Section title | clamp(34px, 4.8vw, 66px) | 500, stretch 114% | Same uppercase rule |
 | Stat value | clamp(38px, 4.2vw, 60px) mono | 500 | Wrapped in faint `[ ]` brackets |
 | Body | 12.5–15.5px | 300 | line-height 1.8–1.9, `word-break: keep-all` |
 | Telemetry label | 9–11px mono | 400–500 | letter-spacing 0.14–0.24em |
 
 ### Rules
 
-Headings mix hand-typed uppercase sans with a lowercase serif-italic `<em>` (never `text-transform`). Mono labels are always tracked wide. Korean never renders in the display sans (falls back to Plex Sans KR).
+Headings are hand-typed uppercase display sans throughout — no accent typeface, no italic, no `text-transform`. Emphasis comes from scale and weight alone. Mono labels are always tracked wide. Korean never renders in the display sans (falls back to Plex Sans KR).
 
 ## 4. Spacing & Layout
 
@@ -80,7 +79,7 @@ Bordered mono definition list (`dl` of label/value rows) beside the page title �
 Bordered 4-step grid (S.01 [scan] → S.04 [coord]) with mono `→` connectors punched out of the shared borders; vertical with `↓` under 1020px. Step labels echo the console feed tags.
 
 ### Dirlist (home site index)
-Full-width hairline rows — mono index, big mixed-case title (sans + serif-em), Korean description, arrow. Hover inverts the entire row to light-on-dark's opposite.
+Full-width hairline rows — mono index, big uppercase sans title, Korean description, arrow. Hover inverts the entire row to light-on-dark's opposite.
 
 ### Open seat (team)
 Dashed-border invitation card (`AZ-005 — UNASSIGNED`) that turns solid on hover; the only dashed panel in the system, marking absence.
