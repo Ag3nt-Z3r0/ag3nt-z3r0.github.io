@@ -61,13 +61,10 @@ Headings are hand-typed uppercase display sans throughout — no accent typeface
 Corner L-brackets at viewport edges + mono tags: coordinates (bottom-left) and live cursor `X:0000 · Y:0000` readout (bottom-right, fine pointers only). Pointer-events: none.
 
 ### Page map
-Home = dome hero + console + ticker + dirlist (site index). About = spec-sheet hero + compare + pipeline + audience cells. Team = orbit hero + roster + open-seat. Disclosure = CRT hero + gauge + filters + full table + protocol. Nav links are page links (about.html / disclosure.html / team.html); JOIN targets each page's own `#join` footer.
+Home = dome hero + ticker + dirlist (site index). Agents = spec-sheet hero + unit cards + handoff pipeline. About = spec-sheet hero + compare + pipeline + audience cells. Team = orbit hero + roster + open-seat. Disclosure = CRT hero + gauge + filters + full table + protocol. Nav links are page links (about.html / agents.html / disclosure.html / team.html); JOIN targets each page's own `#join` footer.
 
 ### Dithered dome (home hero)
-Inline SVG: half-circle masked dot patterns (6px + 13px grids) with radial falloff, ridge silhouettes as masked dot fields, hairline orbit arcs, apex crosshair, satellite rings, one signal dot at base. The dome doubles as the brand "0".
-
-### Floating console
-Terminal card overlapping the dome (Vocel-style): live dot + `az://disclosure-feed` address bar, typed log loop, pill chips, circular go-button. On mobile it stacks above the dome.
+Inline SVG: half-circle masked dot patterns (6px + 13px grids) with radial falloff, ridge silhouettes as masked dot fields, hairline orbit arcs, apex crosshair, satellite rings, one signal dot at base. The dome doubles as the brand "0". It carries the hero alone — a negative top margin on `.hero__stage` pulls it up close under the CTAs.
 
 ### Ticker
 Marquee of disclosure IDs (`AZ-… · CLASS · SEVERITY ✳`), duplicated track, 46s linear loop, pauses on hover.
@@ -76,7 +73,7 @@ Marquee of disclosure IDs (`AZ-… · CLASS · SEVERITY ✳`), duplicated track,
 Bordered mono definition list (`dl` of label/value rows) beside the page title — EST / BASE / FOCUS / METHOD / OUTPUT.
 
 ### Pipeline (about)
-Bordered 4-step grid (S.01 [scan] → S.04 [coord]) with mono `→` connectors punched out of the shared borders; vertical with `↓` under 1020px. Step labels echo the console feed tags.
+Bordered 4-step grid (S.01 [scan] → S.04 [coord]) with mono `→` connectors punched out of the shared borders; vertical with `↓` under 1020px.
 
 ### Dirlist (home site index)
 Full-width hairline rows — mono index, big uppercase sans title, Korean description, arrow. Hover inverts the entire row to light-on-dark's opposite.
@@ -112,14 +109,14 @@ Pill buttons with `aria-pressed`, filtering `tr[data-sev]`; count readout is `ar
 
 | Type | Duration | Usage |
 |------|----------|-------|
-| Reveal | 0.9s, IO threshold 0.01 | Scroll entrance (staggered .d1–.d5) |
+| Reveal | 0.9s, IO threshold 0.01 | Scroll entrance (staggered .d1–.d4) |
 | Micro | 0.25–0.4s | Hover inversions, chips, links |
-| Ambient | 22–90s linear | Ticker, orbit ring, node ring |
-| Typing | timeout loop | Console feed |
+| Ambient | 22–90s linear | Ticker, orbit ring, node ring, agent emblems |
+| Gauge | 1.1s ease | Needle sweep + value arc on scroll-in and filter change |
 | Clocks | 1s interval | KST clock, UTC stamps, uptime |
 
 Only `transform`, `opacity`, `filter`, color/background transitions. Everything ambient stops under `prefers-reduced-motion`.
 
 ## 7. Depth & Surface
 
-Flat and printed: hairlines, tonal opacity steps, dot density. Shadows only under floating instruments (console, orbit chips). Rounded corners are reserved for "control" elements (pills, chips, circular buttons) — panels and cards stay square. Global film grain overlay stays subtle (0.5 opacity of 6% noise).
+Flat and printed: hairlines, tonal opacity steps, dot density. Shadows only under floating instruments (orbit chips). Rounded corners are reserved for "control" elements (pills, filter buttons, status chips) — panels and cards stay square. Global film grain overlay stays subtle (0.5 opacity of 6% noise).

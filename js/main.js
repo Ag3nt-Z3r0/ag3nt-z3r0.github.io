@@ -86,60 +86,6 @@
     }, { passive: true });
   }
 
-  /* ---------- console feed typing ---------- */
-  var feed = document.getElementById("feedBody");
-  if (feed) {
-    var LINES = [
-      "$ az feed --tail 5",
-      "[scan]   coturn · TURN session-resume authz",
-      "[repro]  auth bypass · allocation hijack confirmed",
-      "[draft]  CVE-2026-65981 · severity HIGH",
-      "[coord]  GHSA published · fix released upstream",
-      "→ ledger sync · 38 tracked · 9 disclosed"
-    ];
-
-    if (prefersReduced) {
-      feed.textContent = LINES.join("\n");
-    } else {
-      var li = 0, ci = 0;
-      var caret = document.createElement("span");
-      caret.className = "caret";
-      var buf = document.createTextNode("");
-      feed.appendChild(buf);
-      feed.appendChild(caret);
-
-      var typeStep = function () {
-        if (li >= LINES.length) {
-          setTimeout(function () {
-            buf.textContent = ""; li = 0; ci = 0;
-            typeStep();
-          }, 6200);
-          return;
-        }
-        var line = LINES[li];
-        if (ci < line.length) {
-          var chunk = Math.random() < 0.4 ? 2 : 1;
-          buf.textContent += line.substr(ci, chunk);
-          ci += chunk;
-          setTimeout(typeStep, line.charAt(0) === "$" ? 30 : 10);
-        } else {
-          buf.textContent += "\n";
-          li++; ci = 0;
-          setTimeout(typeStep, LINES[li - 1].charAt(0) === "$" ? 460 : 210);
-        }
-      };
-
-      if ("IntersectionObserver" in window) {
-        var tio = new IntersectionObserver(function (entries) {
-          if (entries[0].isIntersecting) { typeStep(); tio.disconnect(); }
-        }, { threshold: 0.3 });
-        tio.observe(feed);
-      } else {
-        typeStep();
-      }
-    }
-  }
-
   /* ---------- gauge (disclosure) ---------- */
   var gaugeSvg = document.getElementById("gaugeSvg");
   var gauge = null;
