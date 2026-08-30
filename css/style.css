@@ -1041,19 +1041,15 @@ i { font-style: normal; }
   border: 1px solid var(--line);
   background: var(--bg-raise);
 }
-.hero-emblem {
-  align-self: center;
-  display: flex; flex-direction: column; align-items: center; gap: 20px;
-}
-.hero-emblem__img {
-  width: min(240px, 66%); height: auto;
-  opacity: 0.5;
-}
-.hero-emblem__cap {
-  font-family: var(--mono);
-  font-size: 9px; letter-spacing: 0.18em; line-height: 1.9;
-  color: var(--fg-faint);
-  text-align: center;
+.page-hero--about { position: relative; overflow: hidden; }
+.page-hero--about .page-hero__main { position: relative; z-index: 1; }
+.hero-seal {
+  position: absolute; z-index: 0; pointer-events: none;
+  top: 50%; right: clamp(-40px, 1vw, 40px);
+  transform: translateY(-50%);
+  width: min(540px, 44vw); aspect-ratio: 1;
+  background: url("../images/asc-seal.png") center / contain no-repeat;
+  opacity: 0.09;
 }
 .spec__head {
   font-family: var(--mono);
