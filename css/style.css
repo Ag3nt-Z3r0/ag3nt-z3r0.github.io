@@ -112,7 +112,7 @@ i { font-style: normal; }
   display: inline-flex; align-items: center; gap: 12px;
   color: var(--fg); text-decoration: none;
 }
-.nav__glyph { flex: 0 0 auto; }
+.nav__glyph { flex: 0 0 auto; height: 24px; width: auto; display: block; }
 .nav__wordmark {
   font-family: var(--sans);
   font-weight: 600; font-stretch: 118%;
