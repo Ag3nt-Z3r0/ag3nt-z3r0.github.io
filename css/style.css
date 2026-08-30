@@ -1316,6 +1316,103 @@ i { font-style: normal; }
 .unit__cta span { transition: transform 0.3s var(--ease); }
 .unit__cta:hover span { transform: translateX(6px); }
 
+/* ============ live emblems (agent instruments) ============ */
+.emblem { --rate: 1; }
+.emblem * { transform-box: view-box; }
+
+/* -- CrayFisher: sonar sweep -- */
+.emblem__sweep {
+  transform-origin: 40px 150px;
+  animation: sonarsweep calc(5.2s * var(--rate)) cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+@keyframes sonarsweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-62deg); }
+}
+.emblem__ring {
+  transform-origin: 40px 150px;
+  animation: ringpulse calc(3.4s * var(--rate)) ease-out infinite;
+  animation-delay: calc(var(--i) * 0.42s * var(--rate));
+}
+@keyframes ringpulse {
+  0%, 70%, 100% { opacity: 1; }
+  22% { opacity: 0.35; }
+}
+.emblem__ping {
+  transform-origin: 40px 150px;
+  animation: emblemping calc(3.4s * var(--rate)) ease-out infinite;
+}
+@keyframes emblemping {
+  0% { transform: scale(0.55); opacity: 0.85; }
+  60%, 100% { transform: scale(2.3); opacity: 0; }
+}
+.emblem__contact {
+  opacity: 0;
+  animation: contactblink calc(5.2s * var(--rate)) ease-out infinite;
+  animation-delay: calc(0.5s + var(--i) * 1.15s * var(--rate));
+}
+@keyframes contactblink {
+  0% { opacity: 0; }
+  6% { opacity: 1; }
+  38% { opacity: 1; }
+  62% { opacity: 0.25; }
+  100% { opacity: 0; }
+}
+
+/* -- DeepSealer: descending probe + seal -- */
+.emblem__probe {
+  animation: probedive calc(4.4s * var(--rate)) cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+@keyframes probedive {
+  0% { transform: translateY(0); opacity: 0; }
+  8% { opacity: 1; }
+  55%, 100% { transform: translateY(92px); }
+  78% { opacity: 1; }
+  92%, 100% { opacity: 0; }
+}
+.emblem__tick {
+  animation: tickflash calc(4.4s * var(--rate)) ease-out infinite;
+  animation-delay: calc(var(--i) * 0.42s * var(--rate));
+}
+@keyframes tickflash {
+  0%, 100% { stroke-opacity: 0.5; }
+  10% { stroke-opacity: 1; }
+}
+.emblem__sealring {
+  transform-origin: 160px 140px;
+  animation: sealpulse calc(4.4s * var(--rate)) ease-out infinite;
+}
+@keyframes sealpulse {
+  0%, 52% { transform: scale(1); stroke-opacity: 0.5; }
+  62% { transform: scale(1.16); stroke-opacity: 1; }
+  84%, 100% { transform: scale(1); stroke-opacity: 0.5; }
+}
+.emblem__sealcore {
+  transform-origin: 160px 140px;
+  animation: sealcore calc(4.4s * var(--rate)) ease-out infinite;
+}
+@keyframes sealcore {
+  0%, 52% { transform: scale(0.72); opacity: 0.55; }
+  64% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* hover: instruments spin up */
+.unit:hover .emblem { --rate: 0.55; }
+
+/* ============ gauge motion (disclosure) ============ */
+.gauge__needle {
+  transform-box: view-box;
+  transform-origin: 160px 160px;
+  transform: rotate(0deg);
+  transition: transform 1.1s var(--ease);
+}
+.gauge__value {
+  transition: stroke-dashoffset 1.1s var(--ease);
+}
+.gauge__read { transition: opacity 0.25s; }
+.gauge__read.is-swap { opacity: 0.35; }
+
 /* ============ dirlist (home site index) ============ */
 .dirlist { border-top: 1px solid var(--line); }
 .dirlist__row {
@@ -1554,5 +1651,9 @@ i { font-style: normal; }
   .ticker__track { animation: none; }
   .orbit__spin, .orbit__pulse, .compare__node::before,
   .crt__scan::after, .crt__down, .dot-live { animation: none; }
+  .emblem__sweep, .emblem__ring, .emblem__ping, .emblem__contact,
+  .emblem__probe, .emblem__tick, .emblem__sealring, .emblem__sealcore { animation: none; }
+  .emblem__contact { opacity: 1; }
+  .emblem__probe { transform: translateY(92px); }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
 }
