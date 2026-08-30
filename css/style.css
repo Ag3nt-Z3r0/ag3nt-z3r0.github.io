@@ -1041,6 +1041,20 @@ i { font-style: normal; }
   border: 1px solid var(--line);
   background: var(--bg-raise);
 }
+.hero-emblem {
+  align-self: center;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+.hero-emblem__img {
+  width: min(240px, 66%); height: auto;
+  opacity: 0.5;
+}
+.hero-emblem__cap {
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: 0.18em; line-height: 1.9;
+  color: var(--fg-faint);
+  text-align: center;
+}
 .spec__head {
   font-family: var(--mono);
   font-size: 9.5px; letter-spacing: 0.2em;
