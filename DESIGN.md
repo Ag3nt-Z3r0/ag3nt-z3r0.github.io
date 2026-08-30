@@ -61,6 +61,9 @@ Headings mix hand-typed uppercase sans with a lowercase serif-italic `<em>` (nev
 ### Fixed HUD chrome
 Corner L-brackets at viewport edges + mono tags: coordinates (bottom-left) and live cursor `X:0000 · Y:0000` readout (bottom-right, fine pointers only). Pointer-events: none.
 
+### Page map
+Home = dome hero + console + ticker + recent ledger + dirlist. About = spec-sheet hero + compare + pipeline + audience cells. Team = orbit hero + roster + open-seat. Disclosure = CRT hero + gauge + filters + full table + protocol. Nav links are page links (about.html / disclosure.html / team.html); JOIN targets each page's own `#join` footer.
+
 ### Dithered dome (home hero)
 Inline SVG: half-circle masked dot patterns (6px + 13px grids) with radial falloff, ridge silhouettes as masked dot fields, hairline orbit arcs, apex crosshair, satellite rings, one signal dot at base. The dome doubles as the brand "0".
 
@@ -69,6 +72,18 @@ Terminal card overlapping the dome (Vocel-style): live dot + `az://disclosure-fe
 
 ### Ticker
 Marquee of disclosure IDs (`AZ-… · CLASS · SEVERITY ✳`), duplicated track, 46s linear loop, pauses on hover.
+
+### Spec sheet (about hero)
+Bordered mono definition list (`dl` of label/value rows) beside the page title — EST / BASE / FOCUS / METHOD / OUTPUT.
+
+### Pipeline (about)
+Bordered 4-step grid (S.01 [scan] → S.04 [coord]) with mono `→` connectors punched out of the shared borders; vertical with `↓` under 1020px. Step labels echo the console feed tags.
+
+### Dirlist (home site index)
+Full-width hairline rows — mono index, big mixed-case title (sans + serif-em), Korean description, arrow. Hover inverts the entire row to light-on-dark's opposite.
+
+### Open seat (team)
+Dashed-border invitation card (`AZ-005 — UNASSIGNED`) that turns solid on hover; the only dashed panel in the system, marking absence.
 
 ### Compare cards (doctrine)
 Two bordered cards — noisy polyline waveform vs clean sine waveform (SVG, `vector-effect: non-scaling-stroke`, soft glow) — joined by a dashed-ring node; mono readout strips beneath.

@@ -17,14 +17,19 @@ IBM Plex Sans KR(본문) × Cormorant Garamond 이탤릭(악센트).
 페이지별 시그니처 컴포넌트:
 
 - **홈**: 도트 매트릭스 돔 + 플로팅 콘솔 카드(라이브 타이핑), 공개 ID 티커,
-  파형 비교 카드(UNAUDITED vs ZEROED), 동심원 궤도 팀 다이어그램 + 계측 로스터
+  최근 공개 ledger, 사이트 인덱스 리스트(dirlist)
+- **About**: 스펙 시트 히어로, 파형 비교 카드(UNAUDITED vs ZEROED),
+  공개 파이프라인 다이어그램(SCAN→REPRO→DRAFT→COORD), 협업 대상 셀
+- **Team**: 궤도 다이어그램 히어로 + 계측 로스터(하프톤 초상), 공석(AZ-005) 카드
 - **Disclosure**: CRT 히어로(업타임 카운터/스캔라인/겹친 원 구조도), 반원 게이지,
   작동하는 심각도 필터, 브래킷 카운터, 프로토콜 카드
 
 ## 구조
 
 ```
-index.html      # 홈 (히어로+돔+콘솔 / 티커 / 독트린 / 대상 / 최근 공개 / 팀 궤도+로스터 / 푸터)
+index.html      # 홈 (히어로+돔+콘솔 / 티커 / 최근 공개 / 사이트 인덱스 / 푸터)
+about.html      # 독트린 (스펙 시트 히어로 / 비교 카드 / 파이프라인 / 협업 대상)
+team.html       # 팀 (궤도 히어로 / 로스터 / 공석 카드)
 disclosure.html # 전체 취약점 공개 ledger (CRT 히어로 / 게이지 / 필터 / 전체 표 / 프로토콜)
 css/style.css   # 스타일 (모노크롬 HUD 테마, :root 토큰)
 js/main.js      # 인터랙션 (콘솔 타이핑, 리빌, 시계/업타임, 커서 텔레메트리, ledger 필터)
@@ -47,7 +52,7 @@ python -m http.server 4173
 
 ## 내용 수정 가이드
 
-- **팀원**: `index.html`의 `.orbit__chip`(궤도 다이어그램)과 `.roster__row`(로스터) 블록 수정
+- **팀원**: `team.html`의 `.orbit__chip`(궤도 다이어그램)과 `.roster__row`(로스터) 블록 수정
 - **이메일**: `hello@agentzero.team`을 실제 주소로 교체
 - **최근 공개 표**: `index.html`의 `#ledger-recent` 섹션 `<table class="ledger">` 행 수정
 - **전체 공개 표**: `disclosure.html`의 `#ledgerTable` 행 수정 (`data-sev` 속성이 필터 기준)
