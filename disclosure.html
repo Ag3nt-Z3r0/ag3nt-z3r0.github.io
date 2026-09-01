@@ -210,7 +210,7 @@
         <!-- gauge + counters -->
         <div class="gaugeRow reveal">
           <figure class="gauge">
-            <svg id="gaugeSvg" class="gauge__svg" viewBox="0 0 320 190" data-total="38" data-count="9" aria-hidden="true" focusable="false">
+            <svg id="gaugeSvg" class="gauge__svg" viewBox="0 0 320 190" data-total="38" data-count="10" aria-hidden="true" focusable="false">
               <path d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-opacity=".16" stroke-width="10" stroke-dasharray="1.4 11.17" />
               <path d="M34 160 A126 126 0 0 1 286 160" fill="none" stroke="#EAEAE4" stroke-opacity=".28" stroke-width="1"/>
               <path id="gaugeValue" class="gauge__value" d="M40 160 A120 120 0 0 1 280 160" fill="none" stroke="#EAEAE4" stroke-width="3.5"
@@ -224,7 +224,7 @@
             </svg>
             <figcaption class="gauge__cap">
               <span>0</span>
-              <span class="gauge__read" id="gaugeRead" aria-live="polite">DISCLOSED&nbsp;9&nbsp;/&nbsp;TRACKED&nbsp;38</span>
+              <span class="gauge__read" id="gaugeRead" aria-live="polite">DISCLOSED&nbsp;10&nbsp;/&nbsp;TRACKED&nbsp;38</span>
               <span>38</span>
             </figcaption>
           </figure>
@@ -238,7 +238,7 @@
               </article>
               <article class="stat">
                 <span class="stat__label"><span class="dot-live dot-live--sm" aria-hidden="true"></span> DISCLOSED · GHSA</span>
-                <span class="stat__value"><i>[</i>9<i>]</i></span>
+                <span class="stat__value"><i>[</i>10<i>]</i></span>
                 <span class="stat__ruler" aria-hidden="true"></span>
               </article>
               <article class="stat">
@@ -252,7 +252,7 @@
                 <span class="stat__ruler" aria-hidden="true"></span>
               </article>
             </div>
-            <p class="gauge__legend">29 DRAFTS · COORDINATION IN PROGRESS</p>
+            <p class="gauge__legend">28 DRAFTS · COORDINATION IN PROGRESS</p>
           </div>
         </div>
 
@@ -269,8 +269,8 @@
         <div class="filters reveal" role="group" aria-label="상태 필터">
           <span class="filters__label">FILTER</span>
           <button class="filters__btn" type="button" data-filter="all" aria-pressed="true">ALL <i>38</i></button>
-          <button class="filters__btn" type="button" data-filter="published" aria-pressed="false">DISCLOSED <i>9</i></button>
-          <button class="filters__btn" type="button" data-filter="draft" aria-pressed="false">DRAFT <i>29</i></button>
+          <button class="filters__btn" type="button" data-filter="published" aria-pressed="false">DISCLOSED <i>10</i></button>
+          <button class="filters__btn" type="button" data-filter="draft" aria-pressed="false">DRAFT <i>28</i></button>
           <button class="filters__btn" type="button" data-filter="cve" aria-pressed="false">CVE <i>7</i></button>
           <span class="filters__count" id="showCount" aria-live="polite">SHOWING 38 / 38</span>
         </div>
@@ -577,13 +577,13 @@
                 <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A predictable installer working directory allows local package substitution that runs as root.</td>
               </tr>
-              <tr data-status="draft" data-cve="y">
-                <td data-label="ID">GHSA-vg53-****-****</td>
+              <tr data-status="published" data-cve="y">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-vg53-h6qq-xx7h" target="_blank" rel="noopener noreferrer">GHSA-vg53-h6qq-xx7h</a></td>
                 <td data-label="Target">Zephyr RTOS</td>
-                <td data-label="Class">&mdash;</td>
-                <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
+                <td data-label="Class">Out-of-Bounds Write</td>
+                <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
                 <td data-label="CVE"><span class="cvecell">CVE-2026-14368</span></td>
-                <td data-label="Summary">Advisory under embargo; tracked as CVE-2026-14368, public details pending.</td>
+                <td data-label="Summary">An off-by-one in the legacy LwM2M OMA-JSON string reader lets a malicious server write a NUL terminator one byte past a resource buffer (remote out-of-bounds write).</td>
               </tr>
               <tr data-status="draft" data-cve="y">
                 <td data-label="ID">GHSA-4q9g-****-****</td>
