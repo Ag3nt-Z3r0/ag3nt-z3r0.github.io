@@ -127,6 +127,24 @@
   var ledgerTable = document.getElementById("ledgerTable");
   if (ledgerTable) {
     var rows = ledgerTable.querySelectorAll("tbody tr");
+
+    /* severity-fill sort: cases with a severity rise above the pending ones.
+       Stable — same-rank rows keep their original DOM order. */
+    var SEV_RANK = { crit: 0, high: 1, med: 2, low: 3 };
+    function sevRank(row) {
+      var el = row.querySelector(".sev");
+      var m = el && el.className.match(/sev--(\w+)/);
+      var key = m ? m[1] : "";
+      return Object.prototype.hasOwnProperty.call(SEV_RANK, key) ? SEV_RANK[key] : 9;
+    }
+    var tbody = ledgerTable.tBodies[0];
+    if (tbody) {
+      Array.prototype.slice.call(rows)
+        .map(function (row, i) { return { row: row, rank: sevRank(row), i: i }; })
+        .sort(function (a, b) { return a.rank - b.rank || a.i - b.i; })
+        .forEach(function (o) { tbody.appendChild(o.row); });
+    }
+
     var showCount = document.getElementById("showCount");
     var searchInput = document.getElementById("ledgerSearch");
     var searchHint = document.getElementById("searchHint");
