@@ -361,6 +361,14 @@
                 <td data-label="CVE"><span class="cvecell cvecell--none">GHSA only</span></td>
                 <td data-label="Summary">Remote media URLs can slow-read exhaust tool workers, consuming gateway resources and reducing availability.</td>
               </tr>
+              <tr data-status="published" data-cve="y">
+                <td data-label="ID"><a class="ghsa" href="https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-vg53-h6qq-xx7h" target="_blank" rel="noopener noreferrer">GHSA-vg53-h6qq-xx7h</a></td>
+                <td data-label="Target">Zephyr RTOS</td>
+                <td data-label="Class">Out-of-Bounds Write</td>
+                <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
+                <td data-label="CVE"><span class="cvecell">CVE-2026-14368</span></td>
+                <td data-label="Summary">An off-by-one in the legacy LwM2M OMA-JSON string reader lets a malicious server write a NUL terminator one byte past a resource buffer (remote out-of-bounds write).</td>
+              </tr>
               <tr data-status="draft" data-cve="n">
                 <td data-label="ID">GHSA-224w-****-****</td>
                 <td data-label="Target">OpenClaw</td>
@@ -576,14 +584,6 @@
                 <td data-label="Severity"><span class="sev sev--unknown">&mdash;</span></td>
                 <td data-label="CVE"><span class="cellline"><span class="dot-live dot-live--sm" aria-hidden="true"></span> Pending</span></td>
                 <td data-label="Summary">A predictable installer working directory allows local package substitution that runs as root.</td>
-              </tr>
-              <tr data-status="published" data-cve="y">
-                <td data-label="ID"><a class="ghsa" href="https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-vg53-h6qq-xx7h" target="_blank" rel="noopener noreferrer">GHSA-vg53-h6qq-xx7h</a></td>
-                <td data-label="Target">Zephyr RTOS</td>
-                <td data-label="Class">Out-of-Bounds Write</td>
-                <td data-label="Severity"><span class="sev sev--med">MEDIUM</span></td>
-                <td data-label="CVE"><span class="cvecell">CVE-2026-14368</span></td>
-                <td data-label="Summary">An off-by-one in the legacy LwM2M OMA-JSON string reader lets a malicious server write a NUL terminator one byte past a resource buffer (remote out-of-bounds write).</td>
               </tr>
               <tr data-status="draft" data-cve="y">
                 <td data-label="ID">GHSA-4q9g-****-****</td>
